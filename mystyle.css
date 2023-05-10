@@ -1,6 +1,7 @@
 body {
    background: rgb(2,0,36);
-   background: linear-gradient(0deg, rgba(2,0,36,1) 19%, rgba(48,48,98,1) 57%, rgba(131,131,204,1) 100%);
+   background: linear-gradient(0deg, rgba(2,0,36,1) 21%, rgba(48,48,98,1) 72%, rgba(131,181,204,1) 100%);
+
 }
 
 .item1{grid-area: header;}
@@ -19,7 +20,7 @@ body {
         'footer footer footer footer footer footer';
     gap: 20px;
     background-color: transparent;
-    padding: 5%;
+    padding: 20px;
 } 
 .grid-container > div {
     background-color: transparent;
