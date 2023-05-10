@@ -5,17 +5,16 @@ body {
 }
 
 .item1{grid-area: header;}
+.item2{grid-area: menu;}
 .item3{grid-area: main;}
 .item4{grid-area: footer;}
-.menu_angielski{grid-area: angielski;}
-.menu_o{grid-area: o;}
-.menu_kontakt{grid-area: kontakt;}
+
 
 .grid-container{
     display: grid;
     grid-template-areas: 
         'header header header header header header'
-        'angielski angielski o o kontakt kontakt'
+        'menu menu menu menu menu menu'
         'main main main main main main'
         'footer footer footer footer footer footer';
     gap: 20px;
@@ -26,7 +25,7 @@ body {
     background-color: transparent;
     color: #83b5cc;
     text-align: center;
-    padding: 15%;
+    padding: 5%;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 30px;
 }
