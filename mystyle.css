@@ -4,7 +4,6 @@ body {
 }
 
 .item1{grid-area: header;}
-.item2{grid-area: menu;}
 .item3{grid-area: main;}
 .item4{grid-area: footer;}
 .menu_angielski{grid-area: angielski;}
