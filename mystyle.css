@@ -19,13 +19,13 @@ body {
         'footer footer footer footer footer footer';
     gap: 20px;
     background-color: transparent;
-    padding: 15%;
+    padding: 5%;
 } 
 .grid-container > div {
     background-color: transparent;
     color: #83b5cc;
     text-align: center;
-    padding: 20%;
+    padding: 15%;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 30px;
 }
