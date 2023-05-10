@@ -15,14 +15,15 @@ body {
         'menu menu menu menu menu menu'
         'main main main main main main'
         'footer footer footer footer footer footer';
-    gap: 10px;
+    gap: 20px;
     background-color: transparent;
-    padding: 10%;
+    padding: 30%;
 } 
 .grid-container > div {
     background-color: transparent;
+    text-decoration-color: bisque;
     text-align: center;
-    padding: 20%;
+    padding: 40%;
     font-family: cursive;
     font-size: 30px;
 }
