@@ -1,6 +1,6 @@
 body {
    background: rgb(2,0,36);
-   background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(48,48,98,1) 35%, rgba(255,255,255,1) 100%);
+   background: linear-gradient(0deg, rgba(2,0,36,1) 19%, rgba(48,48,98,1) 57%, rgba(131,131,204,1) 100%);
 }
 
 .item1{grid-area: header;}
@@ -21,9 +21,9 @@ body {
 } 
 .grid-container > div {
     background-color: transparent;
-    text-decoration-color: bisque;
+    color: #83b5cc;
     text-align: center;
     padding: 40%;
-    font-family: cursive;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 30px;
 }
