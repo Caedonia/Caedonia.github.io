@@ -7,17 +7,20 @@ body {
 .item2{grid-area: menu;}
 .item3{grid-area: main;}
 .item4{grid-area: footer;}
+.menu_angielski{grid-area: angielski;}
+.menu_o{grid-area: o;}
+.menu_kontakt{grid-area: kontakt;}
 
 .grid-container{
     display: grid;
     grid-template-areas: 
         'header header header header header header'
-        'menu menu menu menu menu menu'
+        'angielski angielski o o kontakt kontakt'
         'main main main main main main'
         'footer footer footer footer footer footer';
     gap: 20px;
     background-color: transparent;
-    padding: 30%;
+    padding: 15%;
 } 
 .grid-container > div {
     background-color: transparent;
