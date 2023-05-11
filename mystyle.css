@@ -30,6 +30,7 @@ body {
     font-size: 30px;
 }
 .menu > li{
+    align-items: center;
     display: table-cell;
     margin:  5%;
     padding: 5;
