@@ -31,7 +31,8 @@ body {
 }
 .menu > li{
     display: table-cell;
-    margin:  5px;
+    margin:  5%;
     padding: 5;
     text-align: center;
+    accent-color: #728fbe;
 }
