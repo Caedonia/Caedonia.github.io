@@ -29,8 +29,12 @@ body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 30px;
 }
+.menu{
+    align-self: center;
+    background-color: transparent;
+
+}
 .menu > li{
-    align-items: center;
     display: table-cell;
     margin:  5%;
     padding: 5;
