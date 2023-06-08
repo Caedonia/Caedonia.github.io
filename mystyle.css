@@ -4,19 +4,9 @@ body {
 
 }
 
-.item1{grid-area: header;}
-.item2{grid-area: menu;}
-.item3{grid-area: main;}
-.item4{grid-area: footer;}
-
-
 .grid-container{
     display: grid;
-    grid-template-areas: 
-        'header header header header header header'
-        'menu menu menu menu menu menu'
-        'main main main main main main'
-        'footer footer footer footer footer footer';
+    grid-auto-flow:inherit;
     gap: 20px;
     background-color: transparent;
     padding: 20px;
@@ -30,14 +20,31 @@ body {
     font-size: 30px;
 }
 .menu{
-    align-self: center;
+    list-style-type:none;
+    overflow: hidden;
     background-color: transparent;
 
 }
 .menu > li{
-    display: table-cell;
-    margin:  5%;
-    padding: 5;
-    text-align: center;
+    float: left;
+    display: block;
+    padding: 12%;
+}
+.menu_angeilski{
+    text-align:center;
     accent-color: #728fbe;
 }
+.menu_o{
+    text-align:center;
+    accent-color: #728fbe;
+}
+.kontakt{
+    text-align:center;
+    accent-color: #728fbe;
+}
+
+
+
+
+
+
