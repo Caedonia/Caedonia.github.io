@@ -13,7 +13,7 @@ body {
     
 }
 .menu{
-    align-self: center;
+    text-align: center;    
     padding-left: 25%;
     list-style-type:none;
     overflow: hidden;
@@ -63,16 +63,16 @@ body {
     width: 300px;
     float: right;
 }
-.kontakt3_1 > input [id=wiadomosc] {
+.kontakt3_1 > [id=wiadomosc] {
     height: 100px;
     max-height: 500px;
 
 }
 .kontakt3_1 > [id=wyslij]{
-    float: right;
+    float: left;
     width: 25%;
     font-family: 'Inconsolata', monospace;
-    background-color:rgba(2,0,36,1) ;
+    background-color:rgba(2,0,36,1);
     color: antiquewhite;
     border-style:double;
     box-shadow: #728fbe;
