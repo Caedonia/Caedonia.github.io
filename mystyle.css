@@ -52,19 +52,30 @@ body {
     display: block;
     line-height: 200%;
 }
-.kontakt2_1{
-    justify-content: center;
-    float:none;
+.kontakt3_1{
     color: antiquewhite;
     font-family: 'Inconsolata', monospace;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+}
+.kontakt3_1 > input{
+    width: 300px;
+    float: right;
+}
+.kontakt3_1 > input [id=wiadomosc] {
+    height: 100px;
+    max-height: 500px;
 
 }
-.kontakt2_1 > input{
-    width: fit-content;
-    align-items:flex-end;
-}
-.kontakt2_1 > input [name=wiadomosc] {
-    height: 500px;
+.kontakt3_1 > [id=wyslij]{
+    float: right;
+    width: 25%;
+    font-family: 'Inconsolata', monospace;
+    background-color:rgba(2,0,36,1) ;
+    color: antiquewhite;
+    border-style:double;
+    box-shadow: #728fbe;
 }
 
 
