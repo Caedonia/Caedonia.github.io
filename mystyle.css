@@ -1,26 +1,15 @@
 body {
-   background: rgb(2,0,36);
    background: linear-gradient(0deg, rgba(2,0,36,1) 21%, rgba(48,48,98,1) 72%, rgba(131,181,204,1) 100%);
-
-}
-
-.grid-container{
-    display: grid;
-    grid-auto-flow:inherit;
-    gap: 1px;
-    background-color: transparent;
-    padding: 5px;
-} 
-.grid-container > div {
-    background-color: transparent;
-    text-align: center;
-    padding: 1%;
+   background-size: cover;
+   min-height: 100%;
 }
 .item1 {
+    align-items:center;
     font-family: 'Inconsolata', monospace;
     font-weight: 500;
         font-size: 50px;
         color: black;
+        text-align: center;
     
 }
 .menu{
@@ -41,6 +30,7 @@ body {
 }
 .menu_angeilski{
     text-align:center;
+
     accent-color: #728fbe;
 }
 .menu_o{
@@ -51,7 +41,31 @@ body {
     text-align:center;
     accent-color: #728fbe;
 }
+.kontakt2{
+    color: antiquewhite;
+    font-family: 'Inconsolata', monospace;
+    box-sizing: border-box;
+    padding: 5%;
+    text-align: center;
+}
+.kontakt2 > br {
+    display: block;
+    line-height: 200%;
+}
+.kontakt2_1{
+    justify-content: center;
+    float:none;
+    color: antiquewhite;
+    font-family: 'Inconsolata', monospace;
 
+}
+.kontakt2_1 > input{
+    width: fit-content;
+    align-items:flex-end;
+}
+.kontakt2_1 > input [name=wiadomosc] {
+    height: 500px;
+}
 
 
 
