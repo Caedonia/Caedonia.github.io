@@ -72,11 +72,18 @@ body {
     float: left;
     width: 25%;
     font-family: 'Inconsolata', monospace;
-    background-color:rgba(2,0,36,1);
     color: #a3a8ae;
     border-style:double;
     box-shadow: #728fbe;
+    background-color: transparent; 
 }
+.kontakt3_1 > [id=wyslij]:hover{
+    background-color:darkslategrey;
+}
+.kontakt3_1 > [id=wyslij]:focus{
+    background-color:steelblue;
+}
+
 
 
 
