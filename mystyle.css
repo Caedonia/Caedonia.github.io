@@ -21,7 +21,7 @@ body {
     font-size: 30px;
     font-family: 'Inconsolata', monospace;
     font-weight: 200;
-    color: ghostwhite;
+    color: #a3a8ae;
 }
 .menu > li{
     float: left;
@@ -42,7 +42,7 @@ body {
     accent-color: #728fbe;
 }
 .kontakt2{
-    color: antiquewhite;
+    color: #a3a8ae;
     font-family: 'Inconsolata', monospace;
     box-sizing: border-box;
     padding: 5%;
@@ -53,7 +53,7 @@ body {
     line-height: 200%;
 }
 .kontakt3_1{
-    color: antiquewhite;
+    color: #a3a8ae;
     font-family: 'Inconsolata', monospace;
     margin: auto;
     width: fit-content;
@@ -73,7 +73,7 @@ body {
     width: 25%;
     font-family: 'Inconsolata', monospace;
     background-color:rgba(2,0,36,1);
-    color: antiquewhite;
+    color: #a3a8ae;
     border-style:double;
     box-shadow: #728fbe;
 }
