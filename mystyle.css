@@ -3,6 +3,22 @@ body {
    background-size: cover;
    min-height: 100%;
 }
+a:any-link{
+    color: #a3a8ae;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:hover{
+    color: #728fbe;
+    text-decoration: underline;
+}
+a:visited{
+    color: #a3a8ae;
+    text-decoration: none;
+}
+a:active{
+    color: blueviolet;
+}
 .item1 {
     align-items:center;
     font-family: 'Inconsolata', monospace;
@@ -41,6 +57,9 @@ body {
     text-align:center;
     accent-color: #728fbe;
 }
+.kontakt1{
+    color: #a3a8ae;
+}
 .kontakt2{
     color: #a3a8ae;
     font-family: 'Inconsolata', monospace;
@@ -75,7 +94,7 @@ body {
     color: #a3a8ae;
     border-style:double;
     box-shadow: #728fbe;
-    background-color: transparent; 
+    background-color:darkslategrey 
 }
 .kontakt3_1 > [id=wyslij]:hover{
     background-color:darkslategrey;

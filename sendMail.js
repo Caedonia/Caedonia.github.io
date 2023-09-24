@@ -3,11 +3,12 @@ document.getElementById('wyslij').addEventListener('click', wySliJJ);
 console.log("im running");}
 
 function wySliJJ (){
+    let form = document.querySelector(".kontakt3_1");
 emailjs.send("service_pqniaal","template_zazqo39",{
-from_name: document.getElementById("fname")+" "+document.getElementById("lname"),
+from_name: flname.value,
 to_name: "Aleksandra Knabel",
-message: "numer telefonu: "+document.getElementById("telnumm")+" poziom: "+document.getElementById("poziom")+" "+document.getElementById("wiadomosc"),
-reply_to: document.getElementById("emailadd")
+message: tressc.value,
+reply_to: maiilen.value
 });
-console.log("it run");
+console.log("it run")
     }
