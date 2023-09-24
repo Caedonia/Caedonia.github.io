@@ -1,6 +1,7 @@
 window.onload = function(){
 document.getElementById('wyslij').addEventListener('click', wySliJJ);
-console.log("im running");}
+console.log("im running");
+document.getElementsByClassName("menu_angielski")[0].addEventListener('click',expAng)}
 
 function wySliJJ (){
     let form = document.querySelector(".kontakt3_1");
@@ -11,4 +12,15 @@ message: tressc.value,
 reply_to: maiilen.value
 });
 console.log("it run")
+}
+
+  function expAng() {
+    console.log("i en run");
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
     }
+  }
