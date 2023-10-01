@@ -18,9 +18,9 @@ console.log("it run")
     console.log("i en run");
     this.classList.toggle("active");
     var content = this.nextElementSibling;
-    if (content.style.display === "block") {
+    if (content.style.display === "inline") {
       content.style.display = "none";
     } else {
-      content.style.display = "block";
+      content.style.display = "inline";
     }
   }

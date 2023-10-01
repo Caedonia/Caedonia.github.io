@@ -32,12 +32,12 @@ a:active{
     text-align: center;    
     padding-top: 5%;
     list-style-type:none;
-    overflow: hidden;
-    background-color:transparent ;
+    background-color:transparent;
     font-size: 30px;
     font-family: 'Inconsolata', monospace;
     font-weight: 200;
     color: #a3a8ae;
+    size: 50%;
     
 }
 .menu_angielski{
