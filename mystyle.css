@@ -27,22 +27,20 @@ a:active{
         text-align: center;
 }
 .menu{
+    display:inline;
+    overflow: auto;
     text-align: center;    
-    padding-left: 25%;
+    padding-top: 5%;
     list-style-type:none;
     overflow: hidden;
-    background-color: transparent;
+    background-color:transparent ;
     font-size: 30px;
     font-family: 'Inconsolata', monospace;
     font-weight: 200;
     color: #a3a8ae;
+    
 }
-.menu > li{
-    float: left;
-    display: block;
-    padding: 5%;
-}
-.menu_angeilski{
+.menu_angielski{
     text-align:center;
 }
 .menu_angielski:hover{
@@ -52,6 +50,11 @@ a:active{
     overflow:hidden;
     display: none;
     list-style: none;
+    background-color:#728fbe;
+    color: black;
+    width: fit-content;
+    text-align: center;
+
 }
 .menu_o{
     text-align:center;
