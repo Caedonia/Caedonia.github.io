@@ -32,7 +32,6 @@ a:active{
     text-align: center;    
     padding-top: 5%;
     list-style-type:none;
-    background-color:transparent;
     font-size: 30px;
     font-family: 'Inconsolata', monospace;
     font-weight: 200;
@@ -40,27 +39,26 @@ a:active{
     size: 50%;
     
 }
-.menu_angielski{
+.menu > [id="menu_angielski"]{
     text-align:center;
 }
-.menu_angielski:hover{
+.menu > [id="menu_angielski"]:hover{
     color: #728fbe;
 }
-.menuAng{
+.menu > [id="menuAng"]{
     overflow:hidden;
     display: none;
     list-style: none;
-    background-color:#728fbe;
-    color: black;
+    background-color:transparent;
+    color: rgb(10, 4, 51);
     width: fit-content;
     text-align: center;
-
 }
-.menu_o{
+.menu > [id="menu_o"]{
     text-align:center;
     accent-color: #728fbe;
 }
-.kontakt{
+.menu > [id="kontakt"]{
     text-align:center;
     accent-color: #728fbe;
 }

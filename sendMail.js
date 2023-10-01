@@ -1,7 +1,7 @@
 window.onload = function(){
 document.getElementById('wyslij').addEventListener('click', wySliJJ);
 console.log("im running");
-document.getElementsByClassName("menu_angielski")[0].addEventListener('click',expAng)}
+document.getElementById('menu_angielski').addEventListener('click',expAng)}
 
 function wySliJJ (){
     let form = document.querySelector(".kontakt3_1");
