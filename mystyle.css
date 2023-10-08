@@ -19,7 +19,7 @@ a:active{
     color: blueviolet;
 }
 .item1 {
-    align-items:center;
+    text-align:center;
     font-family: 'Inconsolata', monospace;
     font-weight: 500;
         font-size: 50px;
@@ -27,7 +27,9 @@ a:active{
         text-align: center;
 }
 .menu{
-    display:inline;
+    display:flex;
+    justify-content: center;
+    align-items: center;
     overflow: auto;
     text-align: center;    
     padding-top: 5%;
@@ -37,30 +39,49 @@ a:active{
     font-weight: 200;
     color: #a3a8ae;
     size: 50%;
-    
 }
 .menu > [id="menu_angielski"]{
+    float: left;
     text-align:center;
+    width: 20%;
 }
 .menu > [id="menu_angielski"]:hover{
     color: #728fbe;
 }
 .menu > [id="menuAng"]{
-    overflow:hidden;
     display: none;
+    position: fixed;
+    top: 185px;
+    left: 155px;
     list-style: none;
-    background-color:transparent;
+    background-color:#a3a8ae;
     color: rgb(10, 4, 51);
-    width: fit-content;
-    text-align: center;
+    width: 140px;
+    height: 80px;
+    text-align: start;
+}
+.nav1 > [id="godz"]{
+    padding-top: 5%;
+}
+.nav1 > [id="plann"]{
+    position:fixed;
+    top: 230px;
+    text-align: left;
 }
 .menu > [id="menu_o"]{
     text-align:center;
     accent-color: #728fbe;
+    width: 20%;
+    float: left;
 }
 .menu > [id="kontakt"]{
     text-align:center;
     accent-color: #728fbe;
+    width: 20%;
+    float: left;
+}
+.item3{
+    display: block;
 }
 .kontakt1{
     color: #a3a8ae;
@@ -107,9 +128,3 @@ a:active{
 .kontakt3_1 > [id=wyslij]:focus{
     background-color:steelblue;
 }
-
-
-
-
-
-
