@@ -1,7 +1,7 @@
 body {
    background: linear-gradient(0deg, rgba(2,0,36,1) 21%, rgba(48,48,98,1) 72%, rgba(131,181,204,1) 100%);
    background-size: cover;
-   min-height: 100%;
+   height: 100%;
 }
 a:any-link{
     color: #a3a8ae;
@@ -19,6 +19,7 @@ a:active{
     color: blueviolet;
 }
 .item1 {
+    background-size: cover;
     text-align:center;
     font-family: 'Inconsolata', monospace;
     font-weight: 500;
@@ -36,7 +37,7 @@ a:active{
     list-style-type:none;
     font-size: 30px;
     font-family: 'Inconsolata', monospace;
-    font-weight: 200;
+    font-weight: 550;
     color: #a3a8ae;
     size: 50%;
 }
@@ -48,11 +49,9 @@ a:active{
 .menu > [id="menu_angielski"]:hover{
     color: #728fbe;
 }
-.menu > [id="menuAng"]{
+.nav1{
     display: none;
-    position: fixed;
-    top: 185px;
-    left: 155px;
+    align-self: flex-start;
     list-style: none;
     background-color:#a3a8ae;
     color: rgb(10, 4, 51);
@@ -61,12 +60,10 @@ a:active{
     text-align: start;
 }
 .nav1 > [id="godz"]{
-    padding-top: 5%;
+    
 }
 .nav1 > [id="plann"]{
-    position:fixed;
-    top: 230px;
-    text-align: left;
+    
 }
 .menu > [id="menu_o"]{
     text-align:center;
@@ -87,6 +84,8 @@ a:active{
     color: #a3a8ae;
 }
 .kontakt2{
+    background-size: cover;
+    object-fit: fill;
     color: #a3a8ae;
     font-family: 'Inconsolata', monospace;
     box-sizing: border-box;
