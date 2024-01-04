@@ -83,9 +83,6 @@ a:active{
     width: 20%;
     float: left;
 }
-.item3{
-    display: block;
-}
 .kontakt1{
     color: #a3a8ae;
 }
@@ -132,6 +129,15 @@ a:active{
 }
 .kontakt3_1 > [id=wyslij]:focus{
     background-color:steelblue;
+}
+.item3 {
+    display: block;
+    background-size: cover;
+    text-align:center;
+    font-weight: 500;
+        font-size: 30px;
+        color: black;
+        text-align: center;
 }
 .first {
     display: flex;
