@@ -29,7 +29,7 @@ a:active{
 }
 .menu{
     display:flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     overflow: auto;
     text-align: center;    
@@ -46,30 +46,34 @@ a:active{
     text-align:center;
     width: 20%;
 }
-.menu > [id="menu_angielski"]:hover{
-    color: #728fbe;
-}
 .nav1{
     display: none;
-    align-self: flex-start;
+    position: absolute;
     list-style: none;
-    background-color:#a3a8ae;
+    background-color:#a3a8ae, transparent;
+    box-shadow: 0px 8px 16px 0px, #3b3d3f;
     color: rgb(10, 4, 51);
     width: 140px;
     height: 80px;
-    text-align: start;
+    text-align: left;
+    font-size: large;
 }
+.menu > [id="menu_angielski"]:hover{
+    color: #728fbe;
+}
+.menu > [id="menu_angielski"]:hover .nav1{
+    display: flex;
+}
+
 .nav1 > [id="godz"]{
-    
 }
 .nav1 > [id="plann"]{
-    
 }
 .menu > [id="menu_o"]{
     text-align:center;
     accent-color: #728fbe;
     width: 20%;
-    float: left;
+    float: center;
 }
 .menu > [id="kontakt"]{
     text-align:center;
