@@ -2,6 +2,7 @@ body {
    background: linear-gradient(0deg, rgba(2,0,36,1) 21%, rgba(48,48,98,1) 72%, rgba(131,181,204,1) 100%);
    background-size: cover;
    height: 100%;
+   font-family: 'Inconsolata', monospace;
 }
 a:any-link{
     color: #a3a8ae;
@@ -50,9 +51,8 @@ a:active{
     display: none;
     position: absolute;
     list-style: none;
-    background-color:#a3a8ae, transparent;
-    box-shadow: 0px 8px 16px 0px, #3b3d3f;
-    color: rgb(10, 4, 51);
+    background-color: transparent;
+    color: rgb(5, 1, 24);
     width: 140px;
     height: 80px;
     text-align: left;
@@ -69,7 +69,9 @@ a:active{
 }
 .nav1 > [id="plann"]{
 }
+
 .menu > [id="menu_o"]{
+    display: none;
     text-align:center;
     accent-color: #728fbe;
     width: 20%;
@@ -130,4 +132,8 @@ a:active{
 }
 .kontakt3_1 > [id=wyslij]:focus{
     background-color:steelblue;
+}
+.first {
+    display: flex;
+    text-align: center;
 }
