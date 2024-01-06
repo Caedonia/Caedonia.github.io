@@ -20,7 +20,7 @@ a:active{
     color: blueviolet;
 }
 .item1 {
-    background-size: cover;
+    background-size:auto;
     text-align:center;
     font-family: 'Inconsolata', monospace;
     font-weight: 500;
@@ -132,6 +132,7 @@ a:active{
 }
 .item3 {
     display: block;
+    height: 750px;
     background-size: cover;
     text-align:center;
     font-weight: 500;
