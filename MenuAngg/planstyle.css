@@ -1,0 +1,17 @@
+body {
+    background: linear-gradient(0deg, rgba(2,0,36,1) 21%, rgba(48,48,98,1) 72%, rgba(131,181,204,1) 100%);
+    background-size: cover;
+    height: 100%;
+    font-family: 'Inconsolata', monospace;
+ }
+ .full {
+    height: 1500px;
+ }
+ .header{
+    display: block;
+ }
+ .header > [id="h1"] {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+ }
