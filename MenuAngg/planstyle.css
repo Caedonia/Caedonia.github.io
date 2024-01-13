@@ -4,6 +4,22 @@ body {
     height: 100%;
     font-family: 'Inconsolata', monospace;
  }
+ a:any-link{
+    color: #a3a8ae;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:hover{
+    color: #728fbe;
+    font-style: italic;
+}
+a:visited{
+    color: #a3a8ae;
+    text-decoration: none;
+}
+a:active{
+    color: blueviolet;
+}
  .full {
     height: 1500px;
  }
@@ -14,4 +30,20 @@ body {
     text-align: center;
     font-size: 40px;
     font-weight: bold;
+ }
+ .tables{
+
+ }
+ .side{
+ list-style: none;
+ }
+
+ .timetable {
+    display: none;
+ }
+ .side > [id="pon"]:hover{
+    color: #728fbe;
+ }
+ .side > [id="pon"]:hover .timetable {
+    display: flex;
  }
