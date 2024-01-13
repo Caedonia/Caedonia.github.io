@@ -99,23 +99,24 @@ a:active{
     display: block;
     line-height: 200%;
 }
+/* kontakt3_1 not needed atm GForms used */
 .kontakt3_1{
+    display: none;
     color: #a3a8ae;
     font-family: 'Inconsolata', monospace;
     margin: auto;
     width: fit-content;
     height: fit-content;
-}
-.kontakt3_1 > input{
+    }
+    .kontakt3_1 > input{
     width: 300px;
     float: right;
-}
-.kontakt3_1 > [id=wiadomosc] {
+    }
+    .kontakt3_1 > [id=wiadomosc] {
     height: 100px;
     max-height: 500px;
-
-}
-.kontakt3_1 > [id=wyslij]{
+    }
+    .kontakt3_1 > [id=wyslij]{
     float: left;
     width: 25%;
     font-family: 'Inconsolata', monospace;
@@ -123,12 +124,18 @@ a:active{
     border-style:double;
     box-shadow: #728fbe;
     background-color:darkslategrey 
-}
-.kontakt3_1 > [id=wyslij]:hover{
+    }
+    .kontakt3_1 > [id=wyslij]:hover{
     background-color:darkslategrey;
-}
-.kontakt3_1 > [id=wyslij]:focus{
+    }
+    .kontakt3_1 > [id=wyslij]:focus{
     background-color:steelblue;
+    }
+    
+.kontakt3_2{
+    display: flex;
+    justify-content: center;
+    height: fit-content;
 }
 .item3 {
     display: block;
