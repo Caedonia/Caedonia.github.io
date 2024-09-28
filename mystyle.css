@@ -47,6 +47,9 @@ a:active{
     text-align:center;
     width: 20%;
 }
+.nav{
+    display:inline-block;
+}
 .nav1{
     display: none;
     position: absolute;
@@ -63,11 +66,6 @@ a:active{
 }
 .menu > [id="menu_angielski"]:hover .nav1{
     display: flex;
-}
-
-.nav1 > [id="godz"]{
-}
-.nav1 > [id="plann"]{
 }
 
 .menu > [id="menu_o"]{
