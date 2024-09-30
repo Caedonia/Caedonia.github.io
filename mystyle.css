@@ -25,7 +25,7 @@ a:active{
     font-family: 'Inconsolata', monospace;
     font-weight: 500;
         font-size: 50px;
-        color: black;
+        color: rgba(41, 41, 53,0.80);
         text-align: center;
 }
 .menu{
