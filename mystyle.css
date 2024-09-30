@@ -35,12 +35,11 @@ a:active{
     overflow:auto;
     text-align: center;    
     list-style-type:none;
-    font-size: 30px;
     font-family: 'Inconsolata', monospace;
-    font-weight: 550;
-    color: #a3a8ae;
+        font-weight: 550;
+        color: #a3a8ae;
+        font-size: 30px;
     background-color: rgba(48,48,98,0.5);
-    accent-color: #728fbe;
     size: 50%;
 }
 .menu > [id="menu_angielski"]:hover{
