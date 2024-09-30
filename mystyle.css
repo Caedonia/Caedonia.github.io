@@ -1,5 +1,5 @@
 body {
-   background: linear-gradient(0deg, rgba(2,0,36,1) 21%, rgba(48,48,98,1) 72%, rgba(131,181,204,1) 100%);
+   background: linear-gradient(0deg, rgba(2,0,36,1) 21%, rgba(131,181,204,1) 100%);
    background-size: cover;
    height: 100%;
    font-family: 'Inconsolata', monospace;
@@ -30,22 +30,24 @@ a:active{
 }
 .menu{
     display:flex;
-    justify-content: space-evenly;
+    justify-content:space-around;
     align-items: center;
-    overflow: auto;
+    overflow:auto;
     text-align: center;    
-    padding-top: 5%;
     list-style-type:none;
     font-size: 30px;
     font-family: 'Inconsolata', monospace;
     font-weight: 550;
     color: #a3a8ae;
+    background-color: rgba(48,48,98,0.5);
+    accent-color: #728fbe;
     size: 50%;
 }
-.menu > [id="menu_angielski"]{
-    float: left;
-    text-align:center;
-    width: 20%;
+.menu > [id="menu_angielski"]:hover{
+    color: #728fbe;
+}
+.menu > [id="menu_angielski"]:hover .nav1{
+    display: flex;
 }
 .nav{
     display:inline-block;
@@ -61,26 +63,7 @@ a:active{
     text-align: left;
     font-size: large;
 }
-.menu > [id="menu_angielski"]:hover{
-    color: #728fbe;
-}
-.menu > [id="menu_angielski"]:hover .nav1{
-    display: flex;
-}
 
-.menu > [id="menu_o"]{
-    display: none;
-    text-align:center;
-    accent-color: #728fbe;
-    width: 20%;
-    float: center;
-}
-.menu > [id="kontakt"]{
-    text-align:center;
-    accent-color: #728fbe;
-    width: 20%;
-    float: left;
-}
 .kontakt1{
     color: #a3a8ae;
 }
