@@ -55,7 +55,7 @@ a:active{
     display: none;
     position: absolute;
     list-style: none;
-    background-color: transparent;
+    background-color: rgba(48,48,98,0.35);
     color: rgb(5, 1, 24);
     width: 140px;
     height: 80px;
