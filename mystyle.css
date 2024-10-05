@@ -48,6 +48,9 @@ a:active{
 .menu > [id="menu_angielski"]:hover .nav1{
     display: flex;
 }
+#kontakt{
+    display: block;
+}
 .nav{
     display:inline-block;
 }
