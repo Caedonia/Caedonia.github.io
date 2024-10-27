@@ -51,9 +51,7 @@ a:active{
 #kontakt{
     display: block;
 }
-.nav{
-    display:inline-block;
-}
+
 .nav1{
     display: none;
     position: absolute;
