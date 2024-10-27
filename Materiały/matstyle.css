@@ -1,55 +1,116 @@
 body {
-    background: linear-gradient(0deg, rgba(2,0,36,1) 21%, rgba(48,48,98,1) 72%, rgba(131,181,204,1) 100%);
+    background-color:#a3a8ae;
     background-size: cover;
-    height:100%;
+    height: 100%;
     font-family: 'Inconsolata', monospace;
- }
- a:any-link{
-    color: #a3a8ae;
+}
+a:any-link{
+    color: #100B00;
     background-color: transparent;
     text-decoration: none;
 }
 a:hover{
-    color: #728fbe;
-}
-a:visited{
-    color: #a3a8ae;
-    text-decoration: none;
+    color: #1B3022;
 }
 a:active{
-    color: blueviolet;
+    color: #1B3022;
 }
- .full {
-    height: 1500px;
- }
- .menu{
+.item1 {
+    padding-bottom: 2%;
+    text-align:center;
+    font-weight: 500;
+        font-size: 50px;
+        color:#100B00;
+        text-align: center;
+}
+.loggo{
+    padding-bottom: 0%;
+}
+#logo1{
+    height: 80px;
+}
+table{
+    width: fit-content;
+    justify-self: center;
+}
+.title{
+    padding-bottom: 2%;
+}
+.menu{
     display:flex;
     justify-content:space-around;
     align-items: center;
     overflow:auto;
     text-align: center;    
     list-style-type:none;
-    font-family: 'Inconsolata', monospace;
         font-weight: 550;
-        color: #a3a8ae;
+        color:#100B00;
         font-size: 30px;
-    background-color: rgba(48,48,98,0.5);
-    size: 50%;
+    background-color: #4B5F85;
+    padding: 0.5%;
 }
-.nav1{
+ul{
+    margin: 0px;
+    padding-top: 10%;
+}
+.menu > [id="menu_mat"]:hover{
+    color: #1B3022;
+}
+.menu > [id="menu_mat"]:hover .nav1{
+    display: flex;
+    justify-content:space-around;
+}
+#kontakt{
+    display: block;
+}
+.nav1,.nav2{
+    position:absolute;
     display: none;
-    position: absolute;
     list-style: none;
-    background-color: rgba(48,48,98,0.35);
-    color: rgb(5, 1, 24);
     width: 150px;
     height: auto;
     text-align: left;
     font-size: large;
+    color: #100B00;
 }
-.menu > [id="menu_info"]:hover{
-    color: #728fbe;
+#menu_dzien:hover{
+    color: #1B3022;
 }
-.menu > [id="menu_info"]:hover .nav1{
+#menu_dzien:hover .nav2{
     display: flex;
+    position:static;
+}
+.kontakt1{
+    color:#100B00;
+}
+.kontakt2{
+    background-size: cover;
+    object-fit: fill;
+    color: #a3a8ae;
+    box-sizing: border-box;
+    padding: 5%;
+    text-align: center;
+}
+.kontakt2 > br {
+    display: block;
+    line-height: 200%;
+}
+.kontakt3_2{
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+}
+.item3 {
+    display: block;
+    height: 750px;
+    background-size: cover;
+    text-align:center;
+    font-weight: 500;
+        font-size: 30px;
+        color: #100B00;
+        text-align: center;
+}
+.first {
+    display: flex;
+    text-align: center;
 }
