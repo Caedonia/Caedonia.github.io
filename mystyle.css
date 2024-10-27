@@ -12,10 +12,6 @@ a:any-link{
 a:hover{
     color: #728fbe;
 }
-a:visited{
-    color: #a3a8ae;
-    text-decoration: none;
-}
 a:active{
     color: blueviolet;
 }
@@ -40,7 +36,10 @@ a:active{
         color: #a3a8ae;
         font-size: 30px;
     background-color: rgba(48,48,98,0.5);
-    size: 50%;
+}
+ul{
+    margin: 0px;
+    padding-top: 10%;
 }
 .menu > [id="menu_angielski"]:hover{
     color: #728fbe;
@@ -51,19 +50,23 @@ a:active{
 #kontakt{
     display: block;
 }
-
-.nav1{
-    display: none;
+.nav1,.nav2{
     position: absolute;
+    display: none;
     list-style: none;
-    background-color: rgba(48,48,98,0.35);
-    color: rgb(5, 1, 24);
     width: 150px;
     height: auto;
     text-align: left;
     font-size: large;
+    color: #a3a8ae;
+    background-color: rgba(48,48,98,0.35);
 }
-
+#menu_mater:hover{
+    color: #728fbe;
+}
+#menu_mater:hover .nav2{
+    display: flex;
+}
 .kontakt1{
     color: #a3a8ae;
 }
