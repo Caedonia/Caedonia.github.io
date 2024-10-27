@@ -1,27 +1,40 @@
 body {
-   background: linear-gradient(0deg, rgba(2,0,36,1) 21%, rgba(131,181,204,1) 100%);
-   background-size: cover;
-   height: 100%;
-   font-family: 'Inconsolata', monospace;
+    background-color:#a3a8ae;
+    background-size: cover;
+    height: 100%;
+    font-family: 'Inconsolata', monospace;
 }
 a:any-link{
-    color: #a3a8ae;
+    color: #100B00;
     background-color: transparent;
     text-decoration: none;
 }
 a:hover{
-    color: #728fbe;
+    color: #1B3022;
 }
 a:active{
-    color: blueviolet;
+    color: #1B3022;
 }
 .item1 {
-    background-size:auto;
+    padding-bottom: 2%;
     text-align:center;
     font-weight: 500;
         font-size: 50px;
-        color: rgba(41, 41, 53,0.80);
+        color:#100B00;
         text-align: center;
+}
+.loggo{
+    padding-bottom: 0%;
+}
+#logo1{
+    height: 80px;
+}
+table{
+    width: fit-content;
+    justify-self: center;
+}
+.title{
+    padding-bottom: 2%;
 }
 .menu{
     display:flex;
@@ -31,16 +44,17 @@ a:active{
     text-align: center;    
     list-style-type:none;
         font-weight: 550;
-        color: #a3a8ae;
+        color:#100B00;
         font-size: 30px;
-    background-color: rgba(48,48,98,0.5);
+    background-color: #4B5F85;
+    padding: 0.5%;
 }
 ul{
     margin: 0px;
     padding-top: 10%;
 }
 .menu > [id="menu_angielski"]:hover{
-    color: #728fbe;
+    color: #1B3022;
 }
 .menu > [id="menu_angielski"]:hover .nav1{
     display: flex;
@@ -56,17 +70,16 @@ ul{
     height: auto;
     text-align: left;
     font-size: large;
-    color: #a3a8ae;
-    background-color: rgba(48,48,98,0.35);
+    color: #100B00;
 }
 #menu_mater:hover{
-    color: #728fbe;
+    color: #1B3022;
 }
 #menu_mater:hover .nav2{
     display: flex;
 }
 .kontakt1{
-    color: #a3a8ae;
+    color:#100B00;
 }
 .kontakt2{
     background-size: cover;
@@ -125,7 +138,7 @@ ul{
     text-align:center;
     font-weight: 500;
         font-size: 30px;
-        color: black;
+        color: #100B00;
         text-align: center;
 }
 .first {
