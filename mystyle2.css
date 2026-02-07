@@ -1,0 +1,288 @@
+/* General Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background-color: #f8fafb; color: #333; }
+
+/* Mobile First Layout */
+.app-wrapper {
+    display: flex;
+    flex-direction: column; /* Sidebar on top or hidden for mobile */
+}
+
+.sidebar {
+    background: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #eee;
+}
+
+.nav-links { list-style: none; display: flex; gap: 15px; font-size: 0.9rem; }
+.nav-links li { cursor: pointer; color: #888; }
+.nav-links li.active { color: #4caf50; font-weight: bold; }
+
+.main-content { padding: 20px; }
+
+/* Header & Tabs */
+.header h1 { font-size: 1.5rem; margin-bottom: 20px; text-align: center; }
+.tab-menu { 
+    display: flex; 
+    justify-content: center; 
+    gap: 20px; 
+    font-size: 0.75rem; 
+    font-weight: bold;
+    color: #bbb;
+    margin-bottom: 30px;
+}
+.active-tab { color: #4caf50; border-bottom: 2px solid #4caf50; padding-bottom: 5px; }
+
+/* Grid System */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column for mobile */
+    gap: 20px;
+}
+
+/* Card Styling */
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.icon { font-size: 30px; margin-bottom: 10px; }
+h3 { font-size: 0.8rem; color: #666; letter-spacing: 1px; margin-bottom: 20px; }
+
+/* SVG Circle Progress */
+.circle-container { position: relative; width: 100px; margin: 0 auto; }
+.circular-chart { display: block; margin: 10px auto; max-width: 100%; }
+.circle-bg { fill: none; stroke: #eee; stroke-width: 2.8; }
+.circle { fill: none; stroke-width: 2.8; stroke-linecap: round; stroke: #4caf50; }
+.percentage { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; }
+
+/* Bar Chart */
+.bar-chart { display: flex; align-items: flex-end; justify-content: center; gap: 8px; height: 50px; margin-bottom: 15px; }
+.bar { width: 15px; background: #81c784; border-radius: 3px; }
+
+/* Score */
+.score-num { font-size: 2.5rem; font-weight: bold; display: block; }
+.score-total { font-size: 0.8rem; color: #999; }
+.meta { font-size: 0.75rem; color: #999; margin-top: 10px; }
+.green-text { color: #4caf50; font-weight: bold; }
+
+/* DESKTOP STYLES (Screen wider than 768px) */
+@media (min-width: 768px) {
+    .app-wrapper { flex-direction: row; }
+    
+    .sidebar {
+        width: 200px;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: flex-start;
+        border-right: 1px solid #eee;
+        position: sticky;
+        top: 0;
+    }
+    
+    .nav-links { flex-direction: column; margin-top: 40px; gap: 25px; }
+    .logo { font-size: 40px; margin-bottom: 20px; }
+
+    .main-content { flex-grow: 1; padding: 50px; }
+    .header h1 { text-align: left; }
+    .tab-menu { justify-content: flex-start; }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for desktop */
+    }
+}
+/* Landing Page Specifics */
+.landing-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.btn-login {
+    background: #f0fdf4;
+    color: #4caf50;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-login:hover { background: #4caf50; color: white; }
+
+.hero {
+    text-align: center;
+    padding: 100px 10%;
+    background: linear-gradient(to bottom, #ffffff, #f4f7f6);
+}
+
+.hero h1 { font-size: 3rem; margin-bottom: 20px; color: #2c3e50; }
+.green-text { color: #4caf50; }
+
+.btn-primary {
+    display: inline-block;
+    background: #4caf50;
+    color: white;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 25px;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+/* Info Section */
+.info-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 80px 10%;
+}
+
+.info-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.info-card:hover { transform: translateY(-10px); }
+
+/* Contact Form */
+.contact-container {
+    padding: 80px 10%;
+    background: #fdfdfd;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    outline: none;
+    font-family: inherit;
+}
+
+.btn-submit {
+    width: 100%;
+    background: #333;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}.schedule-container {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    margin-top: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.schedule-header h2 { font-size: 1.2rem; color: #333; margin-bottom: 5px; }
+.schedule-header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 30px; }
+
+.schedule-grid {
+    display: grid;
+    /* Time | Mon | Tue | Wed (bar) | Wednesday | Fri (dot) | Friday */
+    grid-template-columns: 60px repeat(6, 1fr);
+    gap: 15px;
+    align-items: center;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #888;
+}
+
+/* Event Styling */
+.event {
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+
+.blue { background-color: #4a90e2; }
+.green { background-color: #7cb342; }
+.orange { background-color: #d86d4d; }
+.purple { background-color: #9b59b6; }
+.gray { background-color: #eeeeee; color: #888; }
+.purple-outline { border: 2px solid #9b59b6; color: #9b59b6; background: white; }
+
+/* The Long Vertical Bars (TUE / WED) */
+.green-bar { background-color: #8db083; border-radius: 5px; margin: 0 10px; }
+.purple-bar { background-color: #8e6caf; border-radius: 5px; margin: 0 10px; }
+
+.time-slot { font-weight: bold; color: #bbb; border-bottom: 1px solid #f0f0f0; padding-bottom: 20px;}
+.dot-col { color: #ddd; }
+
+.schedule-container {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    margin-top: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.schedule-header h2 { font-size: 1.2rem; color: #333; margin-bottom: 5px; }
+.schedule-header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 30px; }
+
+.schedule-grid {
+    display: grid;
+    /* Time | Mon | Tue | Wed (bar) | Wednesday | Fri (dot) | Friday */
+    grid-template-columns: 60px repeat(6, 1fr);
+    gap: 15px;
+    align-items: center;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #888;
+}
+
+/* Event Styling */
+.event {
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+
+.blue { background-color: #4a90e2; }
+.green { background-color: #7cb342; }
+.orange { background-color: #d86d4d; }
+.purple { background-color: #9b59b6; }
+.gray { background-color: #eeeeee; color: #888; }
+.purple-outline { border: 2px solid #9b59b6; color: #9b59b6; background: white; }
+
+/* The Long Vertical Bars (TUE / WED) */
+.green-bar { background-color: #8db083; border-radius: 5px; margin: 0 10px; }
+.purple-bar { background-color: #8e6caf; border-radius: 5px; margin: 0 10px; }
+
+.time-slot { font-weight: bold; color: #bbb; border-bottom: 1px solid #f0f0f0; padding-bottom: 20px;}
+.dot-col { color: #ddd; }
