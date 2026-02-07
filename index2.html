@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cactus Learning Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <nav class="sidebar">
+            <div class="logo">🌵</div>
+            <ul class="nav-links">
+                <li class="active">Dashboard</li>
+                <li>Profile</li>
+                <li>Courses</li>
+                <li>Settings</li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Dashboard</h1>
+                <div class="tab-menu">
+                    <span>OVERVIEW</span>
+                    <span class="active-tab">PROGRESS</span>
+                    <span>VOCABULARY</span>
+                </div>
+            </header>
+
+            <section class="dashboard-grid">
+                <div class="card">
+                    <div class="icon">🌵</div>
+                    <h3>PROGRESS</h3>
+                    <div class="circle-container">
+                        <svg viewBox="0 0 36 36" class="circular-chart green">
+                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle" stroke-dasharray="75, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="percentage">75%</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🌵</div>
+                    <h3>VOCABULARY</h3>
+                    <div class="bar-chart">
+                        <div class="bar" style="height: 50%"></div>
+                        <div class="bar" style="height: 80%"></div>
+                        <div class="bar" style="height: 60%"></div>
+                    </div>
+                    <p class="meta">NEW WORDS: <span class="green-text">150</span></p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🌵</div>
+                    <h3>GRAMMAR SCORE</h3>
+                    <div class="score-box">
+                        <span class="score-num">92</span>
+                        <span class="score-total">out of 100</span>
+                    </div>
+                    <p class="meta">MODULES COMPLETED: 12</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>
