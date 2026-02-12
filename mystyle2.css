@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: smooth;
+}
 /* General Reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Inter', sans-serif; background-color: #f8fafb; color: #333; }
@@ -286,3 +289,65 @@ h3 { font-size: 0.8rem; color: #666; letter-spacing: 1px; margin-bottom: 20px; }
 
 .time-slot { font-weight: bold; color: #bbb; border-bottom: 1px solid #f0f0f0; padding-bottom: 20px;}
 .dot-col { color: #ddd; }
+/* Navigation Link Styling */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #666; /* Subtle grey */
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for About/Contact links */
+.nav-links a:hover {
+    color: #4caf50; /* Turns cactus green on hover */
+}
+
+/* Information Section (About) Refinements */
+.info-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    padding: 100px 10%;
+    background-color: #fff;
+}
+
+.info-card {
+    background: #fdfdfd;
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    border: 1px solid #f0f0f0; /* Soft border */
+    transition: all 0.3s ease;
+}
+
+/* Hover effect to make cards feel interactive */
+.info-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    border-color: #e0e0e0;
+}
+
+.info-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.info-card h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.info-card p {
+    color: #777;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
