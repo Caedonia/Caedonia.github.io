@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cactus Learning | Home</title>
-    <link rel="stylesheet" href="mystyle2.css">
+    <link rel="stylesheet" href="../styles/mystyle2.css">
 </head>
+<script src="../JS/SendMail2.js" ></script>
 <body>
 
     <nav class="landing-nav">
@@ -41,18 +42,20 @@
         </div>
     </section>
 
-    <section id="contact" class="contact-container">
-        <div class="contact-form">
-            <h2>Get in Touch</h2>
-            <p>Have questions? We're here to help you grow.</p>
-            <form>
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="How can we help?" rows="5"></textarea>
-                <button type="submit" class="btn-submit">Send Message</button>
-            </form>
-        </div>
-    </section>
+<section id="contact" class="contact-container">
+    <div class="contact-form">
+        <h2>Get in Touch</h2>
+        <p>Have questions? We're here to help you grow.</p><br>
+        
+        <form action="https://formspree.io/f/xlgwbagp" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="How can we help?" rows="5" required></textarea>
+            
+            <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+    </div>
+</section>
 
 </body>
 </html>

@@ -19,7 +19,7 @@ body { font-family: 'Inter', sans-serif; background-color: #f8fafb; color: #333;
     border-bottom: 1px solid #eee;
 }
 
-.nav-links { list-style: none; display: flex; gap: 15px; font-size: 0.9rem; }
+.nav-links { list-style: none; display: flex; gap: 15px; font-size: 0.9rem; }.schedule-grid
 .nav-links li { cursor: pointer; color: #888; }
 .nav-links li.active { color: #4caf50; font-weight: bold; }
 
@@ -196,100 +196,7 @@ h3 { font-size: 0.8rem; color: #666; letter-spacing: 1px; margin-bottom: 20px; }
     border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
-}.schedule-container {
-    background: white;
-    padding: 40px;
-    border-radius: 30px;
-    margin-top: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
-
-.schedule-header h2 { font-size: 1.2rem; color: #333; margin-bottom: 5px; }
-.schedule-header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 30px; }
-
-.schedule-grid {
-    display: grid;
-    /* Time | Mon | Tue | Wed (bar) | Wednesday | Fri (dot) | Friday */
-    grid-template-columns: 60px repeat(6, 1fr);
-    gap: 15px;
-    align-items: center;
-    text-align: center;
-    font-size: 0.75rem;
-    color: #888;
-}
-
-/* Event Styling */
-.event {
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    text-align: left;
-    font-size: 0.7rem;
-    white-space: nowrap;
-}
-
-.blue { background-color: #4a90e2; }
-.green { background-color: #7cb342; }
-.orange { background-color: #d86d4d; }
-.purple { background-color: #9b59b6; }
-.gray { background-color: #eeeeee; color: #888; }
-.purple-outline { border: 2px solid #9b59b6; color: #9b59b6; background: white; }
-
-/* The Long Vertical Bars (TUE / WED) */
-.green-bar { background-color: #8db083; border-radius: 5px; margin: 0 10px; }
-.purple-bar { background-color: #8e6caf; border-radius: 5px; margin: 0 10px; }
-
-.time-slot { font-weight: bold; color: #bbb; border-bottom: 1px solid #f0f0f0; padding-bottom: 20px;}
-.dot-col { color: #ddd; }
-
-.schedule-container {
-    background: white;
-    padding: 40px;
-    border-radius: 30px;
-    margin-top: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
-
-.schedule-header h2 { font-size: 1.2rem; color: #333; margin-bottom: 5px; }
-.schedule-header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 30px; }
-
-.schedule-grid {
-    display: grid;
-    /* Time | Mon | Tue | Wed (bar) | Wednesday | Fri (dot) | Friday */
-    grid-template-columns: 60px repeat(6, 1fr);
-    gap: 15px;
-    align-items: center;
-    text-align: center;
-    font-size: 0.75rem;
-    color: #888;
-}
-
-/* Event Styling */
-.event {
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    text-align: left;
-    font-size: 0.7rem;
-    white-space: nowrap;
-}
-
-.blue { background-color: #4a90e2; }
-.green { background-color: #7cb342; }
-.orange { background-color: #d86d4d; }
-.purple { background-color: #9b59b6; }
-.gray { background-color: #eeeeee; color: #888; }
-.purple-outline { border: 2px solid #9b59b6; color: #9b59b6; background: white; }
-
-/* The Long Vertical Bars (TUE / WED) */
-.green-bar { background-color: #8db083; border-radius: 5px; margin: 0 10px; }
-.purple-bar { background-color: #8e6caf; border-radius: 5px; margin: 0 10px; }
-
-.time-slot { font-weight: bold; color: #bbb; border-bottom: 1px solid #f0f0f0; padding-bottom: 20px;}
-.dot-col { color: #ddd; }
-/* Navigation Link Styling */
 .nav-links {
     display: flex;
     align-items: center;
@@ -350,4 +257,40 @@ h3 { font-size: 0.8rem; color: #666; letter-spacing: 1px; margin-bottom: 20px; }
     color: #777;
     line-height: 1.6;
     font-size: 0.95rem;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    background-color: #ffffff;
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 50px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.back-btn .arrow {
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+/* Hover Effects */
+.back-btn:hover {
+    background-color: #f0fdf4;
+    border-color: #4caf50;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
+}
+
+.back-btn:hover .arrow {
+    transform: translateX(-5px); /* Makes the arrow "nudge" left on hover */
+}
+
+.head {
+    font-weight:bold;
 }

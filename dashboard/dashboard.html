@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cactus Learning Dashboard</title>
-    <link rel="stylesheet" href="mystyle2.css">
+    <link rel="stylesheet" href="../styles/mystyle2.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
 </head>
 <body>
 
@@ -14,7 +15,6 @@
             <ul class="nav-links">
                 <li class="active">Dashboard</li>
                 <li>Profile</li>
-                <li>Courses</li>
                 <li>Settings</li>
             </ul>
         </nav>
@@ -23,46 +23,60 @@
             <header class="header">
                 <h1>Dashboard</h1>
                 <div class="tab-menu">
-                    <span>OVERVIEW</span>
-                    <span class="active-tab">PROGRESS</span>
-                    <span>VOCABULARY</span>
+                    <span class="active-tab">OVERVIEW</span>
                 </div>
             </header>
+        <section class="dashboard-grid">
+    <div class="card homework-card">
+        <div class="card-header">
+            <h3>🌵 MY HOMEWORK</h3>
+            <span class="badge">3 Pending</span>
+        </div>
+        <ul class="task-list">
+            <li>
+                <input type="checkbox" id="task1">
+                <label for="task1">Vocabulary Quiz - Unit 4</label>
+                <span class="due-date">Due: Tomorrow</span>
+            </li>
+            <li>
+                <input type="checkbox" id="task2">
+                <label for="task2">Grammar Exercises p. 42</label>
+                <span class="due-date">Due: Fri</span>
+            </li>
+        </ul>
+    </div>
 
-            <section class="dashboard-grid">
-                <div class="card">
-                    <div class="icon">🌵</div>
-                    <h3>PROGRESS</h3>
-                    <div class="circle-container">
-                        <svg viewBox="0 0 36 36" class="circular-chart green">
-                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                            <path class="circle" stroke-dasharray="75, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        </svg>
-                        <div class="percentage">75%</div>
-                    </div>
-                </div>
+    <div class="card summary-card">
+        <h3>📖 LAST LESSON SUMMARY</h3>
+        <p class="summary-date">February 15, 2026</p>
+        <div class="summary-content">
+            <p>Today we focused on <strong>Past Continuous</strong> and environment-related vocabulary. Remember to review the irregular verb list!</p>
+        </div>
+    </div>
 
-                <div class="card">
-                    <div class="icon">🌵</div>
-                    <h3>VOCABULARY</h3>
-                    <div class="bar-chart">
-                        <div class="bar" style="height: 50%"></div>
-                        <div class="bar" style="height: 80%"></div>
-                        <div class="bar" style="height: 60%"></div>
-                    </div>
-                    <p class="meta">NEW WORDS: <span class="green-text">150</span></p>
-                </div>
+    <div class="card materials-card">
+        <h3>📂 USEFUL MATERIALS</h3>
+        <div class="material-links">
+            <a href="#" class="file-link">📁 Verb Tense Chart.pdf</a>
+            <a href="#" class="file-link">📁 Unit 4 Audio Files.zip</a>
+            <a href="#" class="file-link">📁 Supplementary Reading.pdf</a>
+        </div>
+    </div>
 
-                <div class="card">
-                    <div class="icon">🌵</div>
-                    <h3>GRAMMAR SCORE</h3>
-                    <div class="score-box">
-                        <span class="score-num">92</span>
-                        <span class="score-total">out of 100</span>
-                    </div>
-                    <p class="meta">MODULES COMPLETED: 12</p>
-                </div>
-            </section>
+    <div class="card news-card">
+        <h3>📢 NEWS & UPDATES</h3>
+        <div class="news-item">
+            <span class="news-date">Feb 14</span>
+            <p>New "Cactus Club" meeting this Friday at 4 PM!</p>
+        </div>
+        <div class="news-item">
+            <span class="news-date">Feb 10</span>
+            <p>Spring break schedule has been uploaded to the portal.</p>
+        </div>
+    </div>
+</section>
+
+               
         </main>
     </div>
 

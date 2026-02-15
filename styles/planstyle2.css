@@ -1,0 +1,59 @@
+/* schedule.css */
+
+.schedule-container {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    margin: 30px auto;
+    max-width: 1200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.schedule-header h2 { font-size: 1.2rem; color: #333; margin-bottom: 5px; }
+.schedule-header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 30px; }
+
+.schedule-grid {
+    display: grid;
+    /* Time | Thursaday | Friday | Saturday */
+    grid-template-columns: 60px repeat(3, 1fr);
+    grid-template-rows: auto repeat(4, 1fr);
+    gap: 15px;
+    align-items: center;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #888;
+}
+
+/* Event Styling */
+.event {
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+
+.blue { background-color: #306fb8; }
+.green { background-color: #7cb342; }
+.orange { background-color: #d86d4d; }
+.purple { background-color: #9b59b6; }
+.gray { background-color: #eeeeee; color: #888; }
+.purple-outline { border: 2px solid #9b59b6; color: #9b59b6; background: white; }
+
+/* The Long Vertical Bars (TUE / WED) */
+.green-bar { grid-column: 2; grid-row: 2/-1; background-color: #8db083; border-radius: 5px; margin: 0 10px; height: 100%; }
+.purple-bar { grid-column: 3; grid-row: 2/-1; background-color: #8e6caf; border-radius: 5px; margin: 0 10px; height: 100%; }
+
+.time-slot { font-weight: bold; color: #bbb; border-bottom: 1px solid #f0f0f0; padding-bottom: 20px; }
+.dot-col { color: #ddd; }
+
+/* Make the schedule responsive */
+@media (max-width: 768px) {
+    .schedule-grid {
+        grid-template-columns: 50px 1fr; /* Stack columns on mobile */
+        overflow-x: auto; /* Allow horizontal scroll if needed */
+    }
+    .span-column { display: none; } /* Hide the decorative bars on very small screens to save space */
+}
