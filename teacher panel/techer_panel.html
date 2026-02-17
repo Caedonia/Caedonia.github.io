@@ -1,0 +1,64 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/teacher_panel.css">
+    <link rel="stylesheet" href="../styles/mystyle2.css">
+</head>
+<script src="../JS/teacher_panel.js"></script>
+<div class="admin-container">
+    <aside class="admin-sidebar">
+        <h2>🌵 Teacher Admin</h2>
+        <nav>
+            <a href="#" class="active">Update Dashboard</a>
+            <a href="../schedule/index.html">Edit Schedule</a>
+            <a href="../landing.html">View Site</a>
+        </nav>
+    </aside>
+
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1>Update Student Portal</h1>
+            <p>Changes made here will update the student view.</p>
+        </header>
+
+        <div class="admin-grid">
+            <section class="admin-card">
+                <h3>Assign New Homework</h3>
+                <form id="admin-homework-form">
+                    <input type="text" placeholder="Task Name (e.g., Reading p.20)" required>
+                    <input type="date" required>
+                    <button type="submit" class="admin-btn">Add Task</button>
+                </form>
+            </section>
+
+            <section class="admin-card">
+                <h3>Lesson Summary</h3>
+                <form id="admin-summary-form">
+                    <input type="text" placeholder="Lesson Topic">
+                    <textarea placeholder="What did we cover today?" rows="4"></textarea>
+                    <button type="submit" class="admin-btn">Update Summary</button>
+                </form>
+            </section>
+
+            <section class="admin-card full-width">
+                <h3>Recent Posts</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Update Content</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Feb 17</td>
+                            <td>Spring break starts next week!</td>
+                            <td><button class="delete-btn">Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+</div>
