@@ -1,50 +1,54 @@
-# 🌵 Cactus Learning Portal
+# 🌵 Cactus Learning Portal & Archive
 
-A clean, modern, and responsive student management mockup. This project features a landing page with functional contact capabilities, a student dashboard, and a custom-built class schedule.
+A comprehensive educational platform for cactus enthusiasts and english students. This project has evolved from a simple landing page into a full-scale mockup including a student portal, a teacher admin command center, and a scientific field-number archive.
 
-## 📁 Project Structure
+## 📂 Final Project Architecture
 
-The project is organized into logical modules to ensure scalability and ease of maintenance:
+The repository is structured to separate user roles and data types:
 
-* **`/` (Root):** Contains the main `landing page.html`.
-* **`/dashboard`:** Contains the student portal interface (`dashboard.html`).
-* **`/plan`:** Contains the interactive class schedule (`plan2.html`).
-* **`/styles`:** Centralized CSS files (`mystyle2.css`, `dashboard.css`, `plan2style.css`).
-* **`/js`:** JavaScript logic, including form handling (`sendMail2.js`).
-* **`/assets`:** Images, icons, and cactus-themed branding.
+* **`/` (Root):** Main entry point (`landing.html`).
+* **`/dashboard`:** Student-facing portal with homework and lesson summaries.
+* **`/plan`:** Interactive class timetable with grid-spanning technology.
+* **`/cacti`:** * `start.html`: Multi-filter search for Field Numbers, Genus, and Origin.
+    * `detail.html`: Deep-dive scientific view for specific specimens.
+* **`/teacher_panel`:** Teacher control panel for updating portal content.
+* **`/styles`:** Centralized CSS (Main, Dashboard, Schedule, Search, Admin).
+* **`/js`:** JavaScript modules for form handling and data filtering.
+* **`/assets`:** High-resolution cactus photography and branding.
 
-## ✨ Key Features
+## 🚀 Key Modules
 
-### 1. Modern Landing Page
-* **Smooth Scrolling:** Glides to sections using CSS `scroll-behavior`.
-* **Functional Contact Form:** Powered by **Formspree.io** with an AJAX "hijack" to prevent page redirects.
-* **Responsive UI:** Fully optimized for mobile and desktop viewing.
+### 🔬 Scientific Archive (New!)
+* **Multi-Filter Search:** Separate inputs for Field Number, Genus, Name, and Country.
+* **Specimen Detail View:** A dedicated layout for taxonomical data and collection history (e.g., Alfred Lau/Walter Rausch field records).
+* **Responsive Photo Galleries:** Optimized viewing for habitat and flower macro shots.
 
-### 2. Student Dashboard
-* **Dynamic Grid Layout:** Uses CSS `minmax` and `auto-fit` to rearrange cards based on screen size.
-* **Homework Tracker:** Interactive checklist for students to monitor pending tasks.
-* **Resources & News:** Dedicated sections for lesson summaries and school updates.
+### 👩‍🏫 Teacher Admin Panel
+* **Content Management:** Forms to instantly update the Student Dashboard.
+* **Local Persistence:** Uses Browser LocalStorage to simulate database updates without a backend.
 
-### 3. Class Schedule
-* **Advanced CSS Grid:** Utilizes vertical spanning (`grid-row: 2 / -1`) to create "pillar" bars for specific days.
-* **Color-Coded Events:** Visual distinction between different class types and study sessions.
+### 📩 Contact & Communication
+* **Formspree Integration:** Real-time email delivery with AJAX "hijacking" to maintain a seamless UX.
 
-## 🛠️ Technical Details
+## 🛠️ Technical Implementation
 
-### Relative Pathing
-This project uses relative pathing (`../`) to allow the separate page folders to access centralized styles and scripts. 
-
-
-
-### Form Handling
-The contact form uses a `fetch` request in `js/contact.js` to send data to Formspree asynchronously. This allows for a "Success" message to appear without the user ever leaving the page.
+### Path Navigation
+Due to the nested folder structure, this project relies heavily on **Relative Pathing**:
+* Use `../` to move up to the root from subfolders.
+* Use `../../` if deep-nesting components.
 
 
 
-## 🚀 How to Run Locally
-1. Clone or download this repository.
-2. Open `landing.html` in any modern web browser.
-3. To test the contact form, ensure you have a valid Formspree ID in the `action` attribute of the form.
+### Grid & Layout
+The project utilizes **CSS Grid** for two primary purposes:
+1. **The Schedule:** Vertical pillar spanning using `grid-row`.
+2. **The Archive:** Auto-responsive card layouts using `repeat(auto-fill, minmax(280px, 1fr))`.
+
+
+
+## 📝 Future Roadmap
+- [ ] Connect a real database (Firebase/Supabase) to replace LocalStorage.
+- [ ] create a backend connecting the app and turning it into a working tool
 
 ---
-*Created with care for the Cactus Learning community. 🌵*
+*Maintained by the Cactus Learning Team. Grow your knowledge!* 🌵
