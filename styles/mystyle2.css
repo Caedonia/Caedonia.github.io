@@ -294,3 +294,84 @@ h3 { font-size: 0.8rem; color: #666; letter-spacing: 1px; margin-bottom: 20px; }
 .head {
     font-weight:bold;
 }
+/* Dropdown Container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* The "English Learning" button */
+.dropbtn {
+    cursor: pointer;
+    padding-bottom: 5px;
+}
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover { color: #4caf50; }
+
+.admin-link {
+    background: #f1f8e9;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: #2e7d32 !important;
+}
+
+/* Hidden Menu */
+.dropdown-content {
+    display: none; /* Hide by default */
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 10px 0;
+    z-index: 1001;
+    top: 100%; /* Position it directly below the label */
+    left: 0;
+}
+
+/* Individual Links inside the menu */
+.dropdown-content li {
+    list-style: none;
+    display: block;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 20px;
+    display: block;
+    font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f8e9;
+    color: #4caf50;
+}
+
+/* Show the menu on Hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
