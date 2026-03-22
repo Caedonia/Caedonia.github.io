@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 
 // Connect to (or create) the database
-const db = new sqlite3.Database('./cactus.db');
+const db = new sqlite3.Database('./portal.db');
 
 // Your parsed collection payload
 const initialCacti = [
@@ -72,7 +72,7 @@ db.serialize(() => {
     });
 
     stmt.finalize();
-    console.log(`🌵 Successfully seeded ${initialCacti.length} cacti records into the database!`);
+    console.log(`🌵 Successfully seeded ${initialCacti.length} cacti records into the cacti database!`);
 });
 
 db.close();
