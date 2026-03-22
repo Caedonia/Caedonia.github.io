@@ -47,6 +47,12 @@ app.get('/api/cacti', (req, res) => {
 // ----------------------------------------------------
 // 🏁 START THE SERVER
 // ----------------------------------------------------
+// The Front Door Route
+app.get('/', (req, res) => {
+    // Force the server to load your specific landing page
+    res.sendFile(path.join(__dirname, 'landing_page.html')); 
+});
+
 app.listen(PORT, () => {
     console.log(`🌵 Cactus Learning Portal server running at http://localhost:${PORT}`);
 });
