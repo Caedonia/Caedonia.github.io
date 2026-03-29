@@ -60,3 +60,246 @@
     border-bottom: 1px solid #eee;
 }
 .delete-btn { color: #ff5252; background: none; border: none; cursor: pointer; }
+
+/* ==========================================================================
+   Teacher Admin Panel: CSV Upload Card
+   ========================================================================== */
+
+/* The Main Container */
+.admin-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    max-width: 500px;
+    margin: 3rem auto;
+    border-top: 6px solid #2E7D32; /* Deep cactus green accent */
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.admin-card h3 {
+    margin-top: 0;
+    color: #1B5E20;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.admin-card p {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+/* The File Drop Zone */
+.file-drop-area {
+    border: 2px dashed #81C784; /* Soft green dashed border */
+    border-radius: 8px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    background-color: #F1F8E9; /* Very pale green background */
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.file-drop-area:hover {
+    background-color: #E8F5E9;
+    border-color: #4CAF50;
+}
+
+/* Styling the ugly default file input */
+.file-drop-area input[type="file"] {
+    width: 100%;
+    cursor: pointer;
+    color: #2E7D32;
+    font-weight: 500;
+}
+
+/* Customizing the "Choose File" button inside the input (Webkit/Chrome/Safari) */
+.file-drop-area input[type="file"]::-webkit-file-upload-button {
+    background-color: #fff;
+    border: 1px solid #81C784;
+    color: #2E7D32;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin-right: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.file-drop-area input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #E8F5E9;
+}
+
+/* The Import Button */
+.btn-primary {
+    background-color: #2E7D32;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1B5E20;
+    transform: translateY(-1px); /* Slight lift effect */
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* When JS disables the button during upload */
+.btn-primary:disabled {
+    background-color: #9E9E9E;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Status Message Area */
+#upload-status {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    min-height: 24px; /* Keeps the card from jumping around */
+}
+/* ==========================================================================
+   Teacher Admin Panel: Layout & Import View
+   ========================================================================== */
+
+.admin-dashboard {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #E8F5E9;
+    padding-bottom: 1rem;
+}
+
+.admin-header h2 {
+    color: #1B5E20;
+    margin: 0;
+}
+
+.btn-back {
+    color: #2E7D32;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.btn-back:hover {
+    color: #1B5E20;
+    text-decoration: underline;
+}
+
+/* The Upload Card */
+.admin-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border-top: 6px solid #2E7D32; 
+}
+
+.admin-card h3 {
+    margin-top: 0;
+    color: #1B5E20;
+    font-size: 1.5rem;
+}
+
+.admin-card p {
+    color: #555;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+/* File Drop Zone */
+.file-drop-area {
+    border: 2px dashed #81C784; 
+    border-radius: 8px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    background-color: #F1F8E9; 
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.file-drop-area:hover {
+    background-color: #E8F5E9;
+    border-color: #4CAF50;
+}
+
+.drop-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.file-drop-area input[type="file"] {
+    width: 100%;
+    cursor: pointer;
+    color: #2E7D32;
+    font-weight: 500;
+}
+
+.file-drop-area input[type="file"]::-webkit-file-upload-button {
+    background-color: #fff;
+    border: 1px solid #81C784;
+    color: #2E7D32;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin-right: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.file-drop-area input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #E8F5E9;
+}
+
+/* Button & Status */
+.btn-primary {
+    background-color: #2E7D32;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1B5E20;
+}
+
+.btn-primary:disabled {
+    background-color: #9E9E9E;
+    cursor: not-allowed;
+}
+
+#upload-status {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    min-height: 24px;
+}

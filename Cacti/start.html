@@ -4,6 +4,7 @@
     <title>Cactus Learning | Home</title>
     <link rel="stylesheet" href="../styles/mystyle2.css">
     <link rel="stylesheet" href="../styles/actual_cacti_fn.css">
+
 </head>
 <div class="search-container">
     <header class="search-header">
@@ -16,19 +17,19 @@
         <div class="filter-grid">
             <div class="filter-group">
                 <label>Field Number</label>
-                <input type="text" placeholder="e.g. L 450">
+                <input type="text" id="filter-fn" placeholder="e.g. L 450">
             </div>
             <div class="filter-group">
                 <label>Genus</label>
-                <input type="text" placeholder="e.g. Mammillaria">
+                <input type="text" id="filter-genus" placeholder="e.g. Mammillaria">
             </div>
             <div class="filter-group">
                 <label>Species Name</label>
-                <input type="text" placeholder="e.g. Elongata">
+                <input type="text" id="filter-species" placeholder="e.g. Elongata">
             </div>
             <div class="filter-group">
                 <label>Country of Origin</label>
-                <select>
+                <select id="filter-origin">
                     <option value="">All Countries</option>
                     <option value="mexico">Mexico</option>
                     <option value="bolivia">Bolivia</option>
@@ -36,16 +37,12 @@
                 </select>
             </div>
         </div>
-        <button class="search-trigger">Filter Results</button>
+        <button id="search-btn" class="search-trigger">Filter Results</button>
     </section>
 
-    <div class="results-info">Showing 12 results found in the archive</div>
-    <main class="results-grid">
-        <div class="cactus-card">
-            <div class="card-tag">L 450</div>
-            <h3>Mammillaria Elongata</h3>
-            <p><strong>Origin:</strong> Central Mexico</p>
-            <span class="genus-label">Genus: Mammillaria</span>
-        </div>
+    <div class="results-info" id="results-count">Showing 0 results found in the archive</div>
+    <main class="results-grid" id="cactus-grid">
         </main>
 </div>
+
+<script src="../JS/search_cati.js"></script>

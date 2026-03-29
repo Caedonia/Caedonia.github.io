@@ -1,88 +1,79 @@
-// /js/search.js
-
-// 1. Target the HTML elements (Make sure these IDs match your actual HTML!)
-const searchInput = document.getElementById('search-bar');
+// 1. Target all the new HTML IDs
+const fnInput = document.getElementById('filter-fn');
+const genusInput = document.getElementById('filter-genus');
+const speciesInput = document.getElementById('filter-species');
+const originInput = document.getElementById('filter-origin');
+const searchBtn = document.getElementById('search-btn');
 const cactusGrid = document.getElementById('cactus-grid');
+const resultsCount = document.getElementById('results-count');
 
-// This empty array is our "tray". We will store all the database records here.
 let allCacti = []; 
 
-// ==========================================
-// 🚚 THE WAITER (Fetch data from Server)
-// ==========================================
+// 2. Fetch from the Server
 async function fetchCactiArchive() {
     try {
-        // "Go to the kitchen and ask for the cacti menu"
         const response = await fetch('/api/cacti');
         const result = await response.json();
         
         if (result.message === 'success') {
-            allCacti = result.data; // Put the data on the tray
-            renderCards(allCacti);  // Serve the data to the user
-        } else {
-            cactusGrid.innerHTML = `<p>Error loading archive: ${result.error}</p>`;
+            allCacti = result.data; 
+            renderCards(allCacti); // Render everything on first load
         }
     } catch (error) {
-        console.error('Failed to fetch cacti:', error);
-        cactusGrid.innerHTML = `<p>Connection error. Is the server running?</p>`;
+        console.error('Failed to fetch:', error);
+        cactusGrid.innerHTML = `<p>Connection error. Is the Node server running?</p>`;
     }
 }
 
-// ==========================================
-// 🎨 THE PLATING (Turn JSON into HTML)
-// ==========================================
+// 3. Create the Cards
 function renderCards(cactiArray) {
-    // Clear the table before putting new plates down
     cactusGrid.innerHTML = ''; 
+    resultsCount.innerText = `Showing ${cactiArray.length} results found in the archive`;
 
-    // If the search results are empty, show a polite message
     if (cactiArray.length === 0) {
-        cactusGrid.innerHTML = `<p class="no-results">No cacti match your search. 🌵</p>`;
+        cactusGrid.innerHTML = `<p class="no-results">No cacti match your filters. 🌵</p>`;
         return;
     }
 
-    // Loop through however many plants are in the array and build a card for each
     cactiArray.forEach(cactus => {
         const card = document.createElement('div');
         card.className = 'cactus-card'; 
         
         card.innerHTML = `
-            <div class="card-header">
-                <h3>${cactus.genus} <em>${cactus.species}</em></h3>
-                <span class="badge fn-badge">${cactus.field_number}</span>
-            </div>
-            <div class="card-body">
-                <p><strong>Origin:</strong> ${cactus.origin || 'Unknown'}</p>
-                <p class="description">${cactus.description || 'No description available.'}</p>
-            </div>
-            <div class="card-footer">
-                <a href="../Cacti/detail.html?fn=${encodeURIComponent(cactus.field_number)}" class="btn-read-more">View Details</a>
+            <div class="card-tag">${cactus.field_number}</div>
+            <h3>${cactus.genus} <em>${cactus.species}</em></h3>
+            <p><strong>Origin:</strong> ${cactus.origin || 'Unknown'}</p>
+            <span class="genus-label">Genus: ${cactus.genus}</span>
+            <div style="margin-top: 10px;">
+                <a href="../Cacti/detail.html?fn=${encodeURIComponent(cactus.field_number)}" style="color: #2E7D32; text-decoration: none; font-weight: bold;">View Details →</a>
             </div>
         `;
         cactusGrid.appendChild(card);
     });
 }
 
-// ==========================================
-// 🕵️ THE FILTER (Real-time searching)
-// ==========================================
-// This listens for every single keystroke in the search bar
-searchInput.addEventListener('input', (event) => {
-    // Convert whatever the user typed to lowercase so the search isn't case-sensitive
-    const searchTerm = event.target.value.toLowerCase();
-    
-    // Filter our "tray" of all cacti down to just the ones that match
+// 4. The 4-Way Filter Logic
+searchBtn.addEventListener('click', () => {
+    const fnVal = fnInput.value.toLowerCase();
+    const genusVal = genusInput.value.toLowerCase();
+    const speciesVal = speciesInput.value.toLowerCase();
+    const originVal = originInput.value.toLowerCase();
+
     const filteredCacti = allCacti.filter(cactus => {
-        return (
-            cactus.genus.toLowerCase().includes(searchTerm) ||
-            cactus.species.toLowerCase().includes(searchTerm) ||
-            cactus.field_number.toLowerCase().includes(searchTerm)
-        );
+        // Check every condition. If an input is empty, it acts as a "pass" (true)
+        const matchFn = cactus.field_number.toLowerCase().includes(fnVal);
+        const matchGenus = cactus.genus.toLowerCase().includes(genusVal);
+        const matchSpecies = cactus.species.toLowerCase().includes(speciesVal);
+        
+        // For origin, we handle the select dropdown
+        const matchOrigin = originVal === "" || (cactus.origin && cactus.origin.toLowerCase().includes(originVal));
+
+        // Only keep the plant if it matches ALL the boxes the user typed in
+        return matchFn && matchGenus && matchSpecies && matchOrigin;
     });
 
-    // Re-render the grid with just the matching plants!
     renderCards(filteredCacti);
 });
 
-// 🚀 Fire off the fetch request the moment the script loads
+// Start the process
 fetchCactiArchive();
