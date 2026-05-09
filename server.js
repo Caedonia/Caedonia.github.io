@@ -46,6 +46,19 @@ app.get('/api/cacti', (req, res) => {
         });
     });
 });
+// GET a single cactus by Field Number
+app.get('/api/cacti/:field_number', (req, res) => {
+    const fn = req.params.field_number;
+    const sql = "SELECT * FROM cacti WHERE field_number = ?";
+    
+    // db.get() fetches just one row
+    db.get(sql, [fn], (err, row) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (!row) return res.status(404).json({ error: "Plant not found" });
+        
+        res.json({ message: "success", data: row });
+    });
+});
 
 // The Import Route (Notice 'upload.single' intercepts the file before your code runs)
 app.post('/api/cacti/import', upload.single('csvFile'), (req, res) => {
