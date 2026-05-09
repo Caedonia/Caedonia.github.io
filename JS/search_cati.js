@@ -43,6 +43,10 @@ function renderCards(cactiArray) {
             <div class="card-tag">${cactus.field_number}</div>
             <h3>${cactus.genus} <em>${cactus.species}</em></h3>
             <p><strong>Origin:</strong> ${cactus.origin || 'Unknown'}</p>
+            
+            ${cactus.exact_location ? `<p><strong>Location:</strong> ${cactus.exact_location}</p>` : ''}
+            ${cactus.notes ? `<p class="notes-text"><strong>Notes:</strong> ${cactus.notes}</p>` : ''}
+            
             <span class="genus-label">Genus: ${cactus.genus}</span>
             <div style="margin-top: 10px;">
                 <a href="../Cacti/detail.html?fn=${encodeURIComponent(cactus.field_number)}" style="color: #2E7D32; text-decoration: none; font-weight: bold;">View Details →</a>

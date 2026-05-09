@@ -60,10 +60,15 @@ app.post('/api/cacti/import', upload.single('csvFile'), (req, res) => {
 
     db.serialize(() => {
         const stmt = db.prepare(`
-            INSERT INTO cacti (field_number, genus, species, origin, description) 
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO cacti (field_number, genus, species, origin, description, exact_location, notes) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(field_number) DO UPDATE SET 
-                genus=excluded.genus, species=excluded.species, origin=excluded.origin, description=excluded.description
+                genus=excluded.genus, 
+                species=excluded.species, 
+                origin=excluded.origin, 
+                description=excluded.description,
+                exact_location=excluded.exact_location,
+                notes=excluded.notes
         `);
 
         for (let i = 1; i < lines.length; i++) {
@@ -72,7 +77,7 @@ app.post('/api/cacti/import', upload.single('csvFile'), (req, res) => {
 
             // Our CSV Regex from before
             const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(col => col.replace(/^"|"$/g, '').trim());
-            if (cols.length < 6) continue; 
+            if (cols.length < 8) continue; 
 
             const icon = cols[0];
             const status = cols[1];
@@ -80,13 +85,15 @@ app.post('/api/cacti/import', upload.single('csvFile'), (req, res) => {
             let fieldNumber = cols[3] || `NO-FN-${placeholderCounter++}`;
             const altitude = cols[4];
             const origin = cols[5];
+            const exactLocation = cols[6] || '';
+            const notes = cols[7] || '';
 
             const nameParts = latinName.split(' ');
             const genus = nameParts[0];
             const species = nameParts.slice(1).join(' '); 
             let description = `${icon} ${status}. ${altitude ? 'Altitude: ' + altitude + '.' : ''}`;
 
-            stmt.run(fieldNumber, genus, species, origin, description);
+            stmt.run(fieldNumber, genus, species, origin, description, exactLocation, notes);
             importedCount++;
         }
 
