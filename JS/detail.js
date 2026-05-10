@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Fetch the specific plant data
-    async function fetchPlantDetails() {
+    async function fetchPlantDetails(fieldNumber) {
+        console.log("fetching the data for FN");
+
         try {
             // Notice we use encodeURIComponent to handle spaces in field numbers
             const response = await fetch(`/api/cacti/${encodeURIComponent(fieldNumber)}`);
@@ -30,17 +32,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Render the data into the HTML
     function renderDetailView(cactus) {
-        // Assuming you have elements with these IDs in your detail.html
-        document.getElementById('detail-title').innerHTML = `${cactus.genus} <em>${cactus.species}</em>`;
-        document.getElementById('detail-fn').innerText = cactus.field_number;
+        // We use || '' to prevent crashes if a property is missing
+        document.getElementById('detail-title').innerHTML = `${cactus.genus || 'Unknown'} <em>${cactus.species || ''}</em>`;
+        document.getElementById('detail-fn').innerText = cactus.field_number || '---';
         document.getElementById('detail-origin').innerText = cactus.origin || 'Unknown origin';
-        
-        // Inject Location and Notes!
         document.getElementById('detail-location').innerText = cactus.exact_location || 'Not recorded';
-        document.getElementById('detail-notes').innerText = cactus.notes || 'No notes available.';
-        
         document.getElementById('detail-desc').innerText = cactus.description || '';
+
+        const notesEl = document.getElementById('detail-notes');
+        const notesContainer = document.querySelector('.notes-section');
+        
+        // We force it to a String just in case it is undefined or a number
+        if (cactus.notes && String(cactus.notes).trim() !== '') {
+            notesEl.innerText = cactus.notes;
+            notesContainer.classList.remove('hidden'); 
+        } else {
+            notesContainer.classList.add('hidden'); 
+        }
     }
 
-    fetchPlantDetails();
+    fetchPlantDetails(fieldNumber);
 });

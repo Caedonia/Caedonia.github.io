@@ -33,49 +33,49 @@ const db = new sqlite3.Database('./portal.db', (err) => {
 // 🚦 API ROUTES (The Menu)
 // ----------------------------------------------------
 
-// Route: Get all cacti for the archive
-app.get('/api/cacti', (req, res) => {
-    const sql = "SELECT * FROM cacti";
-    db.all(sql, [], (err, rows) => {
-        if (err) {
+    // Route: Get all cacti for the archive
+    app.get('/api/cacti', (req, res) => {
+        const sql = "SELECT * FROM cacti";
+        db.all(sql, [], (err, rows) => {
+         if (err) {
             return res.status(500).json({ error: err.message });
-        }
-        res.json({
-            message: "success",
-            data: rows
+         }
+            res.json({
+             message: "success",
+             data: rows
+         });
         });
     });
-});
 // GET a single cactus by Field Number
-app.get('/api/cacti/:field_number', (req, res) => {
-    const fn = req.params.field_number;
-    const sql = "SELECT * FROM cacti WHERE field_number = ?";
+    app.get('/api/cacti/:field_number', (req, res) => {
+        const fn = req.params.field_number;
+        const sql = "SELECT * FROM cacti WHERE field_number = ?";
     
-    // db.get() fetches just one row
-    db.get(sql, [fn], (err, row) => {
-        if (err) return res.status(500).json({ error: err.message });
-        if (!row) return res.status(404).json({ error: "Plant not found" });
+        // db.get() fetches just one row
+        db.get(sql, [fn], (err, row) => {
+          if (err) return res.status(500).json({ error: err.message });
+          if (!row) return res.status(404).json({ error: "Plant not found" });
         
-        res.json({ message: "success", data: row });
+         res.json({ message: "success", data: row });
+     });
     });
-});
 
-// The Import Route (Notice 'upload.single' intercepts the file before your code runs)
-app.post('/api/cacti/import', upload.single('csvFile'), (req, res) => {
-    // If no file was sent, kick it back
-    if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+    // The Import Route (Notice 'upload.single' intercepts the file before your code runs)
+    app.post('/api/cacti/import', upload.single('csvFile'), (req, res) => {
+        // If no file was sent, kick it back
+        if (!req.file) return res.status(400).json({ error: "No file uploaded" });
 
-    // Convert the raw memory buffer into a readable text string
-    const csvData = req.file.buffer.toString('utf8');
-    const lines = csvData.split('\n');
-    let importedCount = 0;
-    let placeholderCounter = 100;
+        // Convert the raw memory buffer into a readable text string
+     const csvData = req.file.buffer.toString('utf8');
+        const lines = csvData.split('\n');
+        let importedCount = 0;
+        let placeholderCounter = 100;
 
-    db.serialize(() => {
-        const stmt = db.prepare(`
-            INSERT INTO cacti (field_number, genus, species, origin, description, exact_location, notes) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT(field_number) DO UPDATE SET 
+        db.serialize(() => {
+            const stmt = db.prepare(`
+             INSERT INTO cacti (field_number, genus, species, origin, description, exact_location, notes) 
+             VALUES (?, ?, ?, ?, ?, ?, ?)
+             ON CONFLICT(field_number) DO UPDATE SET 
                 genus=excluded.genus, 
                 species=excluded.species, 
                 origin=excluded.origin, 
@@ -115,7 +115,7 @@ app.post('/api/cacti/import', upload.single('csvFile'), (req, res) => {
         // Send a success message back to the waiter!
         res.json({ message: "success", count: importedCount });
     });
-});
+    });
 
 // ----------------------------------------------------
 // 🏁 START THE SERVER

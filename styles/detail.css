@@ -1,46 +1,142 @@
-.detail-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+/* ==========================================================================
+   Cacti Profile Page Styles
+   ========================================================================== */
 
-.detail-header { margin-bottom: 40px; border-bottom: 2px solid #f0f0f0; padding-bottom: 20px; }
-.field-id { color: #4caf50; font-size: 1.5rem; margin-left: 10px; }
-
-.detail-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr; /* Photo area takes 2/3, Sidebar 1/3 */
-    gap: 40px;
+.profile-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* Gallery Styling */
-.photo-section .main-photo img {
-    width: 100%;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+/* The Back Button */
+.btn-back {
+    display: inline-block;
+    color: #2E7D32;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s, color 0.2s;
 }
 
-.photo-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 15px;
+.btn-back:hover {
+    color: #1B5E20;
+    transform: translateX(-5px); /* Cute slide-left effect on hover */
 }
 
-.photo-grid img {
-    width: 100%;
+/* The Main Profile Card */
+.profile-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border-top: 8px solid #2E7D32;
+}
+
+/* Header (Flexbox to push text left and image right) */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem;
+    border-bottom: 2px solid #F1F8E9;
+    background: linear-gradient(to right, #ffffff, #F8FBF8);
+}
+
+.header-text h1 {
+    margin: 0 0 10px 0;
+    color: #1B5E20;
+    font-size: 2.2rem;
+}
+
+.header-text em {
+    color: #4CAF50; /* Makes the species name pop */
+    font-weight: 400;
+}
+
+/* Future-proofing Image Placeholder */
+.profile-image-placeholder {
+    background: #E8F5E9;
+    width: 100px;
     height: 100px;
-    object-fit: cover;
-    border-radius: 10px;
-    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    box-shadow: inset 0 4px 10px rgba(0,0,0,0.05);
 }
 
-/* Info Cards */
-.info-sidebar { display: flex; flex-direction: column; gap: 20px; }
+/* Data Grid (Origin & Location Dashboard) */
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 2.5rem;
+    background-color: #FAFAFA;
+}
 
 .data-card {
-    background: #fdfdfd;
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid #eee;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #E0E0E0;
+    display: flex;
+    flex-direction: column;
 }
 
-.data-card h3 { font-size: 0.9rem; color: #4caf50; margin-bottom: 15px; }
-.data-card ul { list-style: none; padding: 0; }
-.data-card li { margin-bottom: 8px; font-size: 0.95rem; border-bottom: 1px solid #f9f9f9; }
+.data-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #757575;
+    margin-bottom: 0.5rem;
+}
+
+.data-value {
+    font-size: 1.2rem;
+    color: #212121;
+}
+
+/* Content & Notes Sections */
+.content-section {
+    padding: 2.5rem;
+}
+
+.content-section h3 {
+    color: #2E7D32;
+    margin-top: 0;
+    border-bottom: 2px solid #E8F5E9;
+    padding-bottom: 0.5rem;
+}
+
+.desc-text {
+    line-height: 1.6;
+    color: #424242;
+    font-size: 1.05rem;
+}
+
+/* Special styling just for the Collector's Notes */
+.notes-section {
+    margin: 0 2.5rem 2.5rem 2.5rem;
+    padding: 1.5rem;
+    background: #FFF8E1; /* Soft yellow tint like a notepad */
+    border-left: 5px solid #FFC107;
+    border-radius: 0 8px 8px 0;
+}
+
+.notes-section h3 {
+    margin-top: 0;
+    color: #F57F17;
+}
+
+.notes-text {
+    margin-bottom: 0;
+    color: #5D4037;
+    line-height: 1.5;
+}
+
+/* Hide the notes section entirely if JS finds no notes */
+.notes-section.hidden {
+    display: none;
+}
