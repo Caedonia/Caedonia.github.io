@@ -12,8 +12,7 @@
         <h1>🌵 Cactus Archive</h1>
         <p>Search the global field database</p>
     </header>
-
-    <section class="filter-panel">
+      <section class="filter-panel">
         <div class="filter-grid">
             <div class="filter-group">
                 <label>Field Number</label>
@@ -59,9 +58,18 @@
         <button id="search-btn" class="search-trigger">Filter Results</button>
     </section>
 
+    <div class="view-controls">
+    <button id="grid-view-btn" class="active view-btn">Grid View</button>
+    <button id="list-view-btn" class="view-btn">List View</button>
+    </div>
+
+
+<!-- The container where cacti are rendered -->
+<div id="cactus-container" class="grid-mode"></div>
+
     <div class="results-info" id="results-count">Showing 0 results found in the archive</div>
     <main class="results-grid" id="cactus-grid">
-        </main>
+    </main>
 </div>
 
 <script src="../JS/search_cati.js"></script>

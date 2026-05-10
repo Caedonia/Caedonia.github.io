@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // If the URL is detail.html?fn=L450, this grabs "L450"
     const urlParams = new URLSearchParams(window.location.search);
     const fieldNumber = urlParams.get('fn');
+    console.log(fieldNumber)
 
     if (!fieldNumber) {
         document.querySelector('main').innerHTML = "<h1>Error: No Field Number Provided</h1>";
