@@ -1,54 +1,81 @@
-# 🌵 Cactus Learning Portal & Archive
+Cześć! Przeanalizowałem aktualną strukturę Twojego repozytorium na GitHubie i z przyjemnością pomogę Ci zaktualizować plik **README.md**.
 
-A comprehensive educational platform for cactus enthusiasts and english students. This project has evolved from a simple landing page into a full-scale mockup including a student portal, a teacher admin command center, and a scientific field-number archive.
+Projekt ewoluował z makiety w stronę profesjonalnej aplikacji full-stack. Poniżej przygotowałem propozycję nowej wersji pliku, która uwzględnia przejście na Express.js, bazę danych SQLite oraz nową architekturę folderów[cite: 1, 2].
 
-## 📂 Final Project Architecture
-
-The repository is structured to separate user roles and data types:
-
-* **`/` (Root):** Main entry point (`landing.html`).
-* **`/dashboard`:** Student-facing portal with homework and lesson summaries.
-* **`/plan`:** Interactive class timetable with grid-spanning technology.
-* **`/cacti`:** * `start.html`: Multi-filter search for Field Numbers, Genus, and Origin.
-    * `detail.html`: Deep-dive scientific view for specific specimens.
-* **`/teacher_panel`:** Teacher control panel for updating portal content.
-* **`/styles`:** Centralized CSS (Main, Dashboard, Schedule, Search, Admin).
-* **`/js`:** JavaScript modules for form handling and data filtering.
-* **`/assets`:** High-resolution cactus photography and branding.
-
-## 🚀 Key Modules
-
-### 🔬 Scientific Archive (New!)
-* **Multi-Filter Search:** Separate inputs for Field Number, Genus, Name, and Country.
-* **Specimen Detail View:** A dedicated layout for taxonomical data and collection history (e.g., Alfred Lau/Walter Rausch field records).
-* **Responsive Photo Galleries:** Optimized viewing for habitat and flower macro shots.
-
-### 👩‍🏫 Teacher Admin Panel
-* **Content Management:** Forms to instantly update the Student Dashboard.
-* **Local Persistence:** Uses Browser LocalStorage to simulate database updates without a backend.
-
-### 📩 Contact & Communication
-* **Formspree Integration:** Real-time email delivery with AJAX "hijacking" to maintain a seamless UX.
-
-## 🛠️ Technical Implementation
-
-### Path Navigation
-Due to the nested folder structure, this project relies heavily on **Relative Pathing**:
-* Use `../` to move up to the root from subfolders.
-* Use `../../` if deep-nesting components.
-
-
-
-### Grid & Layout
-The project utilizes **CSS Grid** for two primary purposes:
-1. **The Schedule:** Vertical pillar spanning using `grid-row`.
-2. **The Archive:** Auto-responsive card layouts using `repeat(auto-fill, minmax(280px, 1fr))`.
-
-
-
-## 📝 Future Roadmap
-- [ ] Connect a real database (Firebase/Supabase) to replace LocalStorage.
-- [ ] create a backend connecting the app and turning it into a working tool
+Oto gotowy tekst do wklejenia:
 
 ---
-*Maintained by the Cactus Learning Team. Grow your knowledge!* 🌵
+
+# 🌵 Cactus Learning Portal
+
+## 📖 Project Overview
+
+Cactus Learning Portal to platforma edukacyjna do nauki języka angielskiego, osadzona w kontekście botaniki i taksonomii kaktusów. System integruje pasję do kolekcjonowania roślin z nauką języka, oferując unikalne podejście oparte na autentycznych danych (np. numery polowe, pochodzenie, rodzaje).
+
+Platforma obsługuje trzy konteksty użytkowników:
+
+1. **Publiczny:** Strona lądowania i formularz kontaktowy.
+2. **Student:** Dashboard z archiwum lekcji i prac domowych.
+3. **Nauczyciel:** Panel administracyjny do zarządzania danymi.
+
+## 🛠 Tech Stack
+
+* **Frontend:** HTML5, CSS3 (Grid/Flexbox), Vanilla JavaScript.
+* **Backend:** Node.js z frameworkiem **Express.js**.
+* **Database:** **SQLite** (zarządzana przez sterownik `sqlite3`).
+* **Komunikacja:** Fetch API (AJAX), CORS, Formspree.io (obsługa kontaktu).
+
+## 📂 File Architecture
+
+Projekt stosuje architekturę modułową (folder-per-feature). Globalne zasoby są współdzielone i linkowane relatywnie.
+
+```plaintext
+/root
+├── server.js            # Serwer Express i API
+├── cactus.db            # Baza danych SQLite
+├── landing.html         # Strona główna
+├── /dashboard           # Widok studenta (zadania, podsumowania)
+│   └── index.html
+├── /search              # Archiwum kaktusów (filtrowanie 4-kierunkowe)
+│   ├── index.html
+│   └── detail.html      # Szczegóły konkretnego okazu
+├── /admin               # Panel nauczyciela (formularze wprowadzania)
+│   └── index.html
+├── /styles              # Scentralizowane arkusze stylów
+└── /js                  # Logika (nav.js, search.js, contact.js)
+
+```
+
+## 🗄 Database Schema
+
+Baza danych `cactus.db` zawiera obecnie tabelę:
+
+* **cacti**: `id`, `field_number`, `genus`, `species`, `origin`, `description`.
+
+*W planach:* Tabele `homework` (zadania studentów) oraz `lessons` (dziennik lekcji).
+
+## 🚀 Key Functionalities
+
+* **Dynamiczna nawigacja:** Skrypt `nav.js` automatycznie wstrzykuje menu i oblicza ścieżki relatywne (`../`) zależnie od poziomu zagnieżdżenia strony.
+* **API Endpoints:**
+* `GET /api/cacti`: Pobieranie pełnego archiwum.
+* `GET /api/cacti/:field_number`: Szczegółowe dane taksonomiczne okazu.
+
+
+* **Asynchroniczna obsługa:** Formularze działają bez przeładowania strony, informując o sukcesie poprzez DOM.
+* **Zaawansowany Layout:** Grafik zajęć zbudowany na CSS Grid z obsługą nakładających się bloków czasowych.
+
+## 🛠 Next Steps
+
+1. **CRUD Expansion:** Implementacja tras `POST` i `PUT` dla panelu administratora.
+2. **Authentication:** Zabezpieczenie folderu `/admin` prostym systemem logowania.
+3. **Data Persistence:** Przeniesienie danych "Lesson Summary" z `localStorage` do bazy SQLite.
+4. **Dynamic Detail View:** Obsługa parametrów URL (np. `?field=L450`) w celu dynamicznego generowania strony detali kaktusa.
+
+---
+
+### 💡 Mała sugestia techniczna (Candor Check):
+
+Zauważyłem w Twojej strukturze plików, że niektóre pliki w `/js` mają literówki (np. `dahboard.js` zamiast `dashboard.js`). Warto to poprawić teraz, zanim backend mocno się rozrośnie, aby uniknąć błędów 404 przy ładowaniu skryptów.
+
+Czy chciałbyś, abym pomógł Ci teraz przygotować kod dla jednego z punktów z "Next Steps", np. trasę `POST` do zapisywania kaktusów w bazie?
