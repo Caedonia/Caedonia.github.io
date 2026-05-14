@@ -51,7 +51,7 @@ async function fetchCacti() {
 }
 
 // Initialize the fetch when the page loads
-document.addEventListener('DOMContentLoaded', fetchAllCacti);
+document.addEventListener('DOMContentLoaded', fetchCacti);
 
 // ==========================================
 // 4. The Core Rendering Engine
