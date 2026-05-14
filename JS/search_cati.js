@@ -42,16 +42,18 @@ async function fetchCacti() {
         const cactiData = await response.json();
         console.log("🌵 Cacti loaded successfully:", cactiData);
 
-        // TODO: Pass cactiData to whatever function builds your Grid/Flexbox cards
-        // renderArchive(cactiData);
+        // 1. Save the fetched data into your global arrays
+        cachedCactiData = cactiData; 
+        currentDisplayData = cactiData;
+
+        // 2. Call the rendering engine to draw the UI
+        renderGallery();
 
     } catch (error) {
         console.error("Botanical Data Error:", error);
     }
 }
 
-// Initialize the fetch when the page loads
-document.addEventListener('DOMContentLoaded', fetchCacti);
 
 // ==========================================
 // 4. The Core Rendering Engine
