@@ -6,6 +6,7 @@ const genusInput = document.getElementById('filter-genus');
 const speciesInput = document.getElementById('filter-species');
 const originInput = document.getElementById('filter-origin');
 const searchBtn = document.getElementById('search-btn');
+import CONFIG from './config.js';
 
 // Note: Ensure your HTML uses id="cactus-container" instead of "cactus-grid"
 const cactusContainer = document.getElementById('cactus-container'); 
@@ -23,27 +24,34 @@ let currentDisplayData = []; // The Display Table (What the user actually sees)
 // ==========================================
 async function fetchCacti() {
     try {
-        const response = await fetch('http://localhost:3000/api/cacti');
-        
-        // 1. Get the raw response box from the truck
-        const rawData = await response.json(); 
-        
-        // 2. OPEN THE BOX: Let's see what's actually inside!
-        console.log("📦 Delivery from the Server:", rawData); 
+        // The Supabase REST endpoint for fetching all rows from the 'cacti' table
+        const url = `${CONFIG.SUPABASE_URL}/rest/v1/cacti?select=*`;
 
-        // 3. (Temporary) Guessing the box structure based on standard Express setups
-        // We look for a property named 'data', 'cacti', or fallback to the raw data itself
-        cachedCactiData = rawData.data || rawData.cacti || rawData; 
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                // Supabase requires both the apikey and the Bearer token
+                'apikey': CONFIG.SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${CONFIG.SUPABASE_ANON_KEY}`,
+                'Content-Type': 'application/json'
+            }
+        });
 
-        // 4. Now we spread our guaranteed array onto the display table
-        currentDisplayData = [...cachedCactiData]; 
-        renderGallery(); 
+        if (!response.ok) throw new Error('Failed to fetch the botanical archive.');
 
-    } catch (err) {
-        console.error("The cactus fetch failed:", err);
-        cactusContainer.innerHTML = '<p>Error loading botanical records.</p>';
+        const cactiData = await response.json();
+        console.log("🌵 Cacti loaded successfully:", cactiData);
+
+        // TODO: Pass cactiData to whatever function builds your Grid/Flexbox cards
+        // renderArchive(cactiData);
+
+    } catch (error) {
+        console.error("Botanical Data Error:", error);
     }
 }
+
+// Initialize the fetch when the page loads
+document.addEventListener('DOMContentLoaded', fetchAllCacti);
 
 // ==========================================
 // 4. The Core Rendering Engine
