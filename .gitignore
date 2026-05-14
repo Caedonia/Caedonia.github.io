@@ -1,0 +1,13 @@
+# Zależności Node.js
+node_modules/
+
+# Pliki konfiguracyjne z hasłami (BARDZO WAŻNE)
+.env
+
+# Lokalna baza danych SQLite
+*.db
+*.db-journal
+
+# Pliki systemowe i logi
+npm-debug.log*
+.DS_Store

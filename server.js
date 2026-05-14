@@ -1,9 +1,14 @@
 // 1. Import your required tools
+require('dotenv').config();
+const { createClient } = require('@supabase/supabase-js');
 const express = require('express');
 const cors = require('cors');
-const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const multer = require('multer');
+const supabase = createClient(
+  process.env.SUPABASE_URL, 
+  process.env.SUPABASE_KEY
+);
 
 // 2. Initialize the Express application
 const app = express();
@@ -19,103 +24,99 @@ app.use(express.json()); // Allows the server to understand JSON data (like form
 // This makes sure your server actually displays your website!
 app.use(express.static(path.join(__dirname, '/'))); 
 
-// 4. Connect to the Database (The Pantry)
-// I noticed your database is called portal.db in your file tree!
-const db = new sqlite3.Database('./portal.db', (err) => {
-    if (err) {
-        console.error('Error opening database', err.message);
-    } else {
-        console.log('📦 Successfully connected to the portal.db SQLite database.');
-    }
-});
-
 // ----------------------------------------------------
 // 🚦 API ROUTES (The Menu)
 // ----------------------------------------------------
 
     // Route: Get all cacti for the archive
-    app.get('/api/cacti', (req, res) => {
-        const sql = "SELECT * FROM cacti";
-        db.all(sql, [], (err, rows) => {
-         if (err) {
-            return res.status(500).json({ error: err.message });
-         }
-            res.json({
-             message: "success",
-             data: rows
-         });
-        });
+   app.get('/api/cacti', async (req, res) => {
+    // Supabase uses await, so we need "async" in front of (req, res)
+    const { data, error } = await supabase
+        .from('cacti') // choose cacti
+        .select('*');  // get all columns
+
+    if (error) return res.status(500).json({ error: error.message });
+    res.json(data);
     });
+
 // GET a single cactus by Field Number
-    app.get('/api/cacti/:field_number', (req, res) => {
-        const fn = req.params.field_number;
-        const sql = "SELECT * FROM cacti WHERE field_number = ?";
+    app.get('/api/cacti/:field_number', async (req, res) => {
+        const { field_number } = req.params;
+        try {
+        const { data, error } = await supabase
+            .from('cacti')
+            .select('*')
+            .eq('field_number', field_number) // field_number filter
+            .single(); // we want 1 item not the table
+
+        if (error) throw error;
+        if (!data) return res.status(404).json({ message: "Nie znaleziono takiego okazu." });
+
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+    app.post('/api/cacti/import', upload.single('csvFile'), async (req, res) => {
+    // If no file was sent, kick it back
+    if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+
+    const csvData = req.file.buffer.toString('utf8');
+    const lines = csvData.split('\n');
+    let placeholderCounter = 100;
     
-        // db.get() fetches just one row
-        db.get(sql, [fn], (err, row) => {
-          if (err) return res.status(500).json({ error: err.message });
-          if (!row) return res.status(404).json({ error: "Plant not found" });
+    // Create an array to hold all our new botanical records
+    const cactiToUpload = [];
+
+    for (let i = 1; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+
+        const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(col => col.replace(/^"|"$/g, '').trim());
+        if (cols.length < 8) continue; 
+
+        const icon = cols[0];
+        const status = cols[1];
+        const latinName = cols[2];
+        let fieldNumber = cols[3] || `NO-FN-${placeholderCounter++}`;
+        const altitude = cols[4];
+        const origin = cols[5];
+        const exactLocation = cols[6] || '';
+        const notes = cols[7] || '';
+
+        const nameParts = latinName.split(' ');
+        const genus = nameParts[0];
+        const species = nameParts.slice(1).join(' '); 
+        let description = `${icon} ${status}. ${altitude ? 'Altitude: ' + altitude + '.' : ''}`;
+
+        // Push the formatted data into our array
+        cactiToUpload.push({
+            field_number: fieldNumber,
+            genus: genus,
+            species: species,
+            origin: origin,
+            description: description,
+            exact_location: exactLocation,
+            notes: notes
+        });
+    }
+
+    try {
+        // Send the whole array to Supabase using upsert
+        // 'onConflict' tells it to update existing rows if the field_number matches
+        const { data, error } = await supabase
+            .from('cacti')
+            .upsert(cactiToUpload, { onConflict: 'field_number' });
+
+        if (error) throw error;
         
-         res.json({ message: "success", data: row });
-     });
-    });
-
-    // The Import Route (Notice 'upload.single' intercepts the file before your code runs)
-    app.post('/api/cacti/import', upload.single('csvFile'), (req, res) => {
-        // If no file was sent, kick it back
-        if (!req.file) return res.status(400).json({ error: "No file uploaded" });
-
-        // Convert the raw memory buffer into a readable text string
-     const csvData = req.file.buffer.toString('utf8');
-        const lines = csvData.split('\n');
-        let importedCount = 0;
-        let placeholderCounter = 100;
-
-        db.serialize(() => {
-            const stmt = db.prepare(`
-             INSERT INTO cacti (field_number, genus, species, origin, description, exact_location, notes) 
-             VALUES (?, ?, ?, ?, ?, ?, ?)
-             ON CONFLICT(field_number) DO UPDATE SET 
-                genus=excluded.genus, 
-                species=excluded.species, 
-                origin=excluded.origin, 
-                description=excluded.description,
-                exact_location=excluded.exact_location,
-                notes=excluded.notes
-        `);
-
-        for (let i = 1; i < lines.length; i++) {
-            const line = lines[i].trim();
-            if (!line) continue;
-
-            // Our CSV Regex from before
-            const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(col => col.replace(/^"|"$/g, '').trim());
-            if (cols.length < 8) continue; 
-
-            const icon = cols[0];
-            const status = cols[1];
-            const latinName = cols[2];
-            let fieldNumber = cols[3] || `NO-FN-${placeholderCounter++}`;
-            const altitude = cols[4];
-            const origin = cols[5];
-            const exactLocation = cols[6] || '';
-            const notes = cols[7] || '';
-
-            const nameParts = latinName.split(' ');
-            const genus = nameParts[0];
-            const species = nameParts.slice(1).join(' '); 
-            let description = `${icon} ${status}. ${altitude ? 'Altitude: ' + altitude + '.' : ''}`;
-
-            stmt.run(fieldNumber, genus, species, origin, description, exactLocation, notes);
-            importedCount++;
-        }
-
-        stmt.finalize();
-        
-        // Send a success message back to the waiter!
-        res.json({ message: "success", count: importedCount });
-    });
-    });
+        res.json({ message: "success", count: cactiToUpload.length });
+    } catch (err) {
+        console.error("Import failed:", err);
+        res.status(500).json({ error: err.message });
+    }
+});
 
 // ----------------------------------------------------
 // 🏁 START THE SERVER
