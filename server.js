@@ -42,12 +42,13 @@ app.use(express.static(path.join(__dirname, '/')));
 // GET a single cactus by Field Number
     app.get('/api/cacti/:field_number', async (req, res) => {
         const { field_number } = req.params;
+        console.log(`🕵️ Searching Supabase for: [${field_number}]`);
         try {
         const { data, error } = await supabase
             .from('cacti')
             .select('*')
             .eq('field_number', field_number) // field_number filter
-            .single(); // we want 1 item not the table
+            .maybeSingle(); // we want 1 item not the table
 
         if (error) throw error;
         if (!data) return res.status(404).json({ message: "Nie znaleziono takiego okazu." });

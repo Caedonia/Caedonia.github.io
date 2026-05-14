@@ -21,8 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`/api/cacti/${encodeURIComponent(fieldNumber)}`);
             const result = await response.json();
 
-            if (result.message === 'success') {
-                renderDetailView(result.data);
+           // Check if the result actually contains a cactus field number
+            if (result && result.field_number) {
+             // Pass the raw result directly!
+                renderDetailView(result); 
             } else {
                 document.querySelector('main').innerHTML = `<h1>Plant Not Found</h1>`;
             }
