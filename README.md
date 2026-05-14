@@ -1,11 +1,3 @@
-Cześć! Przeanalizowałem aktualną strukturę Twojego repozytorium na GitHubie i z przyjemnością pomogę Ci zaktualizować plik **README.md**.
-
-Projekt ewoluował z makiety w stronę profesjonalnej aplikacji full-stack. Poniżej przygotowałem propozycję nowej wersji pliku, która uwzględnia przejście na Express.js, bazę danych SQLite oraz nową architekturę folderów[cite: 1, 2].
-
-Oto gotowy tekst do wklejenia:
-
----
-
 # 🌵 Cactus Learning Portal
 
 ## 📖 Project Overview
