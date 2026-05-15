@@ -1,5 +1,5 @@
 // JS/detail.js
-
+import CONFIG from './config.js';
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Read the URL to find out which plant we are looking at
     // If the URL is detail.html?fn=L450, this grabs "L450"
