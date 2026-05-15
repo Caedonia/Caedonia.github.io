@@ -14,24 +14,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Fetch the specific plant data
     async function fetchPlantDetails(fieldNumber) {
-        console.log("fetching the data for FN");
+    console.log(`Fetching data for Field Number: ${fieldNumber}`);
 
-        try {
-            // Notice we use encodeURIComponent to handle spaces in field numbers
-            const response = await fetch(`/api/cacti/${encodeURIComponent(fieldNumber)}`);
-            const result = await response.json();
-
-           // Check if the result actually contains a cactus field number
-            if (result && result.field_number) {
-             // Pass the raw result directly!
-                renderDetailView(result); 
-            } else {
-                document.querySelector('main').innerHTML = `<h1>Plant Not Found</h1>`;
+    try {
+        // 1. Correct PostgREST syntax: ?column_name=eq.value
+        const url = `${CONFIG.SUPABASE_URL}/rest/v1/cacti?field_number=eq.${encodeURIComponent(fieldNumber)}`;
+        
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'apikey': CONFIG.SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${CONFIG.SUPABASE_ANON_KEY}`,
+                'Content-Type': 'application/json'
             }
-        } catch (error) {
-            console.error("Error fetching detail:", error);
+        });
+
+        // Always good practice to check if the network request itself failed
+        if (!response.ok) throw new Error("Failed to reach the botanical archive.");
+
+        // 2. Open the envelope and parse the JSON
+        const result = await response.json();
+
+        // 3. Supabase returns an array. Check if it exists AND has at least one item
+        if (result && result.length > 0) {
+            // Extract the actual cactus object from the array
+            const cactusData = result[0]; 
+            
+            // Pass the clean object to your UI builder
+            renderDetailView(cactusData); 
+        } else {
+            // Array was empty = no match found
+            document.querySelector('main').innerHTML = `<h1>Specimen Not Found</h1>`;
         }
+    } catch (error) {
+        console.error("Error fetching detail:", error);
+        document.querySelector('main').innerHTML = `<h1>Error loading plant details. Please try again.</h1>`;
     }
+}
 
     // 3. Render the data into the HTML
     function renderDetailView(cactus) {
