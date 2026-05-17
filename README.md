@@ -1,73 +1,91 @@
 # 🌵 Cactus Learning Portal
 
-## 📖 Project Overview
+Welcome to the **Cactus Learning Portal**—a specialized, full-stack English language learning platform designed by collectors, for collectors. By blending structured language acquisition with cactus botany and taxonomy, this application creates a highly contextual, engaging environment for botanical enthusiasts to master English.
 
-Cactus Learning Portal to platforma edukacyjna do nauki języka angielskiego, osadzona w kontekście botaniki i taksonomii kaktusów. System integruje pasję do kolekcjonowania roślin z nauką języka, oferując unikalne podejście oparte na autentycznych danych (np. numery polowe, pochodzenie, rodzaje).
+## 📖 Core Philosophy
+* **Contextual Learning:** Vocabulary and grammar are taught through the lens of Genus, Species, and Field Numbers (e.g., L 450).
+* **Minimalist Aesthetic:** A clean, card-based UI utilizing a nature-inspired palette to keep the focus on the content.
+* **Modular Architecture:** A decentralized "folder-per-feature" frontend supported by a centralized Node.js/SQLite backend.
 
-Platforma obsługuje trzy konteksty użytkowników:
+### 📋 Project Status & Stack Architecture
 
-1. **Publiczny:** Strona lądowania i formularz kontaktowy.
-2. **Student:** Dashboard z archiwum lekcji i prac domowych.
-3. **Nauczyciel:** Panel administracyjny do zarządzania danymi.
+The **Cactus Learning Portal** has successfully transitioned from a localized mockup framework to a distributed cloud architecture. The platform decouples user interface delivery from data persistence to guarantee that student archives and taxonomical database records are accessible globally.
+
 
 ## 🛠 Tech Stack
 
-* **Frontend:** HTML5, CSS3 (Grid/Flexbox), Vanilla JavaScript.
-* **Backend:** Node.js z frameworkiem **Express.js**.
-* **Database:** **SQLite** (zarządzana przez sterownik `sqlite3`).
-* **Komunikacja:** Fetch API (AJAX), CORS, Formspree.io (obsługa kontaktu).
+* **Frontend Environment:** Semantic HTML5, CSS3 (Grid/Flexbox layout systems), and Vanilla JavaScript utilizing the asynchronous **Fetch API**. \
+
+* **Database Infrastructure:** Hosted relational PostgreSQL schema managed entirely via **Supabase cloud endpoints**, bypassing the legacy local SQLite (cactus.db) deployment stack. \
+
+* **Global Layout Control:** Centralized component modules (/js/nav.js and /styles/main.css) apply relative path mapping (../) across all folder-per-feature routes. \
 
 ## 📂 File Architecture
+To facilitate rapid remote debugging and feature modularity, components follow a strict **folder-per-feature** pattern, isolating global shared engine logic from standalone application views:
 
-Projekt stosuje architekturę modułową (folder-per-feature). Globalne zasoby są współdzielone i linkowane relatywnie.
 
-```plaintext
-/root
-├── server.js            # Serwer Express i API
-├── cactus.db            # Baza danych SQLite
-├── landing.html         # Strona główna
-├── /dashboard           # Widok studenta (zadania, podsumowania)
-│   └── index.html
-├── /search              # Archiwum kaktusów (filtrowanie 4-kierunkowe)
-│   ├── index.html
-│   └── detail.html      # Szczegóły konkretnego okazu
-├── /admin               # Panel nauczyciela (formularze wprowadzania)
-│   └── index.html
-├── /styles              # Scentralizowane arkusze stylów
-└── /js                  # Logika (nav.js, search.js, contact.js)
+    Plaintext
 
-```
+/root \
+├── index.html              # Application core landing page \
+├── landing.html            # Public entryway and Contact form hub \
+├── /dashboard              # Student Homework & Lesson Summary system \
+│   └── index.html           \
+├── /search                 # Taxon Deep-Dive and Filtering Archive \
+│   ├── index.html          # 4-way filter search interface \
+│   └── detail.html         # Specimen detail view via parameter injection \
+├── /admin                  # Teacher Input & CRUD Administrative panel \
+│   └── index.html           \
+├── /styles                 # Centralized CSS Design Tokens \
+│   ├── main.css            # Base layouts, nature-palette tokens, CSS grid schedules \
+│   └── [feature].css       # Explicit UI overrides scoped to feature folders[cite: 1] \
+└── /js                     # Centralized Client-Side Script Engine[cite: 1] \
+    ├── nav.js              # Relative path injection framework[cite: 1] \
+    ├── contact.js          # Formspree asynchronous hijack scripts[cite: 1] \
+    └── search.js           # Supabase Cloud REST API integration logic[cite: 1] \
+
+### ---🔄 Decoupled Client-to-Cloud Data Flow
+
+    Plaintext
+
+[ Client Browser UI ] ───( Direct HTTPS / Fetch API )───> [ Supabase REST Gateways ] ───> [ Live PostgreSQL Instance ] \
+
+
+By querying Supabase directly from the frontend, application runtime speed is enhanced. Data management is handled cleanly without maintaining an active local Express server connection on your workstation while you are out.
+
 
 ## 🗄 Database Schema
 
-Baza danych `cactus.db` zawiera obecnie tabelę:
+Cacti Platform inclues tables:
 
-* **cacti**: `id`, `field_number`, `genus`, `species`, `origin`, `description`.
+* **cacti**: `id`, `field_number`, `genus`, `species`, `origin`, `description`,`created_at`,`notes`,`exact_location`.
 
-*W planach:* Tabele `homework` (zadania studentów) oraz `lessons` (dziennik lekcji).
+planning for `homework` and `lessons`.
 
 ## 🚀 Key Functionalities
 
-* **Dynamiczna nawigacja:** Skrypt `nav.js` automatycznie wstrzykuje menu i oblicza ścieżki relatywne (`../`) zależnie od poziomu zagnieżdżenia strony.
-* **API Endpoints:**
-* `GET /api/cacti`: Pobieranie pełnego archiwum.
-* `GET /api/cacti/:field_number`: Szczegółowe dane taksonomiczne okazu.
-
-
-* **Asynchroniczna obsługa:** Formularze działają bez przeładowania strony, informując o sukcesie poprzez DOM.
-* **Zaawansowany Layout:** Grafik zajęć zbudowany na CSS Grid z obsługą nakładających się bloków czasowych.
-
-## 🛠 Next Steps
-
-1. **CRUD Expansion:** Implementacja tras `POST` i `PUT` dla panelu administratora.
-2. **Authentication:** Zabezpieczenie folderu `/admin` prostym systemem logowania.
-3. **Data Persistence:** Przeniesienie danych "Lesson Summary" z `localStorage` do bazy SQLite.
-4. **Dynamic Detail View:** Obsługa parametrów URL (np. `?field=L450`) w celu dynamicznego generowania strony detali kaktusa.
+Here is the targeted **Key Functionalities** section for your `README.md`. It highlights what is already running smoothly under the hood and outlines the exact layout and data mechanics you've built into the system.
 
 ---
 
-### 💡 Mała sugestia techniczna (Candor Check):
+## 🚀 Key Functionalities
 
-Zauważyłem w Twojej strukturze plików, że niektóre pliki w `/js` mają literówki (np. `dahboard.js` zamiast `dashboard.js`). Warto to poprawić teraz, zanim backend mocno się rozrośnie, aby uniknąć błędów 404 przy ładowaniu skryptów.
+### 🗺️ Dynamic Path-Calculating Navigation
 
-Czy chciałbyś, abym pomógł Ci teraz przygotować kod dla jednego z punktów z "Next Steps", np. trasę `POST` do zapisywania kaktusów w bazie?
+* **User Feature:** Injects a consistent, mobile-friendly navigation header across all contexts, complete with an expandable **"English Learning" dropdown menu** for quick resource pivoting.
+
+
+### 🔍 4-Way Taxon Filtering Grid (`/search`)
+
+* **Botanical Context:** Cactus collectors analyze specimens using cross-referenced data points: Field Numbers (the collector's specific expedition code, e.g., *L 450*), Genus, Species, and Geographic Origin.
+
+* **Data Engine:** Powered by client-side event listeners that intercept search inputs and instantly update a clean, CSS Grid-based card interface.
+
+* **Asynchronous Processing:** Queries are fired directly to the database layer via asynchronous `fetch()` architecture, ensuring instant lookups without page refreshes.
+
+
+### ✉️ Non-Disruptive Form Hijacking (`landing.html`)
+
+* **User Feature:** The UI instantly transitions to display a seamless "Success" micro-interaction on-screen, keeping the language learner or cactus collector grounded on the landing page.
+
+
