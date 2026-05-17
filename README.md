@@ -16,8 +16,7 @@ The **Cactus Learning Portal** has successfully transitioned from a localized mo
 
 * **Frontend Environment:** Semantic HTML5, CSS3 (Grid/Flexbox layout systems), and Vanilla JavaScript utilizing the asynchronous **Fetch API**. \
 
-* **Database Infrastructure:** Hosted relational PostgreSQL schema managed entirely via **Supabase cloud endpoints**, bypassing the legacy local SQLite (cactus.db) deployment stack. \
-
+* **Database Infrastructure:** Hosted relational PostgreSQL schema managed entirely via **Supabase cloud endpoints**
 * **Global Layout Control:** Centralized component modules (/js/nav.js and /styles/main.css) apply relative path mapping (../) across all folder-per-feature routes. \
 
 ## 📂 File Architecture
@@ -60,14 +59,6 @@ Cacti Platform inclues tables:
 
 * **cacti**: `id`, `field_number`, `genus`, `species`, `origin`, `description`,`created_at`,`notes`,`exact_location`.
 
-planning for `homework` and `lessons`.
-
-## 🚀 Key Functionalities
-
-Here is the targeted **Key Functionalities** section for your `README.md`. It highlights what is already running smoothly under the hood and outlines the exact layout and data mechanics you've built into the system.
-
----
-
 ## 🚀 Key Functionalities
 
 ### 🗺️ Dynamic Path-Calculating Navigation
@@ -87,5 +78,3 @@ Here is the targeted **Key Functionalities** section for your `README.md`. It hi
 ### ✉️ Non-Disruptive Form Hijacking (`landing.html`)
 
 * **User Feature:** The UI instantly transitions to display a seamless "Success" micro-interaction on-screen, keeping the language learner or cactus collector grounded on the landing page.
-
-
