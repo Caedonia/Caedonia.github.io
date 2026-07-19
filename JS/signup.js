@@ -1,5 +1,5 @@
 import CONFIG from './config.js';
-
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const signupForm = document.getElementById('signup-form');
 const submitBtn = document.getElementById('submit-btn');
 const errorMessage = document.getElementById('error-message');
@@ -38,9 +38,8 @@ signupForm.addEventListener('submit', async (e) => {
             password: password,
             options: {
                 data: {
-                    username: username,
-                    favorite_genus: favoriteGenus
-                }
+                    username: username
+                    }
             }
         });
 
