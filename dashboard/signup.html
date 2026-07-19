@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Portal | Cactus Learning</title>
+    <!-- Centralized global styles -->
+    <link rel="stylesheet" href="../styles/mystyle2.css">
+    <!-- Feature-specific styles -->
+    <link rel="stylesheet" href="../styles/signup.css">
+</head>
+<body class="bg-sage-light">
+
+    <main class="auth-container">
+        <div class="cactus-card">
+            <div class="card-header">
+                <h2>Cultivate Your English</h2>
+            </div>
+
+            <form id="signup-form" class="auth-form">
+
+                <div class="input-group">
+                    <label for="username">Collector Alias (Username)</label>
+                    <input type="text" id="username" required placeholder="e.g., LophophoraLover99">
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required placeholder="botanist@example.com">
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="Minimum 8 characters">
+                </div>
+
+                <!-- Domain-specific touch -->
+                <div class="input-group">
+                    <label for="favorite-genus">Role</label>
+                    <select id="favorite-genus">
+                        <option value="">Select...</option>
+                        <option value="cultivator">Cultivator</option>
+                        <option value="sprout">Sprout</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary" id="submit-btn">Sprout Account</button>
+                <p id="error-message" class="error-text hidden"></p>
+            </form>
+        </div>
+    </main>
+
+    <!-- Feature-specific logic -->
+    <script type="module" src="../JS/signup.js"></script>
+</body>
+</html>
