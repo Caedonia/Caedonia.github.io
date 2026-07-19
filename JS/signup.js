@@ -1,4 +1,4 @@
-import { supabase } from '../shared/supabase-client.js';
+import CONFIG from './config.js';
 
 const signupForm = document.getElementById('signup-form');
 const submitBtn = document.getElementById('submit-btn');
@@ -20,7 +20,7 @@ inputs.forEach(input => {
 
 signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+    console.log("submit");
     // UI state: Loading
     submitBtn.textContent = 'Planting seed...';
     submitBtn.disabled = true;
