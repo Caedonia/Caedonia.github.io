@@ -36,6 +36,7 @@ signupForm.addEventListener('submit', async (e) => {
         const { data, error } = await supabaseClient.auth.signUp({
             email: email,
             password: password,
+            role: favoriteGenus,
             options: {
                 data: {
                     username: username
