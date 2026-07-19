@@ -1,4 +1,4 @@
-import { supabaseClient } from '../JS/supabaseClient';
+import { supabaseClient } from '../JS/supabaseClient.js';
 
 const signupForm = document.getElementById('signup-form');
 const submitBtn = document.getElementById('submit-btn');
