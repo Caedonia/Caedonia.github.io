@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation | Cactus Learning Portal</title>
+    <!-- Centralized global styles -->
+    <link rel="stylesheet" href="../styles/global.css">
+    <style>
+        /* Feature-specific Clean Cacti styles */
+        body {
+            background-color: #F4F9F4; /* Soft sage background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        .card-container {
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(46, 139, 87, 0.1);
+            padding: 40px;
+            max-width: 450px;
+            text-align: center;
+            border-top: 6px solid #2E8B57; /* Deep botanical green */
+        }
+        .success-icon {
+            font-size: 48px;
+            color: #2E8B57;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #1A432B;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #557A65;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+        .btn-primary {
+            display: inline-block;
+            background-color: #2E8B57;
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+        .btn-primary:hover {
+            background-color: #1A432B;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div class="success-icon">🌵✨</div>
+        <h1>Rooted Successfully!</h1>
+        <p>Thank you for confirming your account. Your botanical journey is about to begin, and your session has been securely established.</p>
+        
+        <!-- Manual redirect button -->
+        <a href="../landing_page.html" class="btn-primary">Enter the Portal</a>
+    </div>
+
+    <!-- 
+      CRITICAL: Centralized Supabase client import. 
+      This runs silently in the background to catch the URL hash,
+      verify the email confirmation, and store the session token.
+    -->
+    <script type="module" src="../lib/supabase-client.js"></script>
+
+</body>
+</html>
