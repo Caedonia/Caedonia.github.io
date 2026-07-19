@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // 2. Define the Navigation HTML
     navContainer.innerHTML = `
         <nav class="main-nav">
-            <div class="nav-logo">🌵 Cactus Portal</div>
+            <div class="nav-logo"></div>
             <ul class="nav-links">
                 <li><a href="${root}landing_page.html">Home</a></li>
                 <li><a href="${root}Cacti/start.html">Archive</a></li>

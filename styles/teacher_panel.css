@@ -1,185 +1,63 @@
+/* ==========================================================================
+   Base Layout & Typography
+   ========================================================================== */
 .admin-container {
     display: flex;
     min-height: 100vh;
-    background-color: #f4f7f6;
+    background-color: #F4F7F6; /* Soft, airy background */
+    font-family: system-ui, -apple-system, sans-serif;
 }
 
+.admin-main { 
+    flex-grow: 1; 
+    padding: 40px; 
+}
+
+/* ==========================================================================
+   Sidebar & Global Navigation
+   ========================================================================== */
 .admin-sidebar {
+    background-color: #2D4A22; /* Deep chlorophyll green */
+    color: #F4F9F4; 
     width: 250px;
-    background: #2d3e50;
-    color: white;
-    padding: 30px 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.admin-sidebar h2 { font-size: 1.2rem; margin-bottom: 40px; }
 .admin-sidebar nav a {
     display: block;
-    color: #aec0d1;
     text-decoration: none;
-    padding: 12px 0;
-    transition: 0.3s;
-}
-.admin-sidebar nav a.active { color: #4caf50; font-weight: bold; }
-
-.admin-main { flex-grow: 1; padding: 40px; }
-
-.admin-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    padding: 12px 20px;
+    transition: background-color 0.3s ease;
+    color: #F4F9F4;
 }
 
-.admin-card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+.admin-sidebar nav a.active,
+.admin-sidebar nav a:hover { 
+    background-color: rgba(255, 255, 255, 0.1); 
+    font-weight: bold; 
 }
 
-.full-width { grid-column: 1 / -1; }
-
-.admin-btn {
-    background: #4caf50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 10px;
+/* Dynamically Injected Nav Overrides */
+#global-nav .main-nav {
+    background-color: #1E3517; 
+    border-bottom: 2px solid #A3C9A8;
 }
 
-/* Table Styles */
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
+#global-nav .main-nav ul li a {
+    color: #E8F1E8; 
 }
-.admin-table th, .admin-table td {
-    text-align: left;
-    padding: 12px;
-    border-bottom: 1px solid #eee;
+
+#global-nav .main-nav > ul > li > ul {
+    background-color: #2D4A22; 
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); 
+    border: 1px solid #1E3517; 
 }
-.delete-btn { color: #ff5252; background: none; border: none; cursor: pointer; }
 
 /* ==========================================================================
-   Teacher Admin Panel: CSV Upload Card
+   Header & Global Controls
    ========================================================================== */
-
-/* The Main Container */
-.admin-card {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 2.5rem;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    max-width: 500px;
-    margin: 3rem auto;
-    border-top: 6px solid #2E7D32; /* Deep cactus green accent */
-    font-family: system-ui, -apple-system, sans-serif;
-}
-
-.admin-card h3 {
-    margin-top: 0;
-    color: #1B5E20;
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.admin-card p {
-    color: #555;
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-}
-
-/* The File Drop Zone */
-.file-drop-area {
-    border: 2px dashed #81C784; /* Soft green dashed border */
-    border-radius: 8px;
-    padding: 2.5rem 1.5rem;
-    text-align: center;
-    background-color: #F1F8E9; /* Very pale green background */
-    margin-bottom: 1.5rem;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.file-drop-area:hover {
-    background-color: #E8F5E9;
-    border-color: #4CAF50;
-}
-
-/* Styling the ugly default file input */
-.file-drop-area input[type="file"] {
-    width: 100%;
-    cursor: pointer;
-    color: #2E7D32;
-    font-weight: 500;
-}
-
-/* Customizing the "Choose File" button inside the input (Webkit/Chrome/Safari) */
-.file-drop-area input[type="file"]::-webkit-file-upload-button {
-    background-color: #fff;
-    border: 1px solid #81C784;
-    color: #2E7D32;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    margin-right: 1rem;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s;
-}
-
-.file-drop-area input[type="file"]::-webkit-file-upload-button:hover {
-    background-color: #E8F5E9;
-}
-
-/* The Import Button */
-.btn-primary {
-    background-color: #2E7D32;
-    color: white;
-    border: none;
-    padding: 1rem;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.btn-primary:hover {
-    background-color: #1B5E20;
-    transform: translateY(-1px); /* Slight lift effect */
-}
-
-.btn-primary:active {
-    transform: translateY(0);
-}
-
-/* When JS disables the button during upload */
-.btn-primary:disabled {
-    background-color: #9E9E9E;
-    cursor: not-allowed;
-    transform: none;
-}
-
-/* Status Message Area */
-#upload-status {
-    margin-top: 1.5rem;
-    text-align: center;
-    font-weight: 600;
-    min-height: 24px; /* Keeps the card from jumping around */
-}
-/* ==========================================================================
-   Teacher Admin Panel: Layout & Import View
-   ========================================================================== */
-
-.admin-dashboard {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    font-family: system-ui, -apple-system, sans-serif;
-}
-
 .admin-header {
     display: flex;
     justify-content: space-between;
@@ -189,16 +67,111 @@
     padding-bottom: 1rem;
 }
 
+.admin-header h1, 
 .admin-header h2 {
     color: #1B5E20;
     margin: 0;
+}
+
+.global-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #2D4A22;
+}
+
+/* ==========================================================================
+   Grid & Card Architecture
+   ========================================================================== */
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* Unified Single Card Class */
+.admin-card {
+    background-color: #FFFFFF; 
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+    border-top: 4px solid #2D4A22; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.admin-card h3 {
+    color: #1E3517;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.admin-card p {
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Structural Modifiers */
+.full-width { 
+    grid-column: 1 / -1; 
+}
+
+/* ==========================================================================
+   Forms, Inputs & Buttons
+   ========================================================================== */
+.cacti-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #A3C9A8;
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    color: #1E3517;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cacti-input:focus {
+    outline: none;
+    border-color: #2E7D32;
+    box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.1);
+}
+
+.admin-btn, 
+.btn-primary {
+    background-color: #2E7D32;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    text-align: center;
+    text-decoration: none;
+}
+
+.admin-btn:hover, 
+.btn-primary:hover {
+    background-color: #1B5E20;
+    transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+    background-color: #9E9E9E;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .btn-back {
     color: #2E7D32;
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.9rem;
     transition: color 0.2s;
 }
 
@@ -207,36 +180,46 @@
     text-decoration: underline;
 }
 
-/* The Upload Card */
-.admin-card {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 2.5rem;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    border-top: 6px solid #2E7D32; 
+/* ==========================================================================
+   Data Tables
+   ========================================================================== */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
 }
 
-.admin-card h3 {
-    margin-top: 0;
+.admin-table th, 
+.admin-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #E8F5E9;
+}
+
+.admin-table th {
     color: #1B5E20;
-    font-size: 1.5rem;
+    font-weight: 600;
 }
 
-.admin-card p {
-    color: #555;
-    margin-bottom: 1.5rem;
-    line-height: 1.5;
+.delete-btn { 
+    color: #FF5252; 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    font-weight: bold;
 }
 
-/* File Drop Zone */
+/* ==========================================================================
+   File Drop Zone (CSV Upload)
+   ========================================================================== */
 .file-drop-area {
     border: 2px dashed #81C784; 
     border-radius: 8px;
     padding: 2.5rem 1.5rem;
     text-align: center;
     background-color: #F1F8E9; 
-    margin-bottom: 1.5rem;
     transition: all 0.3s ease;
+    cursor: pointer;
     position: relative;
 }
 
@@ -259,7 +242,7 @@
 }
 
 .file-drop-area input[type="file"]::-webkit-file-upload-button {
-    background-color: #fff;
+    background-color: #FFFFFF;
     border: 1px solid #81C784;
     color: #2E7D32;
     padding: 0.5rem 1rem;
@@ -274,32 +257,9 @@
     background-color: #E8F5E9;
 }
 
-/* Button & Status */
-.btn-primary {
-    background-color: #2E7D32;
-    color: white;
-    border: none;
-    padding: 1rem;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.btn-primary:hover {
-    background-color: #1B5E20;
-}
-
-.btn-primary:disabled {
-    background-color: #9E9E9E;
-    cursor: not-allowed;
-}
-
 #upload-status {
-    margin-top: 1.5rem;
     text-align: center;
     font-weight: 600;
     min-height: 24px;
+    color: #1B5E20;
 }
