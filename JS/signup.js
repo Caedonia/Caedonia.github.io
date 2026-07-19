@@ -1,5 +1,5 @@
-import CONFIG from './config.js';
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+import { supabaseClient } from '../JS/supabaseClient';
+
 const signupForm = document.getElementById('signup-form');
 const submitBtn = document.getElementById('submit-btn');
 const errorMessage = document.getElementById('error-message');
@@ -33,7 +33,7 @@ signupForm.addEventListener('submit', async (e) => {
 
     try {
         // Await the asynchronous Supabase authentication
-        const { data, error } = await supabase.auth.signUp({
+        const { data, error } = await supabaseClient.auth.signUp({
             email: email,
             password: password,
             options: {
