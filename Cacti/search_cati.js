@@ -6,7 +6,7 @@ const genusInput = document.getElementById('filter-genus');
 const speciesInput = document.getElementById('filter-species');
 const originInput = document.getElementById('filter-origin');
 const searchBtn = document.getElementById('search-btn');
-import CONFIG from './config.js';
+import CONFIG from '../JS/config.js';
 
 // Note: Ensure your HTML uses id="cactus-container" instead of "cactus-grid"
 const cactusContainer = document.getElementById('cactus-container'); 
@@ -159,7 +159,23 @@ function renderListTemplate(cactus) {
         <button class="view-btn" onclick="window.location.href='detail.html?fn=${cactus.field_number}'">View Details</button>
     `;
 }
+const addBtn = document.getElementById('add-specimen-btn');
 
+addBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    
+    // Check if the user is holding a valid "ID badge"
+    const { data: { session } } = await supabase.auth.getSession();
+
+    if (session) {
+        // Teacher is logged in, let them through to the greenhouse
+        window.location.href = '../admin/index.html';
+    } else {
+        // Not logged in! Route them to a login page 
+        // (You will need to create this simple login.html page)
+        window.location.href = '../admin/login.html'; 
+    }
+});
 // ==========================================
 // Run the App!
 // ==========================================

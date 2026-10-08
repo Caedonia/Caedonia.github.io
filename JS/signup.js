@@ -37,11 +37,7 @@ signupForm.addEventListener('submit', async (e) => {
             email: email,
             password: password,
             role: favoriteGenus,
-            options: {
-                data: {
-                    username: username
-                    }
-            }
+            display_name: username
         });
 
         if (error) throw error;

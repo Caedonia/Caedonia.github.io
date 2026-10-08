@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Cactus Portal</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/login.css">
+</head>
+<body>
+    <!-- Inject your global nav here if desired -->
+    <div id="nav-container"></div> 
+
+    <main class="login-container">
+        <div class="admin-card">
+            <h2>🔑 Botanist Access</h2>
+            <p>Please authenticate to manage the specimen archive.</p>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="teacher@cactusportal.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-primary">Enter Greenhouse</button>
+            </form>
+
+            <div id="login-status" class="status-message"></div>
+        </div>
+    </main>
+
+    <!-- Supabase CDN and your custom script -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/login.js"></script>
+</body>
+</html>

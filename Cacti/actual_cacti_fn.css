@@ -197,3 +197,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.btn-primary {
+    width: 16%;
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover { 
+    background: #388e3c; 
+}

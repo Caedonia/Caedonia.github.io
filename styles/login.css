@@ -1,0 +1,100 @@
+/* --- 🚪 Login Page Specific Layout --- */
+
+/* Center the login card perfectly on the screen */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px); /* Adjusts for your top nav bar */
+    background-color: #f5f9f5; /* A very soft, minty off-white */
+    padding: 2rem;
+}
+
+/* --- 🏷️ The Admin Card (The Vault Door) --- */
+.admin-card {
+    background-color: #ffffff;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 420px; /* Keeps the form from stretching too wide */
+    
+    /* A subtle, plant-green shadow to lift the card */
+    box-shadow: 0 10px 30px rgba(46, 125, 50, 0.08); 
+    
+    /* A bold brand accent line at the top */
+    border-top: 6px solid #2e7d32; 
+    text-align: center;
+}
+
+.admin-card h2 {
+    color: #1b5e20; /* Dark forest green */
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.admin-card p {
+    color: #555;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+/* --- 📝 Form Elements --- */
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left; /* Keep labels aligned left for readability */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2e7d32;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.85rem;
+    border: 2px solid #c8e6c9; /* Light green border */
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+/* The "Glow" when a user clicks into an input */
+.form-group input:focus {
+    outline: none;
+    border-color: #4caf50; 
+    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.15);
+}
+
+/* --- 🔘 Buttons & Status --- */
+.btn-primary {
+    width: 100%; /* Make the button full-width for easier clicking */
+    padding: 0.9rem;
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: 1rem;
+}
+
+.btn-primary:hover {
+    background-color: #1b5e20; /* Darker green on hover */
+}
+
+.btn-primary:active {
+    transform: translateY(2px); /* Satisfying click depression */
+}
+
+.status-message {
+    margin-top: 1.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-height: 1.5rem; /* Prevents the card from jumping when text appears */
+}
