@@ -15,20 +15,24 @@
         <!-- 2. GŁÓWNA ZAWARTOŚĆ - Tutaj dodajemy brakujący tag <main>! -->
         <main class="admin-main">
             
-            <!-- 3. Nasz układ wymuszający pion (column) -->
-            <div class="dashboard-container">
+                <div class="dashboard-container">
                 
                 <!-- Nagłówek -->
                 <header class="panel-header">
-                    <h1>Panel Nauczyciela</h1>
-                    <div class="student-selector">
-                        <label for="student-select">Uczeń:</label>
-                        <select id="student-select" class="cacti-input">
-                            <option value="1">Jan Kowalski (Poziom: B1)</option>
-                            <option value="2">Anna Nowak (Poziom: C1)</option>
-                        </select>
-                    </div>
-                </header>
+            <h1>Panel Nauczyciela</h1>
+    
+            <!-- Nowy kontener na kontrolki -->
+            <div class="global-controls">
+                <div class="student-selector">
+                    <label for="student-select">Uczeń:</label>
+                    <select id="student-select" class="cacti-input">
+                        <option value="1">Jan Kowalski (Poziom: B1)</option>
+                    </select>
+                </div>
+                <!-- Nasz nowy przycisk -->
+                <button id="open-modal-btn" class="admin-btn">+ Nowy Uczeń</button>
+            </div>
+        </header>
 
                 <!-- Karta 1: Harmonogram -->
                 <section class="admin-card schedule-card">
@@ -91,7 +95,57 @@
             </div> <!-- Koniec dashboard-container -->
         </main> <!-- Koniec admin-main -->
     </div> <!-- Koniec admin-container -->
+    <!-- SZKLARNIA: Modal dodawania ucznia -->
+        <div id="add-student-modal" class="cacti-modal hidden">
+        <!-- Używamy Twojej klasy admin-card jako bazy dla okienka -->
+            <div class="modal-content admin-card">
+        
+                <div class="modal-header">
+                    <h2>Katalogowanie nowego ucznia</h2>
+                    <button id="close-modal-btn" class="close-btn">&times;</button>
+                </div>
 
+                <form id="new-student-form">
+                    <!-- Siatka formularza -->
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="new-name">Imię:</label>
+                            <input type="text" id="new-name" class="cacti-input" required>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="new-surname">Nazwisko:</label>
+                            <input type="text" id="new-surname" class="cacti-input" required>
+                        </div>
+
+                    <div class="form-group">
+                            <label for="new-time">Czas zajęć (np. Wt 17:00):</label>
+                            <input type="text" id="new-time" class="cacti-input" required>
+                    </div>
+
+                        <div class="form-group">
+                            <label for="new-rate">Stawka wyjściowa (zł):</label>
+                            <input type="number" id="new-rate" class="cacti-input" value="60" min="0" step="5" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-book">Podręcznik / Materiały:</label>
+                            <input type="text" id="new-book" class="cacti-input" placeholder="Np. English File B1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-level">Klasa / Poziom (Taksonomia):</label>
+                            <input type="text" id="level-class" class="cacti-input" placeholder="Np. Klasa 7">
+                        </div>
+                    </div>
+
+                    <!-- Przycisk zapisu na pełną szerokość -->
+                    <button type="submit" class="admin-btn full-width" style="margin-top: 20px;">
+                Zasadź w bazie (Dodaj)
+                    </button>
+                </form>
+            </div>
+        </div>
     <script src="../JS/nav.js"></script>
     <script src="../teacher_panel/teacher_panel.js"></script>
 </body>
