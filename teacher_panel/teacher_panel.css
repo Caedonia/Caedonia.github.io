@@ -23,6 +23,9 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    position: sticky; 
+    top: 0; 
+    overflow-y: auto; 
 }
 
 .admin-sidebar nav a {
