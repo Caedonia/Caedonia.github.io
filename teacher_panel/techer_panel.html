@@ -14,45 +14,46 @@
         <h1>Teacher Panel</h1>
         <p>Changes made here will update the student view.</p>
         
-        <!-- The Taproot: Global Sprout Selector -->
-        <div class="global-controls">
-            <label for="global_sprout">Active Sprout:</label>
-            <select id="global_sprout" class="cacti-input">
-                <option value="">Select a student...</option>
-                <!-- These will eventually be populated dynamically from Supabase profiles -->
-                <option value="uuid_1">Cultivator</option>
-                <option value="uuid_2">Sprout</option>
-            </select>
-        </div>
-    </header>
+        <!-- KARTA 1: Twój stary element wyboru ucznia (Zaktualizowany) + Nowa stawka -->
+        <section class="cacti-card student-profile">
+            <h2 class="card-title">Zarządzanie Uczniem</h2>
+            
+            <div class="form-group">
+                <!-- Tu integrujemy Twój stary mechanizm wyboru -->
+                <label for="student-select">Wybierz ucznia:</label>
+                <select id="student-select" class="clean-input">
+                    <!-- Opcje ładowane z Supabase -->
+                </select>
+            </div>
 
-    <div class="admin-grid">
-        <section class="admin-card">
-            <h3>Assign New Homework</h3>
-            <!-- Notice the redundant select is gone -->
-            <form id="admin-homework-form">
-                <input type="text" class="cacti-input" placeholder="Task Name (e.g., Reading p.20)" required>
-                <input type="date" class="cacti-input" required>
-                <button type="submit" class="admin-btn">Add Task</button>
-            </form>
+            <div class="form-group mt-2">
+                <label for="hourly-rate">Stawka godzinowa (PLN):</label>
+                <div class="rate-input-group flex-between">
+                    <input type="number" id="hourly-rate" class="clean-input" placeholder="np. 60">
+                    <button id="save-rate-btn" class="btn-primary">Zapisz</button>
+                </div>
+            </div>
         </section>
 
-        <section class="admin-card">
-            <h3>Lesson Summary</h3>
-            <!-- Cleaned form -->
-            <form id="admin-summary-form">
-                <input type="text" class="cacti-input" placeholder="Lesson Topic" required>
-                <textarea class="cacti-input" placeholder="What did we cover today?" rows="4" required></textarea>
-                <button type="submit" class="admin-btn">Update Summary</button>
-            </form>
+        <!-- KARTA 2: Tabela obecności (Nowa funkcja) -->
+        <section class="cacti-card attendance-tracker">
+            <div class="card-header flex-between">
+                <h2 class="card-title">Obecność</h2>
+                <input type="month" id="month-selector" class="clean-input">
+            </div>
+            
+            <table class="clean-table full-width mt-2">
+                <!-- Struktura tabeli pozostaje bez zmian -->
+            </table>
         </section>
-        
-        <!-- Recent posts remains full width -->
-        <section class="admin-card full-width">
-            <h3>Recent Posts</h3>
-            <!-- Table content remains as you had it -->
+
+        <!-- KARTA 3: Twoje stare notatki (Zaktualizowane i przypisane do zajęć) -->
+        <section class="cacti-card class-notes">
+            <h2 class="card-title">Notatki z zajęć</h2>
+            <!-- Tu integrujemy Twoje obecne pole tekstowe -->
+            <textarea id="class-note-input" class="clean-input mt-2" rows="6" placeholder="Wprowadź notatki dla wybranych zajęć..."></textarea>
+            <button id="save-note-btn" class="btn-primary mt-2">Zapisz notatkę</button>
         </section>
-    </div>
 </main>
         <div class="admin-card">
     <h3>📦 Bulk Data Import</h3>
