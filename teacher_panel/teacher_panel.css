@@ -58,7 +58,7 @@
 /* ==========================================================================
    Header & Global Controls
    ========================================================================== */
-.admin-header {
+.panel-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -67,8 +67,8 @@
     padding-bottom: 1rem;
 }
 
-.admin-header h1, 
-.admin-header h2 {
+.panel-header h1, 
+.panel-header h2 {
     color: #1B5E20;
     margin: 0;
 }
@@ -262,4 +262,72 @@
     font-weight: 600;
     min-height: 24px;
     color: #1B5E20;
+}
+/* Dodaj to do swojego pliku CSS */
+.dashboard-container {
+    display: flex;
+    flex-direction: column; /* Wymusza układanie kart jedna pod drugą */
+    gap: 2rem; /* Tworzy niezbędny "oddech" między sekcjami */
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(46, 139, 87, 0.1); /* Delikatny, zielonkawy cień */
+    padding: 1.5rem;
+    border-left: 4px solid #2e8b57; /* Subtelny botaniczny akcent */
+}
+/* ==========================================================================
+   Schedule & Rate Editor
+   ========================================================================== */
+.lesson-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Zabezpieczenie dla bardzo małych ekranów mobilnych */
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.lesson-details-header .schedule-time {
+    margin: 0; /* Usuwamy domyślny margines z akapitu */
+}
+
+.rate-editor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rate-editor label {
+    font-weight: 600;
+    color: #1B5E20; /* Nawiązanie do nagłówków */
+}
+
+.rate-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Modyfikator dla standardowego cacti-input */
+.rate-input {
+    width: 100px;
+    margin-top: 0; /* Nadpisujemy globalne margin-top z .cacti-input */
+    padding-right: 40px; /* Robimy miejsce na 'zł/h' */
+    text-align: right;
+    font-weight: bold;
+    color: #2D4A22;
+}
+
+/* Pływająca waluta wewnątrz inputa */
+.rate-input-wrapper .currency {
+    position: absolute;
+    right: 12px;
+    color: #888;
+    pointer-events: none; /* Kliknięcie w tekst 'zł/h' aktywuje input */
+    font-size: 0.9rem;
 }

@@ -4,65 +4,94 @@
     <link rel="stylesheet" href="../teacher_panel/teacher_panel.css">
     <link rel="stylesheet" href="../styles/mystyle2.css">
 </head>
-<div class="admin-container">
-    <aside class="admin-sidebar">
-        <div id="global-nav"></div>
-    </aside>
-
-    <main class="admin-main">
-    <header class="admin-header">
-        <h1>Teacher Panel</h1>
-        <p>Changes made here will update the student view.</p>
+<body>
+    <div class="admin-container">
         
-        <!-- KARTA 1: Twój stary element wyboru ucznia (Zaktualizowany) + Nowa stawka -->
-        <section class="cacti-card student-profile">
-            <h2 class="card-title">Zarządzanie Uczniem</h2>
+        <!-- 1. Pasek Boczny -->
+        <aside class="admin-sidebar">
+            <div id="global-nav"></div>
+        </aside>
+
+        <!-- 2. GŁÓWNA ZAWARTOŚĆ - Tutaj dodajemy brakujący tag <main>! -->
+        <main class="admin-main">
             
-            <div class="form-group">
-                <!-- Tu integrujemy Twój stary mechanizm wyboru -->
-                <label for="student-select">Wybierz ucznia:</label>
-                <select id="student-select" class="clean-input">
-                    <!-- Opcje ładowane z Supabase -->
-                </select>
-            </div>
+            <!-- 3. Nasz układ wymuszający pion (column) -->
+            <div class="dashboard-container">
+                
+                <!-- Nagłówek -->
+                <header class="panel-header">
+                    <h1>Panel Nauczyciela</h1>
+                    <div class="student-selector">
+                        <label for="student-select">Uczeń:</label>
+                        <select id="student-select" class="cacti-input">
+                            <option value="1">Jan Kowalski (Poziom: B1)</option>
+                            <option value="2">Anna Nowak (Poziom: C1)</option>
+                        </select>
+                    </div>
+                </header>
 
-            <div class="form-group mt-2">
-                <label for="hourly-rate">Stawka godzinowa (PLN):</label>
-                <div class="rate-input-group flex-between">
-                    <input type="number" id="hourly-rate" class="clean-input" placeholder="np. 60">
-                    <button id="save-rate-btn" class="btn-primary">Zapisz</button>
-                </div>
-            </div>
-        </section>
+                <!-- Karta 1: Harmonogram -->
+                <section class="admin-card schedule-card">
+                    <h2>Harmonogram i Obecność</h2>
+    
+                    <!-- NOWY KONTENER: Trzyma czas i stawkę w jednej linii -->
+                    <div class="lesson-details-header">
+                        <p class="schedule-time"><strong>Zajęcia:</strong> Wtorek, 17:00 - 18:00</p>
+        
+                        <!-- Pole edycji stawki -->
+                        <div class="rate-editor">
+                        <label for="hourly-rate">Stawka:</label>
+                            <div class="rate-input-wrapper">
+                            <input type="number" id="hourly-rate" class="cacti-input rate-input" value="60" min="0" step="5">
+                            <span class="currency">zł/h</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- KARTA 2: Tabela obecności (Nowa funkcja) -->
-        <section class="cacti-card attendance-tracker">
-            <div class="card-header flex-between">
-                <h2 class="card-title">Obecność</h2>
-                <input type="month" id="month-selector" class="clean-input">
-            </div>
-            
-            <table class="clean-table full-width mt-2">
-                <!-- Struktura tabeli pozostaje bez zmian -->
-            </table>
-        </section>
+    <!-- Poniżej zostaje Twoja siatka obecności -->
+    <div class="attendance-grid">
+        <div class="day present">12.10 (Obecność)</div>
+        <div class="day absent">19.10 (Brak)</div>
+    </div>
+</section>
 
-        <!-- KARTA 3: Twoje stare notatki (Zaktualizowane i przypisane do zajęć) -->
-        <section class="cacti-card class-notes">
-            <h2 class="card-title">Notatki z zajęć</h2>
-            <!-- Tu integrujemy Twoje obecne pole tekstowe -->
-            <textarea id="class-note-input" class="clean-input mt-2" rows="6" placeholder="Wprowadź notatki dla wybranych zajęć..."></textarea>
-            <button id="save-note-btn" class="btn-primary mt-2">Zapisz notatkę</button>
-        </section>
-</main>
-        <div class="admin-card">
-    <h3>📦 Bulk Data Import</h3>
-    <p>Update your data quickly by uploading your latest CSV spreadsheet.</p>
-    <a href="../teacher_panel/import.html" class="btn-primary" style="display: inline-block; text-align: center; text-decoration: none; box-sizing: border-box;">
-        Open Importer →
-    </a>
-</div>
-    </main>
-</div>
-<script src="../JS/nav.js"></script>
-<script src="../teacher_panel/teacher_panel.js"></script>
+                <!-- Karta 2: Tracker obecności -->
+                <section class="admin-card attendance-tracker">
+                    <div class="card-header global-controls">
+                        <h2>Miesięczna Obecność</h2>
+                        <input type="month" id="month-selector" class="cacti-input">
+                    </div>
+                    <table class="admin-table">
+                        <!-- Miejsce na generowaną tabelę -->
+                    </table>
+                </section>
+
+                <!-- Karta 3: Notatki z zajęć -->
+                <section class="admin-card notes-card">
+                    <h2>Notatki z zajęć</h2>
+                    <form id="note-form">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label for="lesson-date">Data lekcji:</label>
+                            <input type="date" id="lesson-date" class="cacti-input" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <textarea id="lesson-note" class="cacti-input" placeholder="Wpisz nowe słownictwo, problemy z gramatyką..." rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="admin-btn">Zapisz notatkę</button>
+                    </form>
+                </section>
+
+                <!-- Karta 4: Import Danych -->
+                <section class="admin-card">
+                    <h3>📦 Bulk Data Import</h3>
+                    <p>Update your data quickly by uploading your latest CSV spreadsheet.</p>
+                    <a href="../teacher_panel/import.html" class="admin-btn">Open Importer →</a>
+                </section>
+
+            </div> <!-- Koniec dashboard-container -->
+        </main> <!-- Koniec admin-main -->
+    </div> <!-- Koniec admin-container -->
+
+    <script src="../JS/nav.js"></script>
+    <script src="../teacher_panel/teacher_panel.js"></script>
+</body>
