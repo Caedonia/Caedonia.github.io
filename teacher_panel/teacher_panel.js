@@ -1,3 +1,4 @@
+import CONFIG from '../JS/config.js';
 // Run this immediately when the admin script loads
 async function checkAuth() {
     const { data: { session } } = await supabase.auth.getSession();
