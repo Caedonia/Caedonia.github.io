@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <li class="dropdown">
                 <a href="#" class="dropbtn">English Learning ▾</a>
                     <ul class="dropdown-content">
-                        <li><a href="${root}dashboard/dashboard.html">Dashboard</a></li>
+                       <!-- <li><a href="${root}dashboard/dashboard.html">Dashboard</a></li> -->
                         <li><a href="${root}Plan/plan2.html">Schedule</a></li>
                         <li><a href="${root}login/login.html">Teacher Panel login</a></li>
                         <li><a href="${root}teacher_panel/signup.html">Sign up</a></li>
