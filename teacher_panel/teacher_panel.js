@@ -73,7 +73,6 @@ async function fetchStudents() {
         return;
     }
 
-    studentSelect.innerHTML = ''; 
 
     // Stan Pusty (Empty State)
     if (students.length === 0) {
