@@ -3,6 +3,8 @@
 // ==========================================================================
 import { supabase } from '../JS/supabaseClient.js';
 
+let currentStudentsList = [];
+
 // ==========================================================================
 // 2. AUTORYZACJA 
 // ==========================================================================
@@ -26,6 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inicjujemy pobranie uczniów do dropdowna
     fetchStudents();
+
+    const studentSelect = document.getElementById('student-select');
+    if (studentSelect) {
+        studentSelect.addEventListener('change', (e) => {
+            renderStudentData(e.target.value);
+        });
+    }
 
     // --- Obsługa Modala ---
     const modal = document.getElementById('add-student-modal');
@@ -73,8 +82,10 @@ async function fetchStudents() {
         return;
     }
 
+    // ZAPIS STAN DO ZMIENNEJ GLOBALNEJ
+    currentStudentsList = students; 
+    studentSelect.innerHTML = ''; // Czyścimy przed dodaniem opcji
 
-    // Stan Pusty (Empty State)
     if (students.length === 0) {
         const option = document.createElement('option');
         option.textContent = "🌱 Brak uczniów. Dodaj nowy okaz!";
@@ -86,15 +97,40 @@ async function fetchStudents() {
         return; 
     }
 
-    // Wypełnianie listy
     students.forEach(student => {
         const option = document.createElement('option');
         option.value = student.id; 
-        option.textContent = `${student.first_name} ${student.last_name} (${student.level})`;
+        option.textContent = `${student.first_name} ${student.last_name}`;
         studentSelect.appendChild(option);
     });
 
     enableDashboard();
+    
+    // Ważne: Błyskawicznie renderujemy dane pierwszego ucznia z listy po załadowaniu!
+    renderStudentData(students[0].id); 
+}
+
+// NOWA FUNKCJA: Renderowanie danych
+function renderStudentData(studentId) {
+    // Szukamy ucznia w naszym zapisanym lokalnie "kompoście"
+    const student = currentStudentsList.find(s => s.id == studentId);
+    
+    if (!student) return;
+
+    // 1. Zdejmujemy ukrycie z nowej karty i aktualizujemy "badge"
+    document.getElementById('student-summary-card').classList.remove('hidden');
+    document.getElementById('display-student-name').textContent = `${student.first_name} ${student.last_name}`;
+    document.getElementById('display-student-level').textContent = student.level || 'Brak danych';
+    document.getElementById('display-student-book').textContent = student.textbook || 'Brak materiału';
+
+    // 2. Aktualizacja istniejących kart (Zajęcia i Stawka)
+    const timeDisplay = document.querySelector('.schedule-time');
+    if (timeDisplay) timeDisplay.innerHTML = `<strong>Zajęcia:</strong> ${student.schedule_time || 'Brak harmonogramu'}`;
+    
+    const rateInput = document.getElementById('hourly-rate');
+    if (rateInput) {
+        rateInput.value = student.hourly_rate || 0;
+    }
 }
 
 // Sadzenie nowego ucznia (INSERT)
@@ -155,6 +191,8 @@ function clearDashboard() {
     const noteInput = document.getElementById('lesson-note');
     if (noteFormBtn) noteFormBtn.disabled = true; 
     if (noteInput) noteInput.disabled = true; 
+
+    document.getElementById('student-summary-card').classList.add('hidden');
 }
 
 function enableDashboard() {

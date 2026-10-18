@@ -410,3 +410,35 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ==========================================================================
+   Karta Podsumowania Ucznia (Student Summary)
+   ========================================================================== */
+.student-summary {
+    background-color: #E8F5E9; /* Świeża, botaniczna zieleń w tle */
+    border-top: 4px solid #2E7D32;
+    margin-bottom: 0; /* Zostawiamy margines odgapiony z dashboard-container */
+}
+
+.summary-info h2 {
+    color: #1B5E20;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.summary-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Styl pigułek (badges) dla poziomu i książki */
+.cacti-badge {
+    background-color: #FFFFFF;
+    border: 1px solid #A3C9A8;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    color: #2D4A22;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
