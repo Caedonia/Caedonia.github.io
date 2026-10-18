@@ -22,7 +22,7 @@ async function checkAuth() {
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
     // Odpalamy sprawdzanie logowania
-    scheckAuth();
+    checkAuth();
 
     // Inicjujemy pobranie uczniów do dropdowna
     fetchStudents();
