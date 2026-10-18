@@ -1,59 +1,169 @@
-import CONFIG from '../JS/config.js';
-// Run this immediately when the admin script loads
+// ==========================================================================
+// 1. IMPORTY
+// ==========================================================================
+import { supabase } from '../JS/supabaseClient.js';
+
+// ==========================================================================
+// 2. AUTORYZACJA 
+// ==========================================================================
 async function checkAuth() {
     const { data: { session } } = await supabase.auth.getSession();
     
     if (!session) {
-        console.warn("Unauthorized access attempt. Redirecting...");
-        window.location.href = '../landing.html'; 
+        console.warn("Brak autoryzacji. Przekierowanie do poczekalni...");
+        window.location.href = '../landing_page.html'; // Ścieżka z Twojego archiwum
         return;
     }
-    
-    // If they pass, load the rest of the page/data
-    console.log("Welcome back, Teacher!");
+    console.log("Witaj w szklarni, Nauczycielu! 🌵");
 }
 
 // ==========================================================================
-// Obsługa Modala (Szklarni dla nowych uczniów)
+// 3. INICJALIZACJA INTERFEJSU (Po załadowaniu HTML)
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
-    // 1.  pobieramy elementy
+    // Odpalamy sprawdzanie logowania
+    scheckAuth();
+
+    // Inicjujemy pobranie uczniów do dropdowna
+    fetchStudents();
+
+    // --- Obsługa Modala ---
     const modal = document.getElementById('add-student-modal');
     const openBtn = document.getElementById('open-modal-btn');
     const closeBtn = document.getElementById('close-modal-btn');
 
-    // 2. KONTROLA (dodaj to, by zobaczyć co jest winne)
-    console.log("Modal:", modal);
-    console.log("Przycisk Otwórz:", openBtn);
-    console.log("Przycisk Zamknij:", closeBtn);
-
-    // 3. DOPIERO POTEM przypinamy eventy
-    if (openBtn) {
-        openBtn.addEventListener('click', () => {
-            modal.classList.remove('hidden');
-        });
+    if (openBtn && modal) {
+        openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
     }
+    if (closeBtn && modal) {
+        closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+    }
+
+    // Zamykanie tłem
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) modal.classList.add('hidden');
+    });
+
+    // --- Podpinanie Formularzy ---
+    const newStudentForm = document.getElementById('new-student-form');
+    if (newStudentForm) {
+        newStudentForm.addEventListener('submit', handleNewStudent);
+    }
+});
+
+// ==========================================================================
+// 4. LOGIKA BAZY DANYCH (Połączenia z Supabase)
+// ==========================================================================
+
+// Pobieranie uczniów (SELECT)
+async function fetchStudents() {
+    const studentSelect = document.getElementById('student-select');
+    if (!studentSelect) return;
     
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            modal.classList.add('hidden');
-        });
+    studentSelect.innerHTML = '<option>Ładowanie okazów...</option>';
+
+    const { data: students, error } = await supabase
+        .from('students')
+        .select('*')
+        .order('last_name', { ascending: true });
+
+    if (error) {
+        console.error("Błąd pobierania bazy:", error.message);
+        studentSelect.innerHTML = '<option>Błąd połączenia</option>';
+        return;
     }
-});
 
-// Zabezpieczenie na przyszłość: zapobiegamy domyślnemu przeładowaniu strony przy próbie zapisu
-const newStudentForm = document.getElementById('new-student-form');
-newStudentForm.addEventListener('submit', (event) => {
-    event.preventDefault(); // Zatrzymuje przeładowanie strony
-    console.log("Gotowy do wysadzenia danych do Supabase!");
-    // Tutaj w kolejnym kroku dodamy funkcję async/await do bazy danych
-});
+    studentSelect.innerHTML = ''; 
 
-checkAuth();
-// Saving the summary
-document.getElementById('admin-summary-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const summaryText = e.target.querySelector('textarea').value;
-    localStorage.setItem('studentSummary', summaryText);
-    alert('Student Dashboard Updated! 🌵');
-});
+    // Stan Pusty (Empty State)
+    if (students.length === 0) {
+        const option = document.createElement('option');
+        option.textContent = "🌱 Brak uczniów. Dodaj nowy okaz!";
+        option.disabled = true;
+        option.selected = true;
+        studentSelect.appendChild(option);
+        
+        clearDashboard();
+        return; 
+    }
+
+    // Wypełnianie listy
+    students.forEach(student => {
+        const option = document.createElement('option');
+        option.value = student.id; 
+        option.textContent = `${student.first_name} ${student.last_name} (${student.level})`;
+        studentSelect.appendChild(option);
+    });
+
+    enableDashboard();
+}
+
+// Sadzenie nowego ucznia (INSERT)
+async function handleNewStudent(event) {
+    event.preventDefault(); // Zatrzymuje reset strony
+
+    // Pobieranie danych z inputów
+    const firstName = document.getElementById('new-name').value;
+    const lastName = document.getElementById('new-surname').value;
+    const scheduleTime = document.getElementById('new-time').value;
+    const hourlyRate = document.getElementById('new-rate').value;
+    const textbook = document.getElementById('new-book').value;
+    const level = document.getElementById('new-level').value;
+
+    const { data, error } = await supabase
+        .from('students')
+        .insert([{ 
+            first_name: firstName, 
+            last_name: lastName, 
+            schedule_time: scheduleTime,
+            hourly_rate: parseFloat(hourlyRate),
+            textbook: textbook,
+            level: level
+        }]);
+
+    if (error) {
+        console.error("Błąd sadzenia:", error.message);
+        alert("Wystąpił błąd podczas dodawania ucznia.");
+        return;
+    }
+
+    // Sprzątanie po sukcesie
+    document.getElementById('new-student-form').reset();
+    document.getElementById('add-student-modal').classList.add('hidden');
+    
+    // Asynchroniczne odświeżenie listy!
+    fetchStudents(); 
+}
+
+// ==========================================================================
+// 5. MANIPULACJA UI (Helpers)
+// ==========================================================================
+
+function clearDashboard() {
+    const timeDisplay = document.querySelector('.schedule-time');
+    if (timeDisplay) timeDisplay.innerHTML = "<strong>Zajęcia:</strong> Brak danych";
+    
+    const rateInput = document.getElementById('hourly-rate');
+    if (rateInput) {
+        rateInput.value = "";
+        rateInput.disabled = true; 
+    }
+
+    const attendanceGrid = document.querySelector('.attendance-grid');
+    if (attendanceGrid) attendanceGrid.innerHTML = '<p style="color: #888; text-align: center; padding: 20px;">Dodaj ucznia, aby śledzić obecność.</p>';
+
+    const noteFormBtn = document.querySelector('#note-form button[type="submit"]');
+    const noteInput = document.getElementById('lesson-note');
+    if (noteFormBtn) noteFormBtn.disabled = true; 
+    if (noteInput) noteInput.disabled = true; 
+}
+
+function enableDashboard() {
+    const rateInput = document.getElementById('hourly-rate');
+    if (rateInput) rateInput.disabled = false;
+
+    const noteFormBtn = document.querySelector('#note-form button[type="submit"]');
+    const noteInput = document.getElementById('lesson-note');
+    if (noteFormBtn) noteFormBtn.disabled = false;
+    if (noteInput) noteInput.disabled = false;
+}
