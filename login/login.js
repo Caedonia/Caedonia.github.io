@@ -1,7 +1,4 @@
-// Initialize Supabase (Replace with your actual keys)
-const supabaseUrl = 'YOUR_SUPABASE_URL';
-const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+import { supabase } from "../JS/supabaseClient";
 
 const loginForm = document.getElementById('login-form');
 const statusMessage = document.getElementById('login-status');
@@ -32,6 +29,6 @@ loginForm.addEventListener('submit', async (e) => {
         statusMessage.style.color = "green";
         
         // Redirect directly to your teacher panel
-        window.location.href = 'index.html';
+        window.location.href = '../teacher_panel/teacher_panel.html';
     }
 });

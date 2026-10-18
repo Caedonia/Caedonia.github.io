@@ -11,7 +11,7 @@ async function checkAuth() {
     
     if (!session) {
         console.warn("Brak autoryzacji. Przekierowanie do poczekalni...");
-        window.location.href = '../landing_page.html'; // Ścieżka z Twojego archiwum
+        window.location.href = '../login/login.html'; 
         return;
     }
     console.log("Witaj w szklarni, Nauczycielu! 🌵");
