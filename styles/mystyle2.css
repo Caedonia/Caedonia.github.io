@@ -375,3 +375,36 @@ h3 { font-size: 0.8rem; color: #666; letter-spacing: 1px; margin-bottom: 20px; }
 .dropdown:hover .dropdown-content {
     display: block;
 }
+/* Card-based container for notifications */
+#toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9999;
+}
+
+/* Minimalist base card styling */
+.cactus-toast {
+    padding: 16px 24px;
+    border-radius: 8px;
+    font-family: system-ui, sans-serif;
+    font-weight: 500;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease;
+}
+
+/* Thriving plant (Success) */
+.toast-success {
+    background-color: #4A7C59; /* Sage/Cactus Green */
+    border-left: 4px solid #8FC0A9; 
+}
+
+/* Stressed plant (Error) */
+.toast-error {
+    background-color: #C05A5A; /* Muted desert sunset / anthocyanin red */
+    border-left: 4px solid #E88888;
+}
