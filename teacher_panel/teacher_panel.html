@@ -63,6 +63,23 @@
                                     <button type="submit" class="admin-btn small-btn">Zapisz</button>
                             </form>
                     </div>
+                    <!-- Nowy formularz dodawania obecności -->
+                    <form id="add-attendance-form" class="attendance-controls">
+                        <!-- Pole kalendarza -->
+                        <input type="date" id="attendance-date" class="cacti-input" required>
+    
+                        <select id="attendance-status" class="cacti-input">
+                            <option value="present">Obecny</option>
+                            <option value="absent">Nieobecny</option>
+                        </select>
+                            <button type="submit" class="admin-btn small-btn">Dodaj</button>
+                    </form>
+
+            <!-- Poniżej zostaje Twoja siatka obecności -->
+                <div class="attendance-grid">
+                    <div class="day present">12.10 (Obecność)</div>
+                    <div class="day absent">19.10 (Brak)</div>
+                </div>
 
                 </section>
 
