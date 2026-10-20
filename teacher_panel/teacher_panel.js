@@ -2,6 +2,7 @@
 // 1. IMPORTY
 // ==========================================================================
 import { supabase } from '../JS/supabaseClient.js';
+import { showToast } from '../JS/notifications.js';
 
 let currentStudentsList = [];
 
@@ -58,6 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (newStudentForm) {
         newStudentForm.addEventListener('submit', handleNewStudent);
     }
+    const rateForm = document.getElementById('rate-update-form');
+    if (rateForm) {
+        rateForm.addEventListener('submit', handleRateUpdate);
+    }
+    const addAttendance = document.getElementById('add-attendance-form');
+    if (addAttendance) {
+        addAttendance.addEventListener('submit', handleAddAttendance);
+    }
 });
 
 // ==========================================================================
@@ -110,7 +119,7 @@ async function fetchStudents() {
     renderStudentData(students[0].id); 
 }
 
-// NOWA FUNKCJA: Renderowanie danych
+//Renderowanie danych
 function renderStudentData(studentId) {
     // Szukamy ucznia w naszym zapisanym lokalnie "kompoście"
     const student = currentStudentsList.find(s => s.id == studentId);
@@ -169,6 +178,42 @@ async function handleNewStudent(event) {
     // Asynchroniczne odświeżenie listy!
     fetchStudents(); 
 }
+    //rate udate
+    async function handleRateUpdate (event) {
+        event.preventDefault(); // Zatrzymuje reset strony
+        //pobieranie danych
+    
+        const student = currentStudentsList.find(s => s.id == studentId);
+        const hourlyRate = document.getElementById('hourly-rate').value;
+
+        if (!student) {
+        console.error("Student not found in the current list.");
+        return;
+    }
+
+        const { data, error } = await supabase
+        .from('students')
+        .update({ 
+            hourly_rate: parseFloat(hourlyRate) 
+        })
+        .eq('student_id', student.id);
+        if (error) {
+        console.error("Error updating hourly rate:", error.message);
+            showToast("Failed to update rate. Please check database connection.", "error");        
+        
+        return;
+    }
+
+    //console.log("Rate updated successfully:", data);
+    showToast(`Successfully updated rate for ${student.name || 'student'}.`, "success");
+
+    }
+
+    //attencdance update
+    async function handleAddAttendance(event) {
+        event.preventDefault(); // Zatrzymuje reset strony
+
+    }
 
 // ==========================================================================
 // 5. MANIPULACJA UI (Helpers)
