@@ -53,16 +53,18 @@
                         <p class="schedule-time"><strong>Zajęcia:</strong> Wtorek, 17:00 - 18:00</p>
         
                         <!-- Pole edycji stawki -->
-                        <div class="rate-editor">
-                        <label for="hourly-rate">Stawka:</label>
-                            <div class="rate-input-wrapper">
-                            <input type="number" id="hourly-rate" class="cacti-input rate-input" value="60" min="0" step="5">
-                            <span class="currency">zł/h</span>
-                            </div>
-                        </div>
+                        <!-- Zmieniamy div na form i dodajemy id="rate-update-form" -->
+                            <form id="rate-update-form" class="rate-editor">
+                                <label for="hourly-rate">Stawka:</label>
+                                    <div class="rate-input-wrapper">
+                                    <input type="number" id="hourly-rate" class="cacti-input rate-input" value="60" min="0" step="5" required>
+                                    <span class="currency">zł/h</span>
+                                    </div>
+                                    <button type="submit" class="admin-btn small-btn">Zapisz</button>
+                            </form>
                     </div>
 
-</section>
+                </section>
 
                 <!-- Karta 2: Tracker obecności -->
                 <section class="admin-card attendance-tracker">

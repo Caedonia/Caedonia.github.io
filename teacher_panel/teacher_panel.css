@@ -442,3 +442,35 @@
     color: #2D4A22;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
+/* ==========================================================================
+   Nowe Moduły: Formularze i Przyciski
+   ========================================================================== */
+
+/* Pomocnicza klasa dla mniejszych przycisków wewnątrz kart */
+.small-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    white-space: nowrap; /* Zapobiega łamaniu tekstu przycisku na dwa wiersze */
+}
+
+/* Kontener dla kalendarza i statusu obecności */
+.attendance-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+    flex-wrap: wrap; /* Pozwala elementom spaść do nowej linii na telefonach */
+    background-color: #F9FBF9; /* Subtelne, bardzo jasne tło wydzielające sekcję */
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px dashed #A3C9A8;
+}
+
+/* Ograniczenie szerokości inputów, by nie rozciągały się na cały ekran na desktopie */
+#attendance-date {
+    max-width: 160px;
+}
+
+#attendance-status {
+    max-width: 150px;
+}
