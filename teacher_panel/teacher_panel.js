@@ -2,7 +2,7 @@
 // 1. IMPORTY
 // ==========================================================================
 import { supabase } from '../JS/supabaseClient.js';
-import { showToast } from '../JS/notifications.js';
+import { showToast } from '../JS/notification.js';
 
 let currentStudentsList = [];
 
