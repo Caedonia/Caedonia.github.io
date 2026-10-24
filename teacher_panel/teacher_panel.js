@@ -283,7 +283,6 @@ async function handleNewStudent(event) {
             showToast("Please select a valid date.", "error");
             return;
         }
-        console.log(student.id + dateInputLesson.value + newNote.value);
 
         const { data, error } = await supabase
         .from('lessons')
