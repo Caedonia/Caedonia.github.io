@@ -204,7 +204,7 @@ async function handleNewStudent(event) {
         .update({ 
             hourly_rate: parseFloat(hourlyRate) 
         })
-        .eq('student_id', student.id);
+        .eq('id', student.id);
         if (error) {
         console.error("Error updating hourly rate:", error.message);
             showToast("Failed to update rate. Please check database connection.", "error");        
@@ -232,7 +232,6 @@ async function handleNewStudent(event) {
         showToast("Student not found. Field number mismatch.", "error");
         return;
         }
-
         const rawStatus = document.getElementById('attendance-status').value;
         const isPresent = rawStatus === 'present';
 
