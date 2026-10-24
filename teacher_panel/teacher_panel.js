@@ -290,7 +290,7 @@ async function handleNewStudent(event) {
             notes: newNote,
         })
         .eq('student_id', student.id)
-        .eq('lesson_date', new Date(dateInputLesson).toISOString());
+        .eq('lesson_date', dateInputLesson);
         if (error) {
         console.error("Error updating notes:", error.message);
             showToast("Failed to update Notes. Please check database connection.", "error");        
