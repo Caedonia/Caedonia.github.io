@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const addNote = document.getElementById('add-lesson-note');
     if (addNote) {
-        addAttendance.addEventListener('submit', handleNewNote);
+        addNote.addEventListener('submit', handleNewNote);
     }
 });
 
