@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (addAttendance) {
         addAttendance.addEventListener('submit', handleAddAttendance);
     }
-    const addNote = document.getElementById('add-lesson-note');
+    const addNote = document.getElementById('note-form');
     if (addNote) {
         addNote.addEventListener('submit', handleNewNote);
     }
