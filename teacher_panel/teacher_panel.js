@@ -67,6 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (addAttendance) {
         addAttendance.addEventListener('submit', handleAddAttendance);
     }
+    const addNote = document.getElementById('add-lesson-note');
+    if (addNote) {
+        addAttendance.addEventListener('submit', handleNewNote);
+    }
 });
 
 // ==========================================================================
@@ -183,17 +187,16 @@ async function handleNewStudent(event) {
         event.preventDefault(); // Zatrzymuje reset strony
         //pobieranie danych
     
-        const student = currentStudentsList.find(s => s.id == studentId);
-        const hourlyRate = document.getElementById('hourly-rate').value;
-
+         const student = currentStudentsList.find(s => s.id == studentId);
         if (!student) {
-        console.error("Student not found in the current list.");
+        showToast("Student not found.", "error");
         return;
-    }
+        }
+        const hourlyRate = document.getElementById('hourly-rate').value;
 
         const { data, error } = await supabase
         .from('students')
-        .insert({ 
+        .update({ 
             hourly_rate: parseFloat(hourlyRate) 
         })
         .eq('student_id', student.id);
@@ -216,7 +219,7 @@ async function handleNewStudent(event) {
     
         const student = currentStudentsList.find(s => s.id == studentId);
         if (!student) {
-        showToast("Student not found. Field number mismatch.", "error");
+        showToast("Student not found.", "error");
         return;
         }
 
@@ -232,13 +235,13 @@ async function handleNewStudent(event) {
 
         const { data, error } = await supabase
         .from('lessons')
-        insert([{ 
+        .insert([{ 
             student_id: student.id,
             lesson_date: new Date(dateInput).toISOString(),
             status: isPresent
         }])
         if (error) {
-        console.error("Error updating hourly rate:", error.message);
+        console.error("Error updating attendance:", error.message);
             showToast("Failed to update Attendance. Please check database connection.", "error");        
         
         return;
@@ -246,6 +249,43 @@ async function handleNewStudent(event) {
 
     //console.log("Rate updated successfully:", data);
     showToast(`Successfully updated Attendance for ${student.name || 'student'}.`, "success");
+
+    }
+        //notes update
+    async function handleNewNote(event) {
+        event.preventDefault(); // Zatrzymuje reset strony
+        //pobieranie danych
+    
+        const student = currentStudentsList.find(s => s.id == studentId);
+        if (!student) {
+        showToast("Student not found.", "error");
+        return;
+        }
+
+        const newNote = document.getElementById('lesson-note').value;
+        const dateInputLesson = document.getElementById('lesson-date').value;
+    
+        if (!dateInputLesson) {
+            showToast("Please select a valid date.", "error");
+            return;
+        }
+
+        const { data, error } = await supabase
+        .from('lessons')
+        .update({ 
+            notes: newNote,
+        })
+        .eq('student_id', student.id)
+        .eq('lesson_date', new Date(dateInputLesson).toISOString());
+        if (error) {
+        console.error("Error updating notes:", error.message);
+            showToast("Failed to update Notes. Please check database connection.", "error");        
+        
+        return;
+    }
+
+    //console.log("Rate updated successfully:", data);
+    showToast(`Successfully updated Notes for ${student.name || 'student'}.`, "success");
 
     }
 
