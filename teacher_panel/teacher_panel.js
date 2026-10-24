@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================================================
 
 // Pobieranie uczniów (SELECT)
-async function fetchStudents() {
+    async function fetchStudents() {
     const studentSelect = document.getElementById('student-select');
     if (!studentSelect) return;
     
@@ -187,9 +187,14 @@ async function handleNewStudent(event) {
         event.preventDefault(); // Zatrzymuje reset strony
         //pobieranie danych
     
-         const student = currentStudentsList.find(s => s.id == studentId);
+        const studentSelect = document.getElementById('student-select');
+        const selectedId = studentSelect.value;
+    
+        // 2. Znajdź ucznia
+        const student = currentStudentsList.find(s => s.id.toString() === selectedId.toString());
+    
         if (!student) {
-        showToast("Student not found.", "error");
+        showToast("Student not found. Field number mismatch.", "error");
         return;
         }
         const hourlyRate = document.getElementById('hourly-rate').value;
@@ -208,7 +213,7 @@ async function handleNewStudent(event) {
     }
 
     //console.log("Rate updated successfully:", data);
-    showToast(`Successfully updated rate for ${student.name || 'student'}.`, "success");
+    showToast(`Successfully updated rate for ${student.first_name || 'student'}.`, "success");
 
     }
 
@@ -217,9 +222,14 @@ async function handleNewStudent(event) {
         event.preventDefault(); // Zatrzymuje reset strony
         //pobieranie danych
     
-        const student = currentStudentsList.find(s => s.id == studentId);
+        const studentSelect = document.getElementById('student-select');
+        const selectedId = studentSelect.value;
+    
+        // 2. Znajdź ucznia
+        const student = currentStudentsList.find(s => s.id.toString() === selectedId.toString());
+    
         if (!student) {
-        showToast("Student not found.", "error");
+        showToast("Student not found. Field number mismatch.", "error");
         return;
         }
 
@@ -248,7 +258,7 @@ async function handleNewStudent(event) {
     }
 
     //console.log("Rate updated successfully:", data);
-    showToast(`Successfully updated Attendance for ${student.name || 'student'}.`, "success");
+    showToast(`Successfully updated Attendance for ${student.first_name || 'student'}.`, "success");
 
     }
         //notes update
@@ -256,9 +266,14 @@ async function handleNewStudent(event) {
         event.preventDefault(); // Zatrzymuje reset strony
         //pobieranie danych
     
-        const student = currentStudentsList.find(s => s.id == studentId);
+        const studentSelect = document.getElementById('student-select');
+        const selectedId = studentSelect.value;
+    
+        // 2. Znajdź ucznia
+        const student = currentStudentsList.find(s => s.id.toString() === selectedId.toString());
+    
         if (!student) {
-        showToast("Student not found.", "error");
+        showToast("Student not found. Field number mismatch.", "error");
         return;
         }
 
@@ -285,7 +300,7 @@ async function handleNewStudent(event) {
     }
 
     //console.log("Rate updated successfully:", data);
-    showToast(`Successfully updated Notes for ${student.name || 'student'}.`, "success");
+    showToast(`Successfully updated Notes for ${student.first_name || 'student'}.`, "success");
 
     }
 
