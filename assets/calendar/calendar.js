@@ -1,5 +1,3 @@
-// File: ../../shared/ui/CactusCalendar.js
-
 export class CactusCalendar {
   constructor(containerElement, options = {}) {
     this.container = containerElement;
@@ -13,8 +11,7 @@ export class CactusCalendar {
       "July", "August", "September", "October", "November", "December"
     ];
 
-    // Apply base container styling
-    this.container.className = "w-80 bg-white rounded-3xl p-4 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-gray-50";
+    this.container.className = "cactus-calendar-container";
     this.render();
   }
 
@@ -56,43 +53,38 @@ export class CactusCalendar {
     }
 
     this.container.innerHTML = `
-      <div class="flex justify-between items-center mb-6 px-2">
-        <button id="prev-month" class="p-2 rounded-xl bg-gray-50 hover:bg-emerald-50 text-gray-600 transition-colors shadow-sm">
+      <div class="calendar-header">
+        <button id="prev-month" class="nav-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
-        <h2 class="font-semibold text-gray-800 text-base">
-          ${this.monthNames[month]} ${year}
-        </h2>
-        <button id="next-month" class="p-2 rounded-xl bg-gray-50 hover:bg-emerald-50 text-gray-600 transition-colors shadow-sm">
+        <h2 class="month-title">${this.monthNames[month]} ${year}</h2>
+        <button id="next-month" class="nav-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </div>
-      <div class="grid grid-cols-7 gap-1 mb-2">
-        ${['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map(d => `<div class="text-center text-sm font-medium text-gray-400 py-1">${d}</div>`).join('')}
+      <div class="day-names-grid">
+        ${['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map(d => `<div class="day-name">${d}</div>`).join('')}
       </div>
-      <div class="grid grid-cols-7 gap-y-2 gap-x-1" id="calendar-grid">
+      <div class="calendar-grid" id="calendar-grid">
         ${days.map((d, idx) => {
           const isSelected = this.isSameDay(d.date, this.selectedDate);
           const isToday = this.isSameDay(d.date, this.todayHighlight);
           
-          let classes = "h-10 w-10 mx-auto rounded-xl flex items-center justify-center text-sm font-medium transition-all ";
+          let classes = "date-cell ";
           
           if (!d.isCurrentMonth) {
-            classes += "text-gray-300 cursor-default ";
+            classes += "inactive ";
           } else {
-            classes += "text-gray-700 hover:bg-emerald-50 cursor-pointer day-btn ";
+            classes += "day-btn ";
           }
 
           if (isSelected) {
-            classes += "bg-emerald-500 text-white hover:bg-emerald-600 shadow-md shadow-emerald-200 ";
+            classes += "selected ";
           } else if (isToday) {
-            classes += "border-2 border-emerald-400 text-emerald-700 ";
-          } else {
-            classes += "border-2 border-transparent ";
+            classes += "today ";
           }
 
-          return `<button data-index="${idx}" class="${classes}" ${!d.isCurrentMonth ? 'disabled' : ''}>${d.day}</button>`;
-        }).join('')}
+          return `<button data-index="${idx}" class="${classes}" ${!d.isCurrentMonth ? 'disabled' : ''}>${d.day}</button>`;}).join('')}
       </div>
     `;
 
@@ -109,7 +101,7 @@ export class CactusCalendar {
         const idx = e.target.getAttribute('data-index');
         const selected = daysData[idx].date;
         this.selectedDate = selected;
-        this.render(); // Re-render to update the green selection state
+        this.render(); 
         this.onSelectDate(selected);
       });
     });
