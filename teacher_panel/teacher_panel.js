@@ -3,6 +3,7 @@
 // ==========================================================================
 import { supabase } from '../JS/supabaseClient.js';
 import { showToast } from '../JS/notification.js';
+import { CactusCalendar } from '../../shared/ui/CactusCalendar.js';
 
 let currentStudentsList = [];
 
@@ -36,6 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
             renderStudentData(e.target.value);
         });
     }
+    const calendarContainer = document.getElementById('calendar-wrapper');
+    const myCalendar = new CactusCalendar(calendarContainer, {
+  selectedDate: new Date(), 
+  onSelectDate: (date) => {
+    console.log("Selected date: ", date);
+    // Trigger your Supabase fetch/insert logic here
+  }
+});
 
     // --- Obsługa Modala ---
     const modal = document.getElementById('add-student-modal');
