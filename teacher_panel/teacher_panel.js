@@ -3,7 +3,7 @@
 // ==========================================================================
 import { supabase } from '../JS/supabaseClient.js';
 import { showToast } from '../JS/notification.js';
-import { CactusCalendar } from '../../shared/ui/CactusCalendar.js';
+import { CactusCalendar } from '../assets/calendar/calendar.js';
 
 let currentStudentsList = [];
 
