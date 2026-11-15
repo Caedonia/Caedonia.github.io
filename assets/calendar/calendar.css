@@ -104,3 +104,106 @@
   border-color: #34d399; /* Emerald-400 */
   color: #047857; /* Emerald-700 */
 }
+/* Ensure the parent wrapper lays them out side-by-side */
+.attendance-layout {
+  display: flex;
+  gap: 2rem;       /* Keeps a nice breathing room between calendar and notes */
+  align-items: stretch; 
+}
+
+/* Keep the calendar from shrinking */
+.calendar-wrapper {
+  flex-shrink: 0; 
+}
+
+/* The Notes Panel - Flex: 1 is the magic that fills the empty space */
+.notes-panel {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  background-color: #f9fcf9; /* Very faint botanical green */
+  border: 1px solid #e2ece4;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 350px; /* Optional: gives it a solid base height */
+}
+
+/* Header Styling */
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #2db87a; /* Signature cactus green */
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.notes-header h3 {
+  margin: 0;
+  color: #2c3e35;
+  font-size: 1.25rem;
+}
+
+.status-tag {
+  background: #e6f5ec;
+  color: #1a7a4c;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* List Items */
+.notes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.notes-list li {
+  display: flex;
+  gap: 1rem;
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #2db87a;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.notes-list .time {
+  font-weight: 600;
+  color: #6c8a77;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.notes-list .task {
+  color: #3e5246;
+}
+
+/* Push the button down to the bottom of the card */
+.add-note-btn {
+  margin-top: auto; 
+  background: #2db87a;
+  color: #ffffff;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-note-btn:hover {
+  background: #249a65;
+}
+
+.empty-state {
+  color: #8c9e92;
+  text-align: center;
+  font-style: italic;
+  margin-top: 2rem;
+}
