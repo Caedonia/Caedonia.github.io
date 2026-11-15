@@ -392,11 +392,37 @@ async function fetchMonthlyAttendance(studentId, startOfMonth, endOfMonth) {
         if (error) throw error;
         
         console.log("Monthly attendance:", attendance);
-        // Opcjonalnie zaktualizuj kalendarz danymi tutaj: 
-        // if (window.cactusCalendar) window.cactusCalendar.renderDots(attendance);
+            markAttendanceOnCalendar(attendance);
     } catch (error) {
         console.error("Error fetching attendance:", error.message);
     }
+}
+function markAttendanceOnCalendar(attendanceList) {
+    // 1. Clear out any old status classes before applying new ones (prevents ghost data when switching months/students)
+    document.querySelectorAll('.calendar-day').forEach(day => {
+        day.classList.remove('status-present', 'status-absent');
+    });
+
+    if (!attendanceList || attendanceList.length === 0) return;
+
+    // 2. Loop through the database records
+    attendanceList.forEach(record => {
+        // Supabase sometimes returns full timestamps (e.g., '2026-11-07T14:00:00Z'). 
+        // We split by 'T' to guarantee we only use the 'YYYY-MM-DD' portion.
+        const dateOnly = record.lesson_date.split('T')[0]; 
+        
+        // Find the DOM element for this specific date
+        const dayCell = document.querySelector(`.calendar-day[data-date="${dateOnly}"]`);
+        
+        if (dayCell) {
+            // Apply the appropriate class based on the boolean status
+            if (record.status === true) {
+                dayCell.classList.add('status-present');
+            } else {
+                dayCell.classList.add('status-absent');
+            }
+        }
+    });
 }
 
 //rendering notes

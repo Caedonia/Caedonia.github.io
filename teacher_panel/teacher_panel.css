@@ -474,3 +474,23 @@
 #attendance-status {
     max-width: 150px;
 }
+/* Attendance Visual Indicators on the Calendar */
+.calendar-day {
+    position: relative; /* Ensures we can position dots or borders neatly */
+}
+
+/* Present: Healthy Green */
+.calendar-day.status-present {
+    background-color: #f0fdf4; /* Very subtle green tint */
+    border-bottom: 3px solid #2db87a;
+    font-weight: bold;
+    color: #1a7a4c;
+}
+
+/* Absent: Dry Terracotta */
+.calendar-day.status-absent {
+    background-color: #fff8f6; /* Very subtle warm tint */
+    border-bottom: 3px solid #e07a5f;
+    font-weight: bold;
+    color: #c05a3f;
+}
