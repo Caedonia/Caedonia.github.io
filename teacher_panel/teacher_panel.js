@@ -35,16 +35,33 @@ document.addEventListener('DOMContentLoaded', () => {
     if (studentSelect) {
         studentSelect.addEventListener('change', (e) => {
             renderStudentData(e.target.value);
+            refreshMonthlyAttendance();
         });
     }
+
     const calendarContainer = document.getElementById('calendar-wrapper');
     const myCalendar = new CactusCalendar(calendarContainer, {
-  selectedDate: new Date(), 
-  onSelectDate: (date) => {
-    console.log("Selected date: ", date);
-    // Trigger your Supabase fetch/insert logic here
-  }
-});
+      selectedDate: new Date(), 
+      onSelectDate: (date) => {
+        // Zapewniamy format YYYY-MM-DD
+        const formattedDate = new Date(date).toISOString().split('T')[0];
+        const activeStudentId = document.getElementById('student-select').value;
+        if(activeStudentId) {
+            fetchNotesForDate(activeStudentId, formattedDate);
+        }
+      },
+      onMonthChange: (newMonthDate) => {
+          // Wywoływane gdy kalendarz nawiguje do innego miesiąca
+          const activeStudentId = document.getElementById('student-select').value;
+          if(activeStudentId) {
+            const { startOfMonth, endOfMonth } = getMonthBounds(newMonthDate);
+            fetchMonthlyAttendance(activeStudentId, startOfMonth, endOfMonth);
+          }
+      }
+    });
+
+    // Zapisz referencję do kalendarza na oknie, żeby ułatwić integrację
+    window.cactusCalendar = myCalendar;
 
     // --- Obsługa Modala ---
     const modal = document.getElementById('add-student-modal');
@@ -87,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================================================
 
 // Pobieranie uczniów (SELECT)
-    async function fetchStudents() {
+async function fetchStudents() {
     const studentSelect = document.getElementById('student-select');
     if (!studentSelect) return;
     
@@ -130,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Ważne: Błyskawicznie renderujemy dane pierwszego ucznia z listy po załadowaniu!
     renderStudentData(students[0].id); 
+    refreshMonthlyAttendance(); // Wywołanie na start dla obecnego miesiąca
 }
 
 //Renderowanie danych
@@ -157,7 +175,7 @@ function renderStudentData(studentId) {
 
 // Sadzenie nowego ucznia (INSERT)
 async function handleNewStudent(event) {
-    event.preventDefault(); // Zatrzymuje reset strony
+    event.preventDefault(); 
 
     // Pobieranie danych z inputów
     const firstName = document.getElementById('new-name').value;
@@ -191,126 +209,217 @@ async function handleNewStudent(event) {
     // Asynchroniczne odświeżenie listy!
     fetchStudents(); 
 }
-    //rate udate
-    async function handleRateUpdate (event) {
-        event.preventDefault(); // Zatrzymuje reset strony
-        //pobieranie danych
+
+//rate update
+async function handleRateUpdate (event) {
+    event.preventDefault(); 
     
-        const studentSelect = document.getElementById('student-select');
-        const selectedId = studentSelect.value;
-    
-        // 2. Znajdź ucznia
-        const student = currentStudentsList.find(s => s.id.toString() === selectedId.toString());
-    
-        if (!student) {
+    const studentSelect = document.getElementById('student-select');
+    const selectedId = studentSelect.value;
+
+    const student = currentStudentsList.find(s => s.id.toString() === selectedId.toString());
+
+    if (!student) {
         showToast("Student not found. Field number mismatch.", "error");
         return;
-        }
-        const hourlyRate = document.getElementById('hourly-rate').value;
+    }
+    const hourlyRate = document.getElementById('hourly-rate').value;
 
-        const { data, error } = await supabase
-        .from('students')
-        .update({ 
-            hourly_rate: parseFloat(hourlyRate) 
-        })
-        .eq('id', student.id);
-        if (error) {
+    const { data, error } = await supabase
+    .from('students')
+    .update({ 
+        hourly_rate: parseFloat(hourlyRate) 
+    })
+    .eq('id', student.id);
+    if (error) {
         console.error("Error updating hourly rate:", error.message);
-            showToast("Failed to update rate. Please check database connection.", "error");        
-        
+        showToast("Failed to update rate. Please check database connection.", "error");        
         return;
     }
 
-    //console.log("Rate updated successfully:", data);
     showToast(`Successfully updated rate for ${student.first_name || 'student'}.`, "success");
+}
 
-    }
+//attendance update
+async function handleAddAttendance(event) {
+    event.preventDefault(); 
+    
+    const studentSelect = document.getElementById('student-select');
+    const selectedId = studentSelect.value;
 
-    //attencdance update
-    async function handleAddAttendance(event) {
-        event.preventDefault(); // Zatrzymuje reset strony
-        //pobieranie danych
-    
-        const studentSelect = document.getElementById('student-select');
-        const selectedId = studentSelect.value;
-    
-        // 2. Znajdź ucznia
-        const student = currentStudentsList.find(s => s.id.toString() === selectedId.toString());
-    
-        if (!student) {
+    const student = currentStudentsList.find(s => s.id.toString() === selectedId.toString());
+
+    if (!student) {
         showToast("Student not found. Field number mismatch.", "error");
         return;
-        }
-        const rawStatus = document.getElementById('attendance-status').value;
-        const isPresent = rawStatus === 'present';
+    }
+    const rawStatus = document.getElementById('attendance-status').value;
+    const isPresent = rawStatus === 'present';
 
-        const dateInput = document.getElementById('attendance-date').value;
-    
-        if (!dateInput) {
-            showToast("Please select a valid date.", "error");
-            return;
-        }
+    const dateInput = document.getElementById('attendance-date').value;
 
-        const { data, error } = await supabase
-        .from('lessons')
-        .insert([{ 
-            student_id: student.id,
-            lesson_date: new Date(dateInput).toISOString(),
-            status: isPresent
-        }])
-        if (error) {
+    if (!dateInput) {
+        showToast("Please select a valid date.", "error");
+        return;
+    }
+
+    const { data, error } = await supabase
+    .from('lessons')
+    .insert([{ 
+        student_id: student.id,
+        lesson_date: new Date(dateInput).toISOString(),
+        status: isPresent
+    }]);
+
+    if (error) {
         console.error("Error updating attendance:", error.message);
-            showToast("Failed to update Attendance. Please check database connection.", "error");        
-        
+        showToast("Failed to update Attendance. Please check database connection.", "error");        
         return;
     }
 
-    //console.log("Rate updated successfully:", data);
     showToast(`Successfully updated Attendance for ${student.first_name || 'student'}.`, "success");
+    refreshMonthlyAttendance(); // Odświeżenie widoku po dodaniu obecności
+}
 
-    }
-        //notes update
-    async function handleNewNote(event) {
-        event.preventDefault(); // Zatrzymuje reset strony
-        //pobieranie danych
-    
-        const studentSelect = document.getElementById('student-select');
-        const selectedId = studentSelect.value;
-    
-        // 2. Znajdź ucznia
-        const student = currentStudentsList.find(s => s.id.toString() === selectedId.toString());
-    
-        if (!student) {
+//notes update
+async function handleNewNote(event) {
+    event.preventDefault(); 
+
+    const studentSelect = document.getElementById('student-select');
+    const selectedId = studentSelect.value;
+
+    const student = currentStudentsList.find(s => s.id.toString() === selectedId.toString());
+
+    if (!student) {
         showToast("Student not found. Field number mismatch.", "error");
         return;
-        }
+    }
 
-        const newNote = document.getElementById('lesson-note').value;
-        const dateInputLesson = document.getElementById('lesson-date').value;
-    
-        if (!dateInputLesson) {
-            showToast("Please select a valid date.", "error");
-            return;
-        }
+    const newNote = document.getElementById('lesson-note').value;
+    const dateInputLesson = document.getElementById('lesson-date').value;
 
-        const { data, error } = await supabase
-        .from('lessons')
-        .update({ 
-            notes: newNote,
-        })
-        .eq('student_id', student.id)
-        .eq('lesson_date', dateInputLesson);
-        if (error) {
-        console.error("Error updating notes:", error.message);
-            showToast("Failed to update Notes. Please check database connection.", "error");        
-        
+    if (!dateInputLesson) {
+        showToast("Please select a valid date.", "error");
         return;
     }
 
-    //console.log("Rate updated successfully:", data);
-    showToast(`Successfully updated Notes for ${student.first_name || 'student'}.`, "success");
-
+    const { data, error } = await supabase
+    .from('lessons')
+    .update({ 
+        notes: newNote,
+    })
+    .eq('student_id', student.id)
+    .eq('lesson_date', dateInputLesson);
+    
+    if (error) {
+        console.error("Error updating notes:", error.message);
+        showToast("Failed to update Notes. Please check database connection.", "error");        
+        return;
     }
+
+    showToast(`Successfully updated Notes for ${student.first_name || 'student'}.`, "success");
+    fetchNotesForDate(student.id, dateInputLesson); // Odśwież panel z notatkami dla zaktualizowanej daty
+}
+
+// Helpers daty dla kalendarza
+function getMonthBounds(baseDate) {
+    const year = baseDate.getFullYear();
+    const month = baseDate.getMonth(); 
+
+    const startDate = new Date(year, month, 1);
+    const endDate = new Date(year, month + 1, 0);
+
+    const format = (d) => {
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
+    };
+
+    return {
+        startOfMonth: format(startDate),
+        endOfMonth: format(endDate)
+    };
+}
+
+function refreshMonthlyAttendance() {
+    const activeStudentId = document.getElementById('student-select').value;
+    if (!activeStudentId) return;
+
+    // Pobierz datę na którą aktualnie patrzy kalendarz (załóżmy zmienną w obiekcie)
+    const currentDateInCalendar = window.cactusCalendar ? window.cactusCalendar.currentDate : new Date(); 
+    const { startOfMonth, endOfMonth } = getMonthBounds(currentDateInCalendar);
+    
+    fetchMonthlyAttendance(activeStudentId, startOfMonth, endOfMonth);
+}
+
+/**
+ * Fetches notes for a specific date to populate the right panel.
+ */
+async function fetchNotesForDate(studentId, selectedDate) {
+    try {
+        const { data: notes, error } = await supabase
+            .from('lessons')
+            .select('*')
+            .eq('student_id', studentId)
+            .eq('lesson_date', selectedDate); 
+
+        if (error) throw error;
+        
+        renderNotes(notes, selectedDate);
+    } catch (error) {
+        console.error("Error fetching notes (Root rot detected!):", error.message);
+    }
+}
+
+/**
+ * Fetches all attendance records for the current calendar month.
+ */
+async function fetchMonthlyAttendance(studentId, startOfMonth, endOfMonth) {
+    try {
+        const { data: attendance, error } = await supabase
+            .from('lessons')
+            .select('lesson_date, status')
+            .eq('student_id', studentId)
+            .gte('lesson_date', startOfMonth) // Poprawione z 'date' na 'lesson_date'
+            .lte('lesson_date', endOfMonth);
+
+        if (error) throw error;
+        
+        console.log("Monthly attendance:", attendance);
+        // Opcjonalnie zaktualizuj kalendarz danymi tutaj: 
+        // if (window.cactusCalendar) window.cactusCalendar.renderDots(attendance);
+    } catch (error) {
+        console.error("Error fetching attendance:", error.message);
+    }
+}
+
+//rendering notes
+function renderNotes(notes, dateString) {
+    const notesBody = document.querySelector('.notes-body');
+    const notesHeaderDate = document.querySelector('.notes-header h3');
+    const statusTag = document.querySelector('.notes-header .status-tag');
+    
+    notesHeaderDate.textContent = `Notes: ${dateString}`;
+
+    // Handle empty state (dry soil)
+    if (!notes || notes.length === 0) {
+        if(statusTag) statusTag.textContent = 'No Lesson';
+        notesBody.innerHTML = `<p class="empty-state">No notes for this date. Soil is completely dry.</p>`;
+        return;
+    }
+
+    const noteRecord = notes[0];
+    if(statusTag) statusTag.textContent = noteRecord.status ? 'Present' : 'Absent';
+    
+    const notesHtml = `
+        <li>
+            <span class="task">${noteRecord.notes || 'No specific notes recorded.'}</span>
+        </li>
+    `;
+
+    notesBody.innerHTML = `<ul class="notes-list">${notesHtml}</ul>`;
+}
 
 // ==========================================================================
 // 5. MANIPULACJA UI (Helpers)
