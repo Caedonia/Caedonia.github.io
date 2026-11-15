@@ -494,3 +494,17 @@
     font-weight: bold;
     color: #c05a3f;
 }
+/* Remove these lines from teacher_panel.css */
+.role-switch {
+    color: #8d6e63;
+    font-size: 0.9rem;
+}
+
+.role-switch:hover {
+    background-color: #efebe9;
+    color: #5d4037;
+}
+/* Push buttons to the bottom of flex-column cards */
+.admin-card .admin-btn {
+    margin-top: auto;
+}

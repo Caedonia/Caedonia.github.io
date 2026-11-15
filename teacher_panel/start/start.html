@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard | Cactus Learning</title>
+    <link rel="stylesheet" href="../mystyle2.css">
+    <link rel="stylesheet" href="../teacher_panel.css">
+</head>
+<body class="admin-container">
+
+    <aside class="admin-sidebar">
+        <nav>
+            <a href="index.html" class="active">Overview</a>
+            <a href="timetable.html">Timetable</a>
+            <a href="../teacher_panel.html">Student Panel</a>
+            <a href="billing.html">Billing & Payouts</a>
+            <!-- Inline style used strictly for spacing the profile link to the bottom -->
+            <a href="edit-profile.html" style="margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.1);">My Profile</a>
+        </nav>
+    </aside>
+
+    <main class="admin-main">
+        
+        <header class="panel-header">
+            <h1>Teacher Overview</h1>
+        </header>
+
+        <div class="admin-grid">
+            
+            <section class="admin-card">
+                <h3>Instructor Profile</h3>
+                <p><strong>Dr. Saguaro</strong><br>Specialty: Taxonomic Syntax</p>
+            </section>
+
+            <section class="admin-card">
+                <h3>Today's Timetable</h3>
+                <p><strong>10:00 AM:</strong> Advanced Botany Vocab<br>
+                <strong>01:30 PM:</strong> Astrophytum Field Notes</p>
+                <a href="timetable.html" class="admin-btn">Full Schedule</a>
+            </section>
+
+            <section class="admin-card">
+                <h3>My Seedlings</h3>
+                <p class="score-num green-text">24</p>
+                <p class="meta">Active Students</p>
+                <a href="students.html" class="admin-btn">Manage Students</a>
+            </section>
+
+            <section class="admin-card">
+                <h3>Billing & Payouts</h3>
+                <p class="score-num green-text">$840.00</p>
+                <p class="meta">Current Period</p>
+                <a href="billing.html" class="admin-btn">Manage Billing</a>
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>
