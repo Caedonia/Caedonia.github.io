@@ -43,8 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const myCalendar = new CactusCalendar(calendarContainer, {
       selectedDate: new Date(), 
       onSelectDate: (date) => {
-        // Zapewniamy format YYYY-MM-DD
-        const formattedDate = new Date(date).toISOString().split('T')[0];
+        // Bezpieczne parsowanie do lokalnego formatu YYYY-MM-DD bez przesunięcia strefy czasowej
+        const d = new Date(date);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        const formattedDate = `${y}-${m}-${day}`;
+        
         const activeStudentId = document.getElementById('student-select').value;
         if(activeStudentId) {
             fetchNotesForDate(activeStudentId, formattedDate);
