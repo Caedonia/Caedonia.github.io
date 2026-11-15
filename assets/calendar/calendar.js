@@ -70,7 +70,8 @@ export class CactusCalendar {
           const isSelected = this.isSameDay(d.date, this.selectedDate);
           const isToday = this.isSameDay(d.date, this.todayHighlight);
           
-          let classes = "date-cell ";
+          // Add 'calendar-day' to your base classes
+          let classes = "date-cell calendar-day ";
           
           if (!d.isCurrentMonth) {
             classes += "inactive ";
@@ -84,7 +85,15 @@ export class CactusCalendar {
             classes += "today ";
           }
 
-          return `<button data-index="${idx}" class="${classes}" ${!d.isCurrentMonth ? 'disabled' : ''}>${d.day}</button>`;}).join('')}
+          // Format the date to YYYY-MM-DD for the data-date attribute
+          const y = d.date.getFullYear();
+          const m = String(d.date.getMonth() + 1).padStart(2, '0');
+          const dayStr = String(d.date.getDate()).padStart(2, '0');
+          const formattedDate = `${y}-${m}-${dayStr}`;
+
+          // Inject the data-date attribute into the button
+          return `<button data-index="${idx}" data-date="${formattedDate}" class="${classes}" ${!d.isCurrentMonth ? 'disabled' : ''}>${d.day}</button>`;
+        }).join('')}
       </div>
     `;
 
