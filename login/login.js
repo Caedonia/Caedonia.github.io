@@ -29,6 +29,6 @@ loginForm.addEventListener('submit', async (e) => {
         statusMessage.style.color = "green";
         
         // Redirect directly to your teacher panel
-        window.location.href = '../teacher_panel/teacher_panel.html';
+        window.location.href = '../teacher_panel/start/start.html';
     }
 });

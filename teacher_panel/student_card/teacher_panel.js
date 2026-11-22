@@ -1,9 +1,9 @@
 // ==========================================================================
 // 1. IMPORTY
 // ==========================================================================
-import { supabase } from '../JS/supabaseClient.js';
-import { showToast } from '../JS/notification.js';
-import { CactusCalendar } from '../assets/calendar/calendar.js';
+import { supabase } from '../../JS/supabaseClient.js';
+import { showToast } from '../../JS/notification.js';
+import { CactusCalendar } from '../../assets/calendar/calendar.js';
 
 let currentStudentsList = [];
 
